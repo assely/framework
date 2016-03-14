@@ -1,0 +1,39 @@
+.assely-button {
+	padding: 12px;
+	background-color: #00b9eb;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+
+	&:hover {
+		background-color: #00a0d2;
+	}
+
+	&.block {
+		display: block;
+	}
+
+	&.sm {
+		padding: 4px 3px 1px 3px;
+
+		i {
+			font-size: 18px;
+		}
+	}
+
+	&.neutral {
+		background-color: #b4b9be;
+
+		&:hover {
+			background-color: #a0a5aa;
+		}
+	}
+
+	&-spacer {
+		width: 1px;
+		height: 25px;
+		background-color: #ddd;
+	}
+}

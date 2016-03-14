@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Support\Widgets;
+
+use View;
+use Assely\Widget\Widget;
+
+class {{ classname }} extends Widget
+{
+    /**
+     * Widget slug.
+     *
+     * @var string
+     */
+    protected $slug = '{{ slug }}';
+
+    /**
+     * Widget arguments.
+     *
+     * @return array
+     */
+    public function arguments()
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Render widget view.
+     *
+     * @param array $instance
+     * @return void
+     */
+    public function render($instance)
+    {
+        View::make('widgets.{{ slug }}.view', $instance);
+    }
+
+    /**
+     * Render widget form fields.
+     *
+     * @param array $instance
+     * @return void
+     */
+    public function fields($instance)
+    {
+        View::make('widgets.{{ slug }}.form', $instance);
+    }
+}

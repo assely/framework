@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Posttypes;
+
+use Assely\Posttype\Posttype;
+
+class {{ classname }} extends Posttype
+{
+    /**
+     * Posttype slug.
+     *
+     * @var string
+     */
+    public $slug = '{{ slug }}';
+
+    /**
+     * Posttype arguments.
+     *
+     * @return array
+     */
+    public function arguments()
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Specify columns of the posttype posts list.
+     *
+     * @return \Assely\Column\Column[]
+     */
+    public function columns()
+    {
+        return [
+            //
+        ];
+    }
+}

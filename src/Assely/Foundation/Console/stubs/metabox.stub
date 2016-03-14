@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Metaboxes;
+
+use Assely\Metabox\Metabox;
+
+class {{ classname }} extends Metabox
+{
+    /**
+     * Metabox slug.
+     *
+     * @var string
+     */
+    public $slug = '{{ slug }}';
+
+    /**
+     * Describe where this metabox belongs to.
+     *
+     * @var array
+     */
+    public function belongsTo()
+    {
+        return [{{ belongsto }}];
+    }
+
+    /**
+     * Metabox arguments.
+     *
+     * @return array
+     */
+    public function arguments()
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Register metabox custom fields.
+     *
+     * @return \Assely\Field\Field[]
+     */
+    public function fields()
+    {
+        return [
+            //
+        ];
+    }
+}

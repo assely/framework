@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Console\Commands;
+
+use Assely\Console\Command;
+
+class {{ classname }} extends Command
+{
+    /**
+     * Command singnature.
+     *
+     * @var string
+     */
+    public $signature = '{{ signature }}';
+
+    /**
+     * Custom command.
+     *
+     * ## OPTIONS
+     *
+     * <argument>
+     * : Command argument.
+     *
+     * [--option=<option>]
+     * : Command option.
+     *
+     * ## EXAMPLE
+     *
+     *     wp {{ signature }} {{ method }} --option=<option>
+     *
+     */
+    public function {{ method }}()
+    {
+        //
+    }
+}

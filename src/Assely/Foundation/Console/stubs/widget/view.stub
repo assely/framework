@@ -1,0 +1,12 @@
+<!--
+ * To help output widget markup you can use "widget" directive.
+ * This basically echo outs before and after widget markup
+ * which was set up in arguments on the widget creation.
+-->
+@widget($widget)
+    {!! $widget->beforeTitle() !!}
+    	{{=<% %>=}}
+        <h3>{{ $values['title'] }}</h3>
+        <%={{ }}=%>
+    {!! $widget->afterTitle() !!}
+@endwidget

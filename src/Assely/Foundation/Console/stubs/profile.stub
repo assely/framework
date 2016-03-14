@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Profiles;
+
+use Assely\Profile\Profile;
+
+class {{ classname }} extends Profile
+{
+    /**
+     * Profile slug.
+     *
+     * @var string
+     */
+    public $slug = '{{ slug }}';
+
+    /**
+     * Describe where this profile belongs to.
+     *
+     * @var array
+     */
+    public function belongsTo()
+    {
+        return [{{ belongsto }}];
+    }
+
+    /**
+     * Profile arguments.
+     *
+     * @return array
+     */
+    public function arguments()
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Register profile custom fields.
+     *
+     * @return \Assely\Field\Field[]
+     */
+    public function fields()
+    {
+        return [
+            //
+        ];
+    }
+}

@@ -1,0 +1,33 @@
+<main class="assely-widget">
+
+    <!--
+     * Here you can define widget form inputs. By default, inside this view,
+     * you have access to the $widget instance and widget $values array.
+     * Easily access necessary inputs attributes and values. You can
+     * also use Assely markup and stylesheet to make beautifully
+     * integrated look for your widget form inputs. Widgets
+     * usually needs title, so we generated it for you.
+    -->
+    <section class="assely-box">
+        <header class="assely-box__header">
+            <strong>
+                {!! Form::label($widget->inputId('title'), 'Title') !!}
+            </strong>
+        </header>
+
+        <section class="assely-box__content">
+
+            <div class="fielder-field">
+                {!!
+                    Form::text('title', $widget->inputValue('title'), [
+                        'id' => $widget->inputId('title'),
+                        'name' => $widget->inputName('title'),
+                        'class' => 'fielder-field__input'
+                    ])
+                !!}
+            </div>
+
+        </section>
+    </section>
+
+</main>

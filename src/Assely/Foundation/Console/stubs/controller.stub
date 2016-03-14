@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use View;
+use Assely\Routing\Controller;
+
+class {{ classname }} extends Controller
+{
+    /**
+     * Display a list of resources.
+     *
+     * @return void
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Display the specifed resource.
+     *
+     * @return void
+     */
+    public function show()
+    {
+        //
+    }
+}
