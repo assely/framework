@@ -1,0 +1,14 @@
+.assely-alert {
+
+	border: 1px solid #ddd;
+	border-top: 6px solid #ddd;
+	border-bottom: 2px solid #ddd;
+	border-radius: 3px;
+	background-color: #fff;
+
+ 	&__content {
+ 		text-align: center;
+ 		padding: 9px;
+ 	}
+
+}

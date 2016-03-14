@@ -1,0 +1,83 @@
+.assely-box {
+	$this: #{&};
+
+	position: relative;
+	border: 1px solid #ddd;
+	border-top: 6px solid #45bbe6;
+	border-bottom: 2px solid #ddd;
+	background-color: #fff;
+	border-radius: 3px;
+	transition: border-color 700ms ease;
+
+	&.is-invalid {
+		border-top: 6px solid #FF5252 !important;
+	}
+
+	&__header {
+		position: relative;
+		border-bottom: 1px solid #ddd;
+		padding: 9px 14px;
+		background-color: #fff;
+		font-weight: bold;
+
+		.title {
+			font-size: 14px;
+		}
+	}
+
+	&__content {
+		padding: 14px;
+	}
+
+	&__description {
+		display: block;
+		margin-bottom: 12px;
+	}
+
+	&__search {
+		position: absolute;
+		top: 6px; right: 6px;
+		z-index: 2;
+
+		field[type="text"] {
+			border-radius: 25px;
+			padding: 4px 32px 4px 12px;
+			width: 225px;
+			font-size: 12px;
+		}
+
+		i {
+			position: absolute;
+			top: 4px; right: 8px;
+			z-index: 3;
+			color: #ddd;
+		}
+	}
+
+	&__buttons {
+		list-style: none;
+		position: absolute;
+		top: 6px; right: 3px;
+		margin: 0;
+		padding: 0;
+
+		& > li {
+			display: inline-block;
+			margin: 0 3px;
+			float: left;
+		}
+	}
+
+	&__footer {
+		text-align: center;
+
+		.button {
+			padding-left: 54px !important;
+			padding-right: 54px !important;
+		}
+	}
+}
+
+
+
+

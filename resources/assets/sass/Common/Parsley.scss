@@ -1,0 +1,47 @@
+.parsley {
+	$this: #{&};
+
+	&-error {
+		$error: #{&};
+
+		.repeatable#{$error} {
+			#{$this}-errors-list {
+				&.filled {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+	&-errors-list {
+		position: relative;
+		display: none;
+		padding-left: 21px;
+
+		&.filled {
+			display: block;
+			margin: 0;
+			margin-top: 9px;
+
+			&:before {
+				content: "\f534";
+				display: inline-block;
+				-webkit-font-smoothing: antialiased;
+				font: normal 16px/1 'dashicons';
+				vertical-align: top;
+				position: absolute;
+				top: 0; left: 0;
+				color: #b4b9be;
+			}
+
+			li + li {
+				margin: 0;
+			}
+
+			li {
+				margin: 0;
+			}
+		}
+	}
+
+}
