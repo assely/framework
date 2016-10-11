@@ -79,7 +79,7 @@ class Menu
     {
         // Transform flat menu structure to the tree.
         // For better performance - cache results.
-        if ( ! $this->cache->get($this->getFingerprint())) {
+        if (! $this->cache->get($this->getFingerprint())) {
             $items = $this->generateTree($this->model->items());
 
             $this->cache->put($this->getFingerprint(), $items);

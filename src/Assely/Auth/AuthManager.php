@@ -81,7 +81,7 @@ class AuthManager
 
         $user = wp_signon($credentials);
 
-        if ( ! is_wp_error($user)) {
+        if (! is_wp_error($user)) {
             return true;
         }
 

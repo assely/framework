@@ -111,7 +111,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     {
         $term = $this->find($id);
 
-        if ( ! $term->getWrappedObject()) {
+        if (! $term->getWrappedObject()) {
             throw new QueryException("Taxonomy [{$this->slug}] could not find term [{$id}].");
         }
 

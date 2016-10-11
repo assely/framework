@@ -109,7 +109,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
      */
     public function find($id)
     {
-        if ( ! is_numeric($id) && is_string($id)) {
+        if (! is_numeric($id) && is_string($id)) {
             return $this->findBySlug($id);
         }
 
@@ -149,7 +149,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     {
         $post = $this->find($id);
 
-        if ( ! $post->getWrappedObject()) {
+        if (! $post->getWrappedObject()) {
             throw new QueryException("Posttype [{$this->slug}] could not find post with id: {$id}.");
         }
 

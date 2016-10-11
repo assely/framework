@@ -238,11 +238,11 @@ class MakeCommand extends Command
     {
         $this->setClassname($this->getArgument(0));
 
-        if ( ! $this->getOption('signature')) {
+        if (! $this->getOption('signature')) {
             return $this->error('You must specify command signature [--signature=<signature>].');
         }
 
-        if ( ! $this->getOption('method')) {
+        if (! $this->getOption('method')) {
             return $this->error('You must specify the name of command method name [--method=<method>].');
         }
 
@@ -298,7 +298,7 @@ class MakeCommand extends Command
         $directory = "{$base}/resources/views/{$dir}";
         $file = "{$directory}/{$file}.blade.php";
 
-        if ( ! $this->filesystem->exists($directory)) {
+        if (! $this->filesystem->exists($directory)) {
             $this->filesystem->makeDirectory($directory);
         }
 
