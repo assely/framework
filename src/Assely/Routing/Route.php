@@ -676,7 +676,7 @@ class Route
      */
     public function setFilter($filter)
     {
-        $this->filter = ( ! strpos($filter, ',')) ? $filter : explode(',', $filter);
+        $this->filter = (! strpos($filter, ',')) ? $filter : explode(',', $filter);
 
         return $this;
     }

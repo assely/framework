@@ -90,7 +90,7 @@ class Asset
             [$this, 'handleAction']
         )->dispatch();
 
-        if ( ! empty($this->getArgument('execution'))) {
+        if (! empty($this->getArgument('execution'))) {
             $this->hook->filter(
                 'script_loader_tag',
                 [$this, 'addExecutionTypes']
@@ -118,7 +118,7 @@ class Asset
      */
     public function register()
     {
-        if ( ! $this->is('registered')) {
+        if (! $this->is('registered')) {
             call_user_func("wp_register_{$this->getType()}",
                 $this->getSlug(),
                 $this->getPath(),
@@ -140,7 +140,7 @@ class Asset
      */
     public function enqueue()
     {
-        if ( ! $this->is('enqueued')) {
+        if (! $this->is('enqueued')) {
             call_user_func("wp_enqueue_{$this->getType()}", $this->getSlug());
         }
     }
@@ -355,7 +355,7 @@ class Asset
         $allowed = $this->getAllowedTypes();
 
         if ($type) {
-            if ( ! $this->isAllowedType($type)) {
+            if (! $this->isAllowedType($type)) {
                 throw new AssetException('Illegal Asset Type: Assets types can be only ' . implode(', ', $allowed));
             }
 
@@ -377,7 +377,7 @@ class Asset
         $allowed = $this->getAllowedAreas();
 
         if ($area) {
-            if ( ! $this->isAllowedArea($area)) {
+            if (! $this->isAllowedArea($area)) {
                 throw new AssetException('Illegal Asset Area: Assets can be only assigned to ' . implode(', ', $allowed));
             }
 
@@ -414,7 +414,7 @@ class Asset
         $allowed = $this->getAllowedMedia();
 
         if ($media) {
-            if ( ! $this->isAllowedMedia($media)) {
+            if (! $this->isAllowedMedia($media)) {
                 throw new AssetException('Illegal media: Style assets acceptable madia ' . implode(', ', $allowed));
             }
 
@@ -435,7 +435,7 @@ class Asset
         $allowed = $this->getAllowedPlacements();
 
         if ($placement) {
-            if ( ! $this->isAllowedPlacement($placement)) {
+            if (! $this->isAllowedPlacement($placement)) {
                 throw new AssetException('Illegal placement: Script assets can be only placed in ' . implode(', ', $allowed));
             }
 

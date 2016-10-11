@@ -4,7 +4,7 @@ namespace Assely\Helpers;
 
 use Assely\Foundation\Application;
 
-if ( ! function_exists('app')) {
+if (! function_exists('app')) {
     /**
      * Get application container
      *
@@ -22,7 +22,7 @@ if ( ! function_exists('app')) {
     }
 }
 
-if ( ! function_exists('asset')) {
+if (! function_exists('asset')) {
     /**
      * Gets asset.
      *
@@ -36,7 +36,7 @@ if ( ! function_exists('asset')) {
     }
 }
 
-if ( ! function_exists('nonce')) {
+if (! function_exists('nonce')) {
     /**
      * Get nonces factory
      *
@@ -48,7 +48,7 @@ if ( ! function_exists('nonce')) {
     }
 }
 
-if ( ! function_exists('config')) {
+if (! function_exists('config')) {
     /**
      * Get theme configs
      *
@@ -62,7 +62,7 @@ if ( ! function_exists('config')) {
     }
 }
 
-if ( ! function_exists('public_path')) {
+if (! function_exists('public_path')) {
     /**
      * Get the path to the public folder.
      *
@@ -76,7 +76,7 @@ if ( ! function_exists('public_path')) {
     }
 }
 
-if ( ! function_exists('public_dir')) {
+if (! function_exists('public_dir')) {
     /**
      * Get the dir to the public folder.
      *
@@ -90,7 +90,7 @@ if ( ! function_exists('public_dir')) {
     }
 }
 
-if ( ! function_exists('view')) {
+if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *

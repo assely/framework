@@ -29,7 +29,8 @@ class Thumbnail
      * @param string $slug
      * @param array $arguments
      */
-    public function __construct(HookFactory $hook) {
+    public function __construct(HookFactory $hook)
+    {
         $this->hook = $hook;
     }
 
@@ -75,7 +76,8 @@ class Thumbnail
      *
      * @return void
      */
-    function default() {
+    public function default()
+    {
         return set_post_thumbnail_size(
             $this->getArgument('size')[0],
             $this->getArgument('size')[1],

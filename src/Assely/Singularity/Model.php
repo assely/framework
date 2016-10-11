@@ -174,11 +174,11 @@ abstract class Model implements ModelInterface
     {
         $arguments = $this->getArguments();
 
-        if ( ! isset($arguments['preserve'])) {
+        if (! isset($arguments['preserve'])) {
             throw new QueryException('You need to specify how this repository should be preserved [single, multiple or default].');
         }
 
-        if ( ! in_array($arguments['preserve'], ['single', 'multiple', 'default'])) {
+        if (! in_array($arguments['preserve'], ['single', 'multiple', 'default'])) {
             throw new QueryException('Repository can be preserved only as single, multiple or default.');
         }
 

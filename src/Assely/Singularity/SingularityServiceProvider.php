@@ -60,7 +60,7 @@ class SingularityServiceProvider extends ServiceProvider
      */
     public function registerAdditionalSingularities()
     {
-        if ( ! empty($this->singularities)) {
+        if (! empty($this->singularities)) {
             $this->resolveSingularities($this->singularities);
         }
     }

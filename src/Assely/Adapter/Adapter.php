@@ -43,7 +43,7 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
      */
     public function __get($name)
     {
-        if ( ! property_exists($this, $name) && method_exists($this, $name)) {
+        if (! property_exists($this, $name) && method_exists($this, $name)) {
             return $this->{$name}();
         }
 

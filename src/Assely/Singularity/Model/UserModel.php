@@ -82,7 +82,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
     {
         $user = $this->find($id);
 
-        if ( ! isset($user->id)) {
+        if (! isset($user->id)) {
             throw new QueryException("User [{$id}] not found.");
         }
 
