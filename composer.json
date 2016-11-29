@@ -1,7 +1,7 @@
 {
     "name": "assely/framework",
     "type": "wordpress-plugin",
-    "description": "Assely framework brings a little joy to the WordPress development. Develop structured, easily scalable websites or web applications with expressive and elegant syntax.",
+    "description": "Assely is a PHP framework which brings a little joy to the WordPress development. Develop structured, easily scalable and complex WordPress websites and web applications with truly pleasure.",
     "keywords": ["framework", "assely", "wordpress", "php"],
     "license": "MIT",
     "homepage": "http://assely.org",
