@@ -7,7 +7,7 @@ interface PreservesMetaInterface
     /**
      * Read model object meta data from Singularity.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      */
     public function readMeta(array $parameters);
@@ -15,7 +15,7 @@ interface PreservesMetaInterface
     /**
      * Save model object meta data to Singularity.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      */
     public function saveMeta(array $parameters);
@@ -23,7 +23,7 @@ interface PreservesMetaInterface
     /**
      * Delete model object meta data from Singularity.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      */
     public function removeMeta(array $parameters);
@@ -31,7 +31,7 @@ interface PreservesMetaInterface
     /**
      * Get model object meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      */
     public function findMeta($id, $key);
@@ -39,21 +39,21 @@ interface PreservesMetaInterface
     /**
      * Get all model object meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function getMeta($id);
 
     /**
      * Get model object meta data collection.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function getAllMeta($id);
 
     /**
      * Create model object meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      */
     public function createMeta($id, array $arguments);
@@ -61,7 +61,7 @@ interface PreservesMetaInterface
     /**
      * Update model object meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      */
     public function updateMeta($id, array $arguments);
@@ -69,7 +69,7 @@ interface PreservesMetaInterface
     /**
      * Delete model object meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function deleteMeta($id, $key);
 }

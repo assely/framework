@@ -48,7 +48,7 @@ class NonceFactory
      * @param  string $slug
      * @param  array  $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function verify($slug)
     {
@@ -63,7 +63,7 @@ class NonceFactory
      * @param  string $slug
      * @param  array  $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function check($slug, $token)
     {

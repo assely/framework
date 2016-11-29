@@ -109,7 +109,7 @@ abstract class Profile extends Repository
      * Check if we meet conditions for
      * the profile registration.
      *
-     * @return boolean
+     * @return bool
      */
     protected function meetsConditions()
     {
@@ -127,7 +127,7 @@ abstract class Profile extends Repository
     /**
      * Check if profile have holders.
      *
-     * @return boolean
+     * @return bool
      */
     public function haveHolders()
     {

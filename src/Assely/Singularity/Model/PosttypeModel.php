@@ -5,9 +5,6 @@ namespace Assely\Singularity\Model;
 use Assely\Adapter\Post;
 use Assely\Adapter\Term;
 use Assely\Contracts\Singularity\WPQueryable;
-use Assely\Nonce\NonceFactory;
-use Assely\Singularity\Model\CommentModel;
-use Assely\Singularity\Model\TaxonomyModel;
 use Assely\Support\Facades\App;
 
 class PosttypeModel extends MetaboxModel implements WPQueryable
@@ -84,13 +81,13 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Find post by id.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return \Assely\Adapter\Post
      */
     public function find($id)
     {
-        if ( ! is_numeric($id) && is_string($id)) {
+        if (! is_numeric($id) && is_string($id)) {
             return $this->findBySlug($id);
         }
 
@@ -122,7 +119,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Find post by id or trow if unsuccessful.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return \Assely\Adapter\Post
      */
@@ -130,7 +127,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     {
         $post = $this->find($id);
 
-        if ( ! $post->getWrappedObject()) {
+        if (! $post->getWrappedObject()) {
             throw new QueryException("Posttype [{$this->slug}] could not find post with id: {$id}.");
         }
 
@@ -152,8 +149,8 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Paginate query results.
      *
-     * @param  integer|string $page
-     * @param  integer|string $perPage
+     * @param  int|string $page
+     * @param  int|string $perPage
      *
      * @return self
      */
@@ -182,7 +179,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Gets post terms.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $taxonomy_slug
      * @param  array $arguments
      *
@@ -251,7 +248,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Create post.
      *
-     * @return boolean
+     * @return bool
      */
     public function create(array $arguments)
     {
@@ -268,8 +265,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
      *
      * @throws QueryException
      *
-     * @return boolean|\WP_Error
-     *
+     * @return bool|\WP_Error
      */
     public function createOrFail(array $arguments)
     {
@@ -285,10 +281,10 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Update post.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      *
-     * @return integer
+     * @return int
      */
     public function update(Post $post)
     {
@@ -300,8 +296,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
      *
      * @throws QueryException
      *
-     * @return boolean|\WP_Error
-     *
+     * @return bool|\WP_Error
      */
     public function updateOrFail(Post $post)
     {
@@ -335,7 +330,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Trash post.
      *
-     * @param  integer $id
+     * @param  int $id
      *
      * @return mixed
      */
@@ -347,8 +342,8 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Delete post.
      *
-     * @param  integer  $id
-     * @param  boolean $force
+     * @param  int  $id
+     * @param  bool $force
      *
      * @return mixed
      */
@@ -360,8 +355,8 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     /**
      * Delete post completly.
      *
-     * @param  integer  $id
-     * @param  boolean $force
+     * @param  int  $id
+     * @param  bool $force
      *
      * @return mixed
      */

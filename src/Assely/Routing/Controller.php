@@ -21,7 +21,6 @@ class Controller
      * @throws \Assely\Routing\RoutingException
      *
      * @return void
-     *
      */
     public function missingMethod($method)
     {

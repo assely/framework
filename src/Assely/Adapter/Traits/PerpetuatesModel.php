@@ -7,7 +7,7 @@ trait PerpetuatesModel
     /**
      * Save model.
      *
-     * @return integer|\WP_Error
+     * @return int|\WP_Error
      */
     public function save()
     {

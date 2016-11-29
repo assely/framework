@@ -32,13 +32,12 @@ class InfoCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:show assets
-     *
      */
     public function assets()
     {
         $assets = $this->app->make('assets.collection')->all();
 
-        if ( ! $this->getOption('all')) {
+        if (! $this->getOption('all')) {
             $assets = array_filter($assets, function ($asset) {
                 return $asset->getArea() !== 'admin';
             });
@@ -67,7 +66,6 @@ class InfoCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:show routes
-     *
      */
     public function routes()
     {
@@ -95,7 +93,6 @@ class InfoCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:show sidebars
-     *
      */
     public function sidebars()
     {
@@ -121,7 +118,6 @@ class InfoCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:show menus
-     *
      */
     public function menus()
     {
@@ -146,7 +142,6 @@ class InfoCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:show ajaxes
-     *
      */
     public function ajaxes()
     {

@@ -28,7 +28,7 @@ trait CanBeSanitized
      * Check if callback is strong or function.
      *
      * @param mxied $callback
-     * @return boolean
+     * @return bool
      */
     public function isValidCallback($callback)
     {
@@ -56,7 +56,7 @@ trait CanBeSanitized
     /**
      * Are we have sanitize argument.
      *
-     * @return boolean
+     * @return bool
      */
     public function needsSanitization()
     {

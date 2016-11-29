@@ -4,7 +4,6 @@ namespace Assely\Routing;
 
 use Assely\Contracts\Routing\RouteInterface;
 use Assely\Hook\HookFactory;
-use Assely\Routing\Router;
 use Illuminate\Contracts\Container\Container;
 
 class Route implements RouteInterface
@@ -117,7 +116,7 @@ class Route implements RouteInterface
      *
      * @param  string $pattern
      *
-     * @return boolean
+     * @return bool
      */
     public function matchesPathPattern($path)
     {
@@ -131,7 +130,7 @@ class Route implements RouteInterface
      *
      * @param  array $conditions
      *
-     * @return boolean
+     * @return bool
      */
     public function matchesWordpressConditions($conditions)
     {
@@ -508,7 +507,7 @@ class Route implements RouteInterface
      */
     public function setFilter($filter)
     {
-        $this->filter = ( ! strpos($filter, ',')) ? $filter : explode(',', $filter);
+        $this->filter = (! strpos($filter, ',')) ? $filter : explode(',', $filter);
 
         return $this;
     }

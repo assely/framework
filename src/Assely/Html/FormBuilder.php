@@ -2,8 +2,6 @@
 
 namespace Assely\Html;
 
-use Assely\Routing\UrlGenerator;
-
 class FormBuilder
 {
     /**
@@ -77,7 +75,7 @@ class FormBuilder
         // extra value for the hidden _method field if it's needed for the form.
         $attributes = $this->html->attributes($attributes);
 
-        return '<form' . $attributes . '>';
+        return '<form'.$attributes.'>';
     }
 
     /**
@@ -107,7 +105,7 @@ class FormBuilder
 
         $value = e($this->formatLabel($name, $value));
 
-        return '<label for="' . $name . '"' . $options . '>' . $value . '</label>';
+        return '<label for="'.$name.'"'.$options.'>'.$value.'</label>';
     }
 
     /**
@@ -151,7 +149,7 @@ class FormBuilder
 
         $options = array_merge($options, $merge);
 
-        return '<input' . $this->html->attributes($options) . '>';
+        return '<input'.$this->html->attributes($options).'>';
     }
 
     /**
@@ -267,7 +265,7 @@ class FormBuilder
         // the element. Then we'll create the final textarea elements HTML for us.
         $options = $this->html->attributes($options);
 
-        return '<textarea' . $options . '>' . e($value) . '</textarea>';
+        return '<textarea'.$options.'>'.e($value).'</textarea>';
     }
 
     /**
@@ -453,7 +451,7 @@ class FormBuilder
             $html[] = $this->option($display, $value, $selected);
         }
 
-        return '<optgroup label="' . e($label) . '">' . implode('', $html) . '</optgroup>';
+        return '<optgroup label="'.e($label).'">'.implode('', $html).'</optgroup>';
     }
 
     /**
@@ -471,7 +469,7 @@ class FormBuilder
 
         $options = ['value' => e($value), 'selected' => $selected];
 
-        return '<option' . $this->html->attributes($options) . '>' . e($display) . '</option>';
+        return '<option'.$this->html->attributes($options).'>'.e($display).'</option>';
     }
 
     /**
@@ -568,7 +566,7 @@ class FormBuilder
      */
     protected function missingOldAndModel($name)
     {
-        return (is_null($this->old($name)) && is_null($this->getModelValueAttribute($name)));
+        return is_null($this->old($name)) && is_null($this->getModelValueAttribute($name));
     }
 
     /**
@@ -611,7 +609,7 @@ class FormBuilder
             $options['type'] = 'button';
         }
 
-        return '<button' . $this->html->attributes($options) . '>' . $value . '</button>';
+        return '<button'.$this->html->attributes($options).'>'.$value.'</button>';
     }
 
     /**

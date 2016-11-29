@@ -7,7 +7,7 @@ class Shortcodes
     /**
      * Ignore html shortcodes inside html elements.
      *
-     * @var boolean
+     * @var bool
      */
     protected $ignore;
 
@@ -17,7 +17,7 @@ class Shortcodes
      * @param \Assely\Adapter\Adapter|string $key
      * @param array $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function setUp($ignore = false)
     {

@@ -31,14 +31,14 @@ class Application extends Container implements ContainerContract
     /**
      * Indicates if the application has been bootstrapped before.
      *
-     * @var boolean
+     * @var bool
      */
     protected $hasBeenBootstrapped = false;
 
     /**
      * Indicates if the application has "booted".
      *
-     * @var boolean
+     * @var bool
      */
     protected $booted = false;
 
@@ -176,7 +176,7 @@ class Application extends Container implements ContainerContract
         $this->instance('path', $this->path());
 
         foreach (['base', 'config', 'lang', 'public', 'storage'] as $path) {
-            $this->instance('path.' . $path, $this->{$path . 'Path'}());
+            $this->instance('path.'.$path, $this->{$path.'Path'}());
         }
     }
 
@@ -187,7 +187,7 @@ class Application extends Container implements ContainerContract
      */
     public function path()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'app';
+        return $this->basePath.DIRECTORY_SEPARATOR.'app';
     }
 
     /**
@@ -207,7 +207,7 @@ class Application extends Container implements ContainerContract
      */
     public function configPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'config';
+        return $this->basePath.DIRECTORY_SEPARATOR.'config';
     }
 
     /**
@@ -217,7 +217,7 @@ class Application extends Container implements ContainerContract
      */
     public function langPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang';
+        return $this->basePath.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang';
     }
 
     /**
@@ -227,7 +227,7 @@ class Application extends Container implements ContainerContract
      */
     public function publicPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
+        return $this->basePath.DIRECTORY_SEPARATOR.'public';
     }
 
     /**
@@ -237,7 +237,7 @@ class Application extends Container implements ContainerContract
      */
     public function resourcePath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
+        return $this->basePath.DIRECTORY_SEPARATOR.'resources';
     }
 
     /**
@@ -247,7 +247,7 @@ class Application extends Container implements ContainerContract
      */
     public function storagePath()
     {
-        return $this->storagePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'storage';
+        return $this->storagePath ?: $this->basePath.DIRECTORY_SEPARATOR.'storage';
     }
 
     /**
@@ -518,7 +518,7 @@ class Application extends Container implements ContainerContract
     }
 
     /**
-     * Register Base Facades
+     * Register Base Facades.
      *
      * @return void
      */
@@ -534,7 +534,7 @@ class Application extends Container implements ContainerContract
     }
 
     /**
-     * Run the Application
+     * Run the Application.
      *
      * @return self
      */

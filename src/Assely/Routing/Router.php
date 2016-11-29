@@ -38,14 +38,14 @@ class Router
     protected $container;
 
     /**
-     * Router namspace
+     * Router namspace.
      *
      * @var string
      */
     protected $namespace;
 
     /**
-     * Construct Router
+     * Construct Router.
      *
      * @param \Assely\Routing\RoutesCollection $routes
      * @param \Assely\Routing\WordpressConditions $conditions
@@ -205,7 +205,7 @@ class Router
     /**
      * Resolve 404 route or redirect if not exsist.
      *
-     * @return mixed|boolean
+     * @return mixed|bool
      */
     public function resolveNotFoundRoute()
     {

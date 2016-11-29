@@ -67,7 +67,7 @@ abstract class Model implements ModelInterface
     /**
      * Save model.
      *
-     * @param integer $id
+     * @param int $id
      * @param mixed $values
      *
      * @return void
@@ -102,7 +102,7 @@ abstract class Model implements ModelInterface
     /**
      * Resolve meta data.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return mixed
      */
@@ -168,17 +168,16 @@ abstract class Model implements ModelInterface
      * @throws \Assely\Singularity\QueryException
      *
      * @return string
-     *
      */
     public function preserveAs()
     {
         $arguments = $this->getArguments();
 
-        if ( ! isset($arguments['preserve'])) {
+        if (! isset($arguments['preserve'])) {
             throw new QueryException('You need to specify how this repository should be preserved [single, multiple or default].');
         }
 
-        if ( ! in_array($arguments['preserve'], ['single', 'multiple', 'default'])) {
+        if (! in_array($arguments['preserve'], ['single', 'multiple', 'default'])) {
             throw new QueryException('Repository can be preserved only as single, multiple or default.');
         }
 
@@ -190,7 +189,7 @@ abstract class Model implements ModelInterface
      *
      * @param  string $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isPreservedAs($type)
     {

@@ -66,7 +66,6 @@ class SaltsCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:salts generate --format="yaml"
-     *
      */
     public function generate()
     {

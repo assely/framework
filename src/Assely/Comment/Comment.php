@@ -1,4 +1,5 @@
 <?php
+
 namespace Assely\Comment;
 
 use Assely\Hook\HookFactory;

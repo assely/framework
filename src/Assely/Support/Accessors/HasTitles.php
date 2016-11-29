@@ -7,14 +7,14 @@ use Illuminate\Support\Str;
 trait HasTitles
 {
     /**
-     * Singular title
+     * Singular title.
      *
      * @var string
      */
     protected $singular;
 
     /**
-     * Plural title
+     * Plural title.
      *
      * @var string
      */
@@ -39,7 +39,7 @@ trait HasTitles
      */
     public function setSingular($title = [])
     {
-        if ( ! empty($title) && isset($title[0])) {
+        if (! empty($title) && isset($title[0])) {
             $this->singular = $title[0];
         } else {
             $name = str_replace('_', ' ', $this->getSlug());
@@ -69,7 +69,7 @@ trait HasTitles
      */
     public function setPlural($title = [])
     {
-        if ( ! empty($title) && isset($title[1])) {
+        if (! empty($title) && isset($title[1])) {
             $this->plural = $title[1];
         } else {
             $name = str_replace('_', ' ', $this->getSlug());
@@ -81,7 +81,7 @@ trait HasTitles
     }
 
     /**
-     * Get labels
+     * Get labels.
      *
      * @return array
      */
@@ -90,15 +90,15 @@ trait HasTitles
         return [
             'name' => $this->plural,
             'singular_name' => $this->singular,
-            'add_new' => 'Add New' . ' ' . $this->singular,
-            'add_new_item' => 'Add New' . ' ' . $this->singular,
-            'edit_item' => 'Edit' . ' ' . $this->singular,
-            'new_item' => 'New' . ' ' . $this->singular,
-            'all_items' => 'All' . ' ' . $this->plural,
-            'view_item' => 'View' . ' ' . $this->singular,
-            'search_items' => 'Search' . ' ' . $this->plural,
-            'not_found' => $this->plural . ' ' . 'no found',
-            'not_found_in_trash' => $this->plural . ' ' . 'no found in Trash',
+            'add_new' => 'Add New'.' '.$this->singular,
+            'add_new_item' => 'Add New'.' '.$this->singular,
+            'edit_item' => 'Edit'.' '.$this->singular,
+            'new_item' => 'New'.' '.$this->singular,
+            'all_items' => 'All'.' '.$this->plural,
+            'view_item' => 'View'.' '.$this->singular,
+            'search_items' => 'Search'.' '.$this->plural,
+            'not_found' => $this->plural.' '.'no found',
+            'not_found_in_trash' => $this->plural.' '.'no found in Trash',
             'parent_item_colon' => '',
             'menu_name' => $this->plural,
         ];

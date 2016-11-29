@@ -88,7 +88,7 @@ class Post extends Adapter
     /**
      * Get post terms.
      *
-     * @param integer $id
+     * @param int $id
      * @param array $arguments
      *
      * @return \Illuminate\Support\Collection
@@ -153,7 +153,7 @@ class Post extends Adapter
     /**
      * If the post has a thumbnail?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasThumbnail()
     {
@@ -163,7 +163,7 @@ class Post extends Adapter
     /**
      * Get post thumbnail id.
      *
-     * @return integer
+     * @return int
      */
     public function thumbnailId()
     {

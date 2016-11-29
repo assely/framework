@@ -15,7 +15,7 @@ class FoundationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(ASSELY_FRAMEWORK_DIR . 'resources/views', 'Assely');
+        $this->loadViewsFrom(ASSELY_FRAMEWORK_DIR.'resources/views', 'Assely');
 
         $this->registerAssets();
 
@@ -75,7 +75,7 @@ class FoundationServiceProvider extends ServiceProvider
     {
         return Finder::create()
             ->files()
-            ->in(ASSELY_FRAMEWORK_DIR . 'config')
+            ->in(ASSELY_FRAMEWORK_DIR.'config')
             ->name('*.php');
     }
 
@@ -87,21 +87,21 @@ class FoundationServiceProvider extends ServiceProvider
     private function registerAssets()
     {
         $this->app['asset.factory']->add('assely-styles', [
-            'path' => ASSELY_FRAMEWORK_URI . 'public/css/assely.css',
+            'path' => ASSELY_FRAMEWORK_URI.'public/css/assely.css',
         ])->area('admin');
 
         $this->app['asset.factory']->add('parsleyjs', [
-            'path' => ASSELY_FRAMEWORK_URI . 'public/js/vendors/parsley.js',
+            'path' => ASSELY_FRAMEWORK_URI.'public/js/vendors/parsley.js',
             'placement' => 'head',
         ])->area('admin');
 
         $this->app['asset.factory']->add('vue', [
-            'path' => ASSELY_FRAMEWORK_URI . 'public/js/vendors/vue.js',
+            'path' => ASSELY_FRAMEWORK_URI.'public/js/vendors/vue.js',
             'placement' => 'head',
         ])->area('admin');
 
         $this->app['asset.factory']->add('assely-components', [
-            'path' => ASSELY_FRAMEWORK_URI . 'public/js/assely-components.js',
+            'path' => ASSELY_FRAMEWORK_URI.'public/js/assely-components.js',
             'placement' => 'head',
             'dependences' => ['jquery', 'underscore', 'vue', 'parsleyjs'],
         ])->localize('Assely', [$this, 'localizationData'])->area('admin');

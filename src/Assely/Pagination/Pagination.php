@@ -11,7 +11,7 @@ class Pagination
     /**
      * Current page number.
      *
-     * @var integer|string
+     * @var int|string
      */
     public $currentPage;
 
@@ -55,7 +55,7 @@ class Pagination
     /**
      * Get pagination.
      *
-     * @param  integer|string  $currentPage
+     * @param  int|string  $currentPage
      * @param  array  $arguments
      *
      * @return self
@@ -200,9 +200,9 @@ class Pagination
     /**
      * Get number of links.
      *
-     * @param  boolean $zeroBased Using zero-based index
+     * @param  bool $zeroBased Using zero-based index
      *
-     * @return integer
+     * @return int
      */
     public function getLinksCount($zeroBased = false)
     {

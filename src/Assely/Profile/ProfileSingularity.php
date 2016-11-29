@@ -58,7 +58,7 @@ class ProfileSingularity extends Singularity implements ValidatesScreenInterface
      * Check if we are on user profile
      * or user edit screen.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidScreen()
     {
@@ -69,7 +69,7 @@ class ProfileSingularity extends Singularity implements ValidatesScreenInterface
      * Check if current screen
      * is profile page.
      *
-     * @return boolean
+     * @return bool
      */
     public function currentScreenIsProfile()
     {
@@ -80,7 +80,7 @@ class ProfileSingularity extends Singularity implements ValidatesScreenInterface
      * Check if current screen
      * is user edit page.
      *
-     * @return boolean
+     * @return bool
      */
     public function currentScreenIsUserEdit()
     {

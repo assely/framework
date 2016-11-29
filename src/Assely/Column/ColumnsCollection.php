@@ -25,7 +25,7 @@ class ColumnsCollection
     }
 
     /**
-     * Map columns
+     * Map columns.
      *
      * @param \Assely\Support\Facades\Column[] $columns
      * @return array

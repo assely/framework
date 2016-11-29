@@ -9,7 +9,7 @@ trait PreservesMeta
     /**
      * Get user meta data collection.
      *
-     * @param  integer $id Term id
+     * @param  int $id Term id
      *
      * @return array
      */
@@ -21,9 +21,9 @@ trait PreservesMeta
     }
 
     /**
-     * Find user meta data
+     * Find user meta data.
      *
-     * @param  integer $id Term id
+     * @param  int $id Term id
      *
      * @return array
      */
@@ -41,7 +41,7 @@ trait PreservesMeta
     /**
      * Get all user meta data.
      *
-     * @param  integer $id Term id
+     * @param  int $id Term id
      *
      * @return array
      */
@@ -53,11 +53,11 @@ trait PreservesMeta
     /**
      * Create user meta data.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      * @param  mixed $value
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function createMeta($id, array $arguments)
     {
@@ -74,11 +74,11 @@ trait PreservesMeta
     /**
      * Update user meta.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string $key
      * @param  mixed $value
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function updateMeta($id, array $arguments)
     {
@@ -94,10 +94,10 @@ trait PreservesMeta
     /**
      * Delete model object meta data.
      *
-     * @param integer $id
+     * @param int $id
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteMeta($id, $key = '')
     {

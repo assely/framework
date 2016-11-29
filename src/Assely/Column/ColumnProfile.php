@@ -44,7 +44,7 @@ class ColumnProfile extends Column
     /**
      * Render column content.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return void
      */

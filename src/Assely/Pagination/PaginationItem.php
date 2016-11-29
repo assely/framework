@@ -35,14 +35,14 @@ class PaginationItem
     /**
      * Item number.
      *
-     * @var integer
+     * @var int
      */
     public $number;
 
     /**
      * Item active status.
      *
-     * @var boolean
+     * @var bool
      */
     public $active = false;
 
@@ -66,7 +66,7 @@ class PaginationItem
      */
     public function resolveType()
     {
-        $regrex = "/class=.+(?<type>dots|number).+/";
+        $regrex = '/class=.+(?<type>dots|number).+/';
 
         preg_match($regrex, $this->markup, $matches);
 

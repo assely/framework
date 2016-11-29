@@ -4,9 +4,9 @@ namespace Assely\Helpers;
 
 use Assely\Foundation\Application;
 
-if ( ! function_exists('app')) {
+if (! function_exists('app')) {
     /**
-     * Get application container
+     * Get application container.
      *
      * @param  string $make
      *
@@ -22,7 +22,7 @@ if ( ! function_exists('app')) {
     }
 }
 
-if ( ! function_exists('asset')) {
+if (! function_exists('asset')) {
     /**
      * Gets asset.
      *
@@ -36,9 +36,9 @@ if ( ! function_exists('asset')) {
     }
 }
 
-if ( ! function_exists('nonce')) {
+if (! function_exists('nonce')) {
     /**
-     * Get nonces factory
+     * Get nonces factory.
      *
      * @return \Assely\Nonce\NonceFactory
      */
@@ -48,9 +48,9 @@ if ( ! function_exists('nonce')) {
     }
 }
 
-if ( ! function_exists('config')) {
+if (! function_exists('config')) {
     /**
-     * Get theme configs
+     * Get theme configs.
      *
      * @param  string $name
      *
@@ -62,7 +62,7 @@ if ( ! function_exists('config')) {
     }
 }
 
-if ( ! function_exists('public_path')) {
+if (! function_exists('public_path')) {
     /**
      * Get the path to the public folder.
      *
@@ -72,11 +72,11 @@ if ( ! function_exists('public_path')) {
      */
     function public_path($path)
     {
-        return app('config')->get('app.path') . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $path;
+        return app('config')->get('app.path').DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.$path;
     }
 }
 
-if ( ! function_exists('public_dir')) {
+if (! function_exists('public_dir')) {
     /**
      * Get the dir to the public folder.
      *
@@ -86,11 +86,11 @@ if ( ! function_exists('public_dir')) {
      */
     function public_dir($dir)
     {
-        return app('config')->get('app.directory') . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $dir;
+        return app('config')->get('app.directory').DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.$dir;
     }
 }
 
-if ( ! function_exists('view')) {
+if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *

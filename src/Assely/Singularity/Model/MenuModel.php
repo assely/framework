@@ -35,7 +35,7 @@ class MenuModel extends Model
     /**
      * Has menu items?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasNavigation()
     {

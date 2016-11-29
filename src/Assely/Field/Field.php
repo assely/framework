@@ -139,11 +139,10 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function template(ViewFactory $view)
     {
-        throw new FieldException(ucfirst($this->type) . ' Field must have template.');
+        throw new FieldException(ucfirst($this->type).' Field must have template.');
     }
 
     /**
@@ -156,11 +155,10 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function on($condition, $fields)
     {
-        throw new FieldException(ucfirst($this->type) . " Field can't have conditional fields.");
+        throw new FieldException(ucfirst($this->type)." Field can't have conditional fields.");
     }
 
     /**
@@ -172,11 +170,10 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function children($fields)
     {
-        throw new FieldException(ucfirst($this->type) . " Field can't have children fields.");
+        throw new FieldException(ucfirst($this->type)." Field can't have children fields.");
     }
 
     /**
@@ -188,11 +185,10 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function validate($rules)
     {
-        throw new FieldException(ucfirst($this->type) . " Field can't be validated.");
+        throw new FieldException(ucfirst($this->type)." Field can't be validated.");
     }
 
     /**
@@ -204,11 +200,10 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function sanitize($callback = '')
     {
-        throw new FieldException(ucfirst($this->type) . " Field can't be sanitized.");
+        throw new FieldException(ucfirst($this->type)." Field can't be sanitized.");
     }
 
     /**
@@ -221,18 +216,17 @@ abstract class Field implements FieldInterface, JsonSerializable
      * @throws \Assely\Field\FieldException
      *
      * @return void
-     *
      */
     public function preview(ViewFactory $view, $value)
     {
-        throw new FieldException(ucfirst($this->type) . " Field can't have column preview.");
+        throw new FieldException(ucfirst($this->type)." Field can't have column preview.");
     }
 
     /**
      * By default field can't have children, so we are returning false.
      * This behavior is overwrited by specifed field implementation.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
@@ -243,7 +237,7 @@ abstract class Field implements FieldInterface, JsonSerializable
      * By default field can not be sanitized, so we are returning false.
      * This behavior is overwrited by specifed field implementation.
      *
-     * @return boolean
+     * @return bool
      */
     public function needsSanitization()
     {
@@ -295,7 +289,7 @@ abstract class Field implements FieldInterface, JsonSerializable
      *
      * @param  string  $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isTypeOf($type)
     {
@@ -357,7 +351,7 @@ abstract class Field implements FieldInterface, JsonSerializable
     }
 
     /**
-     * Gets Field Manager
+     * Gets Field Manager.
      *
      * @return \Assely\Field\FieldManager
      */

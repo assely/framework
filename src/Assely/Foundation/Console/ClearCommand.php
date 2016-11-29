@@ -42,7 +42,6 @@ class ClearCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:clear cache
-     *
      */
     public function cache()
     {
@@ -59,7 +58,6 @@ class ClearCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:clear views
-     *
      */
     public function views()
     {
@@ -76,7 +74,6 @@ class ClearCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:clear rewrites
-     *
      */
     public function rewrites()
     {

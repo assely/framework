@@ -134,7 +134,7 @@ class Ajax implements RouteInterface
         $this->hook->action($name, function () {
             header('Content-Type: application/json');
 
-            if ( ! $this->nonceValid()) {
+            if (! $this->nonceValid()) {
                 echo json_encode($this->getErrorMessage());
 
                 die();
@@ -149,7 +149,7 @@ class Ajax implements RouteInterface
     /**
      * Verify nonce token.
      *
-     * @return boolean
+     * @return bool
      */
     public function nonceValid()
     {

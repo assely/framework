@@ -73,7 +73,8 @@ class FieldTest extends TestCase
 
         $this->expectException('Assely\Field\FieldException');
 
-        $field->sanitize(function () {});
+        $field->sanitize(function () {
+        });
     }
 
     /**
