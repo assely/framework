@@ -12,7 +12,7 @@ trait CanBeValidated
     protected $validator;
 
     /**
-     * Set field validate rules,
+     * Set field validate rules,.
      *
      * @param  array $rules
      * @return self

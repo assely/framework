@@ -57,7 +57,7 @@ class Menu extends Adapter
     /**
      * Checks if menu have children items.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {

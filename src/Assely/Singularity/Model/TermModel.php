@@ -11,7 +11,7 @@ class TermModel extends Model implements PreservesMetaInterface
     use PreservesMeta;
 
     /**
-     * Default term params
+     * Default term params.
      *
      * @var array
      */
@@ -38,7 +38,7 @@ class TermModel extends Model implements PreservesMetaInterface
      *
      * @param  array  $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function makeMeta(array $parameters)
     {
@@ -50,7 +50,7 @@ class TermModel extends Model implements PreservesMetaInterface
      *
      * @param  array  $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function saveMeta(array $parameters)
     {
@@ -58,11 +58,11 @@ class TermModel extends Model implements PreservesMetaInterface
     }
 
     /**
-     * Remove term meta form Singularity,
+     * Remove term meta form Singularity,.
      *
      * @param  array  $parameters
      *
-     * @return boolean
+     * @return bool
      */
     public function removeMeta(array $parameters)
     {

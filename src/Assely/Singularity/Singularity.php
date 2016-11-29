@@ -29,7 +29,7 @@ abstract class Singularity
      * Prepare singularity values
      * and dispatch to the view.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return void
      */
@@ -56,7 +56,7 @@ abstract class Singularity
     /**
      * Save singularity.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return void
      */
@@ -77,7 +77,7 @@ abstract class Singularity
     /**
      * Check if request have singularity data.
      *
-     * @return boolean
+     * @return bool
      */
     public function requestNotEmpty()
     {

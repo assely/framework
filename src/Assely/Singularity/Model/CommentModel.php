@@ -36,7 +36,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
     /**
      * Find comment by id.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return \Assely\Adapter\Comment
      */
@@ -48,7 +48,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
     /**
      * Find comment by id or trow if unsuccessful.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return \Assely\Adapter\Comment
      */
@@ -56,7 +56,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
     {
         $comment = $this->find($id);
 
-        if ( ! $comment->getWrappedObject()) {
+        if (! $comment->getWrappedObject()) {
             throw new QueryException("Comment [{$id}] not found.");
         }
 
@@ -88,7 +88,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
     /**
      * Create post.
      *
-     * @return boolean
+     * @return bool
      */
     public function create(array $arguments)
     {
@@ -100,8 +100,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
      *
      * @throws QueryException
      *
-     * @return boolean|\WP_Error
-     *
+     * @return bool|\WP_Error
      */
     public function createOrFail(array $arguments)
     {
@@ -117,10 +116,10 @@ class CommentModel extends MetaboxModel implements WPQueryable
     /**
      * Update post.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      *
-     * @return integer
+     * @return int
      */
     public function update(Comment $comment)
     {
@@ -132,8 +131,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
      *
      * @throws QueryException
      *
-     * @return boolean|\WP_Error
-     *
+     * @return bool|\WP_Error
      */
     public function updateOrFail(Comment $comment)
     {
@@ -149,8 +147,8 @@ class CommentModel extends MetaboxModel implements WPQueryable
     /**
      * Delete post.
      *
-     * @param  integer  $id
-     * @param  boolean $force
+     * @param  int  $id
+     * @param  bool $force
      *
      * @return mixed
      */

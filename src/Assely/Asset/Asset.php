@@ -16,7 +16,7 @@ class Asset
     use HasSlug, HasArguments;
 
     /**
-     * Default asset arguments
+     * Default asset arguments.
      *
      * @var array
      */
@@ -33,7 +33,7 @@ class Asset
     ];
 
     /**
-     * Asset action type
+     * Asset action type.
      *
      * @var string
      */
@@ -90,7 +90,7 @@ class Asset
             [$this, 'handleAction']
         )->dispatch();
 
-        if ( ! empty($this->getArgument('execution'))) {
+        if (! empty($this->getArgument('execution'))) {
             $this->hook->filter(
                 'script_loader_tag',
                 [$this, 'addExecutionTypes']
@@ -118,7 +118,7 @@ class Asset
      */
     public function register()
     {
-        if ( ! $this->is('registered')) {
+        if (! $this->is('registered')) {
             call_user_func("wp_register_{$this->getType()}",
                 $this->getSlug(),
                 $this->getPath(),
@@ -140,7 +140,7 @@ class Asset
      */
     public function enqueue()
     {
-        if ( ! $this->is('enqueued')) {
+        if (! $this->is('enqueued')) {
             call_user_func("wp_enqueue_{$this->getType()}", $this->getSlug());
         }
     }
@@ -245,7 +245,7 @@ class Asset
      *
      * @param  string  $state State name
      *
-     * @return boolean
+     * @return bool
      */
     public function is($state)
     {
@@ -334,8 +334,8 @@ class Asset
             return $path;
         }
 
-        $filePath = $this->config->get('app.directory') . DIRECTORY_SEPARATOR . "public/{$path}";
-        $fileUrl = $this->config->get('app.path') . DIRECTORY_SEPARATOR . "public/{$path}";
+        $filePath = $this->config->get('app.directory').DIRECTORY_SEPARATOR."public/{$path}";
+        $fileUrl = $this->config->get('app.path').DIRECTORY_SEPARATOR."public/{$path}";
 
         if ($this->filesystem->exists($filePath)) {
             return $fileUrl;
@@ -355,14 +355,15 @@ class Asset
         $allowed = $this->getAllowedTypes();
 
         if ($type) {
-            if ( ! $this->isAllowedType($type)) {
-                throw new AssetException('Illegal Asset Type: Assets types can be only ' . implode(', ', $allowed));
+            if (! $this->isAllowedType($type)) {
+                throw new AssetException('Illegal Asset Type: Assets types can be only '.implode(', ', $allowed));
             }
 
             return $type;
         }
 
         $ext = pathinfo($this->getArgument('path'), PATHINFO_EXTENSION);
+
         return ($ext && $ext === 'js') ? $allowed[0] : $allowed[1];
     }
 
@@ -377,8 +378,8 @@ class Asset
         $allowed = $this->getAllowedAreas();
 
         if ($area) {
-            if ( ! $this->isAllowedArea($area)) {
-                throw new AssetException('Illegal Asset Area: Assets can be only assigned to ' . implode(', ', $allowed));
+            if (! $this->isAllowedArea($area)) {
+                throw new AssetException('Illegal Asset Area: Assets can be only assigned to '.implode(', ', $allowed));
             }
 
             return $area;
@@ -414,8 +415,8 @@ class Asset
         $allowed = $this->getAllowedMedia();
 
         if ($media) {
-            if ( ! $this->isAllowedMedia($media)) {
-                throw new AssetException('Illegal media: Style assets acceptable madia ' . implode(', ', $allowed));
+            if (! $this->isAllowedMedia($media)) {
+                throw new AssetException('Illegal media: Style assets acceptable madia '.implode(', ', $allowed));
             }
 
             return $media;
@@ -427,7 +428,7 @@ class Asset
     /**
      * Gets placement of scripts asset.
      *
-     * @return boolean
+     * @return bool
      */
     private function getScriptsPlacement()
     {
@@ -435,8 +436,8 @@ class Asset
         $allowed = $this->getAllowedPlacements();
 
         if ($placement) {
-            if ( ! $this->isAllowedPlacement($placement)) {
-                throw new AssetException('Illegal placement: Script assets can be only placed in ' . implode(', ', $allowed));
+            if (! $this->isAllowedPlacement($placement)) {
+                throw new AssetException('Illegal placement: Script assets can be only placed in '.implode(', ', $allowed));
             }
 
             if ($this->isPlacement('head')) {
@@ -498,7 +499,7 @@ class Asset
      *
      * @param  string  $area
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedArea($area)
     {
@@ -520,7 +521,7 @@ class Asset
      *
      * @param  string  $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedType($type)
     {
@@ -532,7 +533,7 @@ class Asset
      *
      * @param  string  $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isTypeOf($type)
     {
@@ -554,7 +555,7 @@ class Asset
      *
      * @param  string  $placement
      *
-     * @return boolean
+     * @return bool
      */
     public function isPlacement($placement)
     {
@@ -566,7 +567,7 @@ class Asset
      *
      * @param  string  $placement
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedPlacement($placement)
     {
@@ -584,11 +585,11 @@ class Asset
     }
 
     /**
-     * Check if asset media is allowed
+     * Check if asset media is allowed.
      *
      * @param  string  $media
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedMedia($media)
     {

@@ -46,7 +46,7 @@ class User extends Adapter
      *
      * @param  string $capability
      *
-     * @return boolean
+     * @return bool
      */
     public function can($capability)
     {
@@ -74,7 +74,7 @@ class User extends Adapter
      *
      * @param string $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role)
     {

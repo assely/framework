@@ -2,8 +2,6 @@
 
 namespace Assely\View;
 
-use Assely\View\ViewEngine;
-
 class View
 {
     /**

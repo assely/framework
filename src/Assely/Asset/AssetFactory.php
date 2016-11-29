@@ -66,7 +66,6 @@ class AssetFactory extends Depot
      * @throws AssetException
      *
      * @return \Assely\Asset\Asset
-     *
      */
     public function get($slug)
     {

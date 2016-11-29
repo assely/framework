@@ -43,9 +43,9 @@ class HtmlBuilder
 
         $title = $title ?: $email;
 
-        $email = $this->obfuscate('mailto:') . $email;
+        $email = $this->obfuscate('mailto:').$email;
 
-        return '<a href="' . $email . '"' . $this->attributes($attributes) . '>' . $this->entities($title) . '</a>';
+        return '<a href="'.$email.'"'.$this->attributes($attributes).'>'.$this->entities($title).'</a>';
     }
 
     /**
@@ -130,7 +130,7 @@ class HtmlBuilder
             return $this->nestedListing($key, $type, $value);
         }
 
-        return '<li>' . e($value) . '</li>';
+        return '<li>'.e($value).'</li>';
     }
 
     /**
@@ -148,7 +148,7 @@ class HtmlBuilder
             return $this->listing($type, $value);
         }
 
-        return '<li>' . $key . $this->listing($type, $value) . '</li>';
+        return '<li>'.$key.$this->listing($type, $value).'</li>';
     }
 
     /**
@@ -173,7 +173,7 @@ class HtmlBuilder
             }
         }
 
-        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
+        return count($html) > 0 ? ' '.implode(' ', $html) : '';
     }
 
     /**
@@ -191,7 +191,7 @@ class HtmlBuilder
         }
 
         if (! is_null($value)) {
-            return $key . '="' . e($value) . '"';
+            return $key.'="'.e($value).'"';
         }
     }
 
@@ -216,11 +216,11 @@ class HtmlBuilder
             // the randomly obfuscated letters out of the string on the responses.
             switch (rand(1, 3)) {
                 case 1:
-                    $safe .= '&#' . ord($letter) . ';';
+                    $safe .= '&#'.ord($letter).';';
                     break;
 
                 case 2:
-                    $safe .= '&#x' . dechex(ord($letter)) . ';';
+                    $safe .= '&#x'.dechex(ord($letter)).';';
                     break;
 
                 case 3:

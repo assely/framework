@@ -50,7 +50,6 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make posttype Movies
-     *
      */
     public function posttype()
     {
@@ -82,7 +81,6 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make taxonomy Grenes --belongsto="App\Posttypes\Movies"
-     *
      */
     public function taxonomy()
     {
@@ -115,7 +113,6 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make metabox MovieDetails --belongsto="App\Posttypes\Movies"
-     *
      */
     public function metabox()
     {
@@ -147,7 +144,6 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make profile WatchedMovies --belongsto="App\User"
-     *
      */
     public function profile()
     {
@@ -173,7 +169,6 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make controller MoviesController
-     *
      */
     public function controller()
     {
@@ -201,17 +196,16 @@ class MakeCommand extends Command
      * ## EXAMPLE
      *
      *     wp assely:make command RandomMovie --command="app:movie" --method="random"
-     *
      */
     public function command($arguments, $options)
     {
         $this->setClassname($this->getArgument(0));
 
-        if ( ! $this->getOption('signature')) {
+        if (! $this->getOption('signature')) {
             return $this->error('You must specify command signature [--signature=<signature>].');
         }
 
-        if ( ! $this->getOption('method')) {
+        if (! $this->getOption('method')) {
             return $this->error('You must specify the name of command method name [--method=<method>].');
         }
 
@@ -233,7 +227,7 @@ class MakeCommand extends Command
      */
     protected function generateClass($dir, $stub, array $arguments = [])
     {
-        $this->line($this->colorize('Crafting:') . " Generating [{$this->getClassname()}] class...");
+        $this->line($this->colorize('Crafting:')." Generating [{$this->getClassname()}] class...");
 
         $base = $this->config->get('app.directory');
         $file = "{$base}/app/{$dir}/{$this->getClassname()}.php";
@@ -242,7 +236,7 @@ class MakeCommand extends Command
             $this->confirm("[{$this->getClassname()}] class already exists. Want to overwrite?");
         }
 
-        $template = $this->filesystem->get(__DIR__ . "/stubs/{$stub}");
+        $template = $this->filesystem->get(__DIR__."/stubs/{$stub}");
 
         $this->filesystem->put($file, $this->stub->render($template, $arguments));
 
@@ -261,13 +255,13 @@ class MakeCommand extends Command
      */
     protected function generateView($stub, $dir, $file, array $arguments = [])
     {
-        $this->line($this->colorize('Crafting:') . " Generating [{$file}] view...");
+        $this->line($this->colorize('Crafting:')." Generating [{$file}] view...");
 
         $base = $this->config->get('app.directory');
         $directory = "{$base}/resources/views/{$dir}";
         $file = "{$directory}/{$file}.blade.php";
 
-        if ( ! $this->filesystem->exists($directory)) {
+        if (! $this->filesystem->exists($directory)) {
             $this->filesystem->makeDirectory($directory);
         }
 
@@ -275,7 +269,7 @@ class MakeCommand extends Command
             $this->confirm("View template [{$file}] already exists. Want to overwrite?");
         }
 
-        $template = $this->filesystem->get(__DIR__ . "/stubs/{$stub}");
+        $template = $this->filesystem->get(__DIR__."/stubs/{$stub}");
 
         $this->filesystem->put($file, $this->stub->render($template, $arguments));
 

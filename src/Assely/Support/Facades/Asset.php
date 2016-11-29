@@ -2,7 +2,6 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Asset\AssetFactory;
 use Illuminate\Support\Facades\Facade;
 
 /**

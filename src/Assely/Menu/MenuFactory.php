@@ -29,7 +29,6 @@ class MenuFactory extends Depot
      * @throws MenuException
      *
      * @return \Assely\Menu\Menu
-     *
      */
     public function get($slug)
     {

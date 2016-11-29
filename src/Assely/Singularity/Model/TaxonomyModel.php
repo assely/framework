@@ -5,14 +5,13 @@ namespace Assely\Singularity\Model;
 use Assely\Adapter\Post;
 use Assely\Adapter\Term;
 use Assely\Contracts\Singularity\WPQueryable;
-use Assely\Singularity\Model\PosttypeModel;
 use Assely\Singularity\QueryException;
 use Assely\Support\Facades\App;
 
 class TaxonomyModel extends TermModel implements WPQueryable
 {
     /**
-     * Default taxonomy arguments
+     * Default taxonomy arguments.
      *
      * @var array
      */
@@ -29,7 +28,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     ];
 
     /**
-     * Query
+     * Query.
      *
      * @param  array $arguments
      *
@@ -46,7 +45,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
      * Find term by key.
      *
      * @param  string $key
-     * @param  integer $id
+     * @param  int $id
      *
      * @return \Illuminate\Support\Collection
      */
@@ -89,7 +88,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
      * Find term.
      *
      * @param  string $key
-     * @param  integer $id
+     * @param  int $id
      *
      * @return \Illuminate\Support\Collection
      */
@@ -105,7 +104,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     /**
      * Find term or trow if unssuccesful.
      *
-     * @param  integer $id     Term id
+     * @param  int $id     Term id
      * @param  string $output
      * @param  string $filter
      *
@@ -115,7 +114,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     {
         $term = $this->find($id);
 
-        if ( ! $term->getWrappedObject()) {
+        if (! $term->getWrappedObject()) {
             throw new QueryException("Taxonomy [{$this->slug}] could not find term [{$id}].");
         }
 
@@ -179,7 +178,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     /**
      * Update term.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array  $arguments
      *
      * @return array|\WP_Error
@@ -192,7 +191,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
     /**
      * Update term.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array  $arguments
      *
      * @return array|\WP_Error
@@ -211,9 +210,9 @@ class TaxonomyModel extends TermModel implements WPQueryable
     /**
      * Delete term.
      *
-     * @param  integer $id
+     * @param  int $id
      *
-     * @return boolean|\WP_Error
+     * @return bool|\WP_Error
      */
     public function delete($id)
     {

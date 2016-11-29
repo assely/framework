@@ -27,7 +27,7 @@ trait MayHaveChildren
     /**
      * There are any children?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
@@ -45,7 +45,7 @@ trait MayHaveChildren
     }
 
     /**
-     * Sets the value of children
+     * Sets the value of children.
      *
      * @param @return \Assely\Field\FieldsCollection $children
      *

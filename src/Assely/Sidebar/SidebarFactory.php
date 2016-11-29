@@ -27,7 +27,6 @@ class SidebarFactory extends Depot
      * @throws SidebarException
      *
      * @return \Assely\Sidebar\Sidebar
-     *
      */
     public function get($slug)
     {
@@ -41,7 +40,7 @@ class SidebarFactory extends Depot
     /**
      * Check if sidebar is active.
      *
-     * @return boolean
+     * @return bool
      */
     public function isActive($slug)
     {

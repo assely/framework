@@ -24,7 +24,6 @@ class FieldsFinder
      * @param string $path
      *
      * @return \Assely\Field\Field
-     *
      */
     public function find($path)
     {
@@ -70,7 +69,7 @@ class FieldsFinder
 
         // We could not find field.
         // Throw an Exception.
-        throw new FieldException("We couldn't find Field: " . $this->getPath());
+        throw new FieldException("We couldn't find Field: ".$this->getPath());
     }
 
     /**

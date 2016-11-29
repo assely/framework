@@ -39,7 +39,7 @@ class ColumnTerm extends Column
     /**
      * Render column content.
      *
-     * @param integer $termId
+     * @param int $termId
      *
      * @return void
      */

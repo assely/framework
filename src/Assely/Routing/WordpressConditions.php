@@ -63,7 +63,7 @@ class WordpressConditions
      * @param  string  $condition
      * @param  array   $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function is($condition, $arguments = [])
     {

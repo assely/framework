@@ -27,7 +27,6 @@ class ThumbnailFactory extends Depot
      * @throws ThumbnailException
      *
      * @return \Assely\Thumbnail\Thumbnail
-     *
      */
     public function get($slug)
     {

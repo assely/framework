@@ -50,7 +50,7 @@ class MetaboxModel extends Model implements PreservesMetaInterface
      *
      * @param  array  $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function makeMeta(array $parameters)
     {
@@ -62,7 +62,7 @@ class MetaboxModel extends Model implements PreservesMetaInterface
      *
      * @param  array  $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function saveMeta(array $parameters)
     {
@@ -70,11 +70,11 @@ class MetaboxModel extends Model implements PreservesMetaInterface
     }
 
     /**
-     * Remove post meta form Singularity,
+     * Remove post meta form Singularity,.
      *
      * @param  array  $parameters
      *
-     * @return boolean
+     * @return bool
      */
     public function removeMeta(array $parameters)
     {

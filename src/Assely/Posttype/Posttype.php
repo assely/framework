@@ -1,4 +1,5 @@
 <?php
+
 namespace Assely\Posttype;
 
 use Assely\Hook\HookFactory;

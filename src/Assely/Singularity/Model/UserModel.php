@@ -23,7 +23,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
     ];
 
     /**
-     * Query
+     * Query.
      *
      * @param  array $arguments
      *
@@ -59,7 +59,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
     /**
      * Find user by id.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return \WP_User|false
      */
@@ -71,18 +71,17 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
     /**
      * Find user by id or trow if unsuccessful.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @throws \Assely\Singularity\QueryException
      *
      * @return \WP_User|false
-     *
      */
     public function findOrFail($id)
     {
         $user = $this->find($id);
 
-        if ( ! isset($user->id)) {
+        if (! isset($user->id)) {
             throw new QueryException("User [{$id}] not found.");
         }
 
@@ -118,7 +117,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      *
      * @param array $arguments
      *
-     * @return integer|\WP_Error
+     * @return int|\WP_Error
      */
     public function create(array $arguments)
     {
@@ -130,7 +129,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      *
      * @param \Assely\Adapter\User $user
      *
-     * @return integer|\WP_Error
+     * @return int|\WP_Error
      */
     public function update(User $user)
     {
@@ -143,11 +142,11 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      * @param \Assely\Adapter\User $user
      * @param \Assely\Adapter\User $reassign
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(User $user, User $successor = null)
     {
-        require_once ABSPATH . 'wp-admin/includes/user.php';
+        require_once ABSPATH.'wp-admin/includes/user.php';
 
         if ($successor instanceof User) {
             $successor = $successor->id;
@@ -173,7 +172,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      *
      * @param array $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function makeMeta(array $parameters)
     {
@@ -185,7 +184,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      *
      * @param array $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function saveMeta(array $parameters)
     {
@@ -197,7 +196,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      *
      * @param array $parameters
      *
-     * @return boolean|integer
+     * @return bool|int
      */
     public function removeMeta(array $parameters)
     {

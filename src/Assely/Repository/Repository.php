@@ -32,7 +32,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Repository compatibilites.
      *
-     * @var boolean
+     * @var bool
      */
     protected $compatibility = true;
 
@@ -64,7 +64,7 @@ abstract class Repository implements RepositoryInterface
      *
      * @param  string $method
      *
-     * @return boolean
+     * @return bool
      */
     public function methodExist($method)
     {
@@ -166,7 +166,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Gets the Repository compatibility.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCompatibility()
     {

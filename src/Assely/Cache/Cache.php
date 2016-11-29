@@ -30,7 +30,7 @@ class Cache
     /**
      * Put data to store.
      *
-     * @return boolean
+     * @return bool
      */
     public function put($key, $value, $expire = null)
     {
@@ -44,7 +44,7 @@ class Cache
     /**
      * Get data from store.
      *
-     * @return boolean
+     * @return bool
      */
     public function get($key)
     {
@@ -54,7 +54,7 @@ class Cache
     /**
      * Cache has data.
      *
-     * @return boolean
+     * @return bool
      */
     public function has($key)
     {
@@ -64,7 +64,7 @@ class Cache
     /**
      * Delete data form store.
      *
-     * @return boolean
+     * @return bool
      */
     public function flush($key)
     {

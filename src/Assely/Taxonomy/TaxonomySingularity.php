@@ -1,4 +1,5 @@
 <?php
+
 namespace Assely\Taxonomy;
 
 use Assely\Column\ColumnsCollection;
@@ -83,7 +84,7 @@ class TaxonomySingularity extends Singularity implements ValidatesScreenInterfac
      */
     public function register()
     {
-        if ( ! $this->isBaseTaxonomy()) {
+        if (! $this->isBaseTaxonomy()) {
             return $this->registerTaxonomy();
         }
     }
@@ -95,7 +96,7 @@ class TaxonomySingularity extends Singularity implements ValidatesScreenInterfac
      */
     protected function registerTaxonomy()
     {
-        if ( ! $this->isRegistered()) {
+        if (! $this->isRegistered()) {
             $parameters = array_merge([
                 'labels' => $this->getModel()->getLabels(),
                 'rewrite' => ['slug' => $this->getModel()->getSlug()],
@@ -128,7 +129,7 @@ class TaxonomySingularity extends Singularity implements ValidatesScreenInterfac
     /**
      * Check if current screen is taxonomy model.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidScreen()
     {
@@ -138,7 +139,7 @@ class TaxonomySingularity extends Singularity implements ValidatesScreenInterfac
     /**
      * Checks if taxonomy is not one of Wordpress base taxonomies.
      *
-     * @return boolean
+     * @return bool
      */
     public function isBaseTaxonomy()
     {
@@ -148,7 +149,7 @@ class TaxonomySingularity extends Singularity implements ValidatesScreenInterfac
     /**
      * Checks if taxonomy is already registered.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRegistered()
     {

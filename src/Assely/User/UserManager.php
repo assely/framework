@@ -26,12 +26,12 @@ class UserManager extends Manager
     public function columns()
     {
         $this->hook->filter(
-            "manage_users_columns",
-            [$this->user->getColumns(), "setNames"]
+            'manage_users_columns',
+            [$this->user->getColumns(), 'setNames']
         )->dispatch();
 
         $this->hook->action(
-            "manage_users_custom_column",
+            'manage_users_custom_column',
             function ($value, $name, $id) {
                 ob_start();
 
@@ -43,7 +43,7 @@ class UserManager extends Manager
 
                 return ob_get_clean();
             },
-            ["numberOfArguments" => 3]
+            ['numberOfArguments' => 3]
         )->dispatch();
     }
 }

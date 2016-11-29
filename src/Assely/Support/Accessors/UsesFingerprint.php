@@ -33,7 +33,7 @@ trait UsesFingerprint
         if (isset($fingerprint)) {
             $this->fingerprint = $fingerprint;
         } else {
-            $this->fingerprint = "assely-" . Str::random();
+            $this->fingerprint = 'assely-'.Str::random();
         }
 
         return $this;

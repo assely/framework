@@ -50,7 +50,7 @@ class AuthManager
     /**
      * Get currently loged in user id.
      *
-     * @return integer
+     * @return int
      */
     public function getCurrentUserId()
     {
@@ -60,7 +60,7 @@ class AuthManager
     /**
      * Determine if the user is already logged in.
      *
-     * @return boolean
+     * @return bool
      */
     public function check()
     {
@@ -71,9 +71,9 @@ class AuthManager
      * Attempt user login.
      *
      * @param array $credentials
-     * @param boolean $remember
+     * @param bool $remember
      *
-     * @return boolean
+     * @return bool
      */
     public function attempt(array $credentials, $remember = false)
     {
@@ -81,7 +81,7 @@ class AuthManager
 
         $user = wp_signon($credentials);
 
-        if ( ! is_wp_error($user)) {
+        if (! is_wp_error($user)) {
             return true;
         }
 
@@ -92,7 +92,7 @@ class AuthManager
      * Login with User istance.
      *
      * @param \Assely\Adapter\User $user
-     * @param boolean $remember
+     * @param bool $remember
      * @param string $secure
      *
      * @return void

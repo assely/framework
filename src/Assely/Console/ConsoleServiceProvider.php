@@ -28,7 +28,7 @@ class ConsoleServiceProvider extends ServiceProvider
     {
         // Don't bootstrap service if
         // wp-cli is not present.
-        if ( ! (defined('WP_CLI') && WP_CLI)) {
+        if (! (defined('WP_CLI') && WP_CLI)) {
             return;
         }
 
@@ -76,7 +76,7 @@ class ConsoleServiceProvider extends ServiceProvider
      * @param string $class
      * @param arrat $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function addCommand($name, $command, array $arguments = [])
     {

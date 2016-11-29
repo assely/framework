@@ -36,9 +36,9 @@ class ColumnMetabox extends Column
     }
 
     /**
-     * Render column content
+     * Render column content.
      *
-     * @param integer $postId
+     * @param int $postId
      *
      * @return void
      */

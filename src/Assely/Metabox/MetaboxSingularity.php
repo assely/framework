@@ -22,7 +22,7 @@ class MetaboxSingularity extends Singularity implements ValidatesScreenInterface
     protected $manager;
 
     /**
-     * Construct Metabox
+     * Construct Metabox.
      *
      * @param \Assely\Metabox\MetaboxManager $manager
      * @param \Assely\Field\FieldsCollection $fields
@@ -87,7 +87,7 @@ class MetaboxSingularity extends Singularity implements ValidatesScreenInterface
      * Is the current screen a posttype
      * where the metabox belongs to.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidScreen()
     {
@@ -97,7 +97,7 @@ class MetaboxSingularity extends Singularity implements ValidatesScreenInterface
     /**
      * Current screen is comment edit?
      *
-     * @return boolean
+     * @return bool
      */
     protected function screenIsComment()
     {
@@ -107,7 +107,7 @@ class MetaboxSingularity extends Singularity implements ValidatesScreenInterface
     /**
      * Current screen is posttype where metabox belongs to?
      *
-     * @return boolean
+     * @return bool
      */
     protected function screenIsPosttype()
     {

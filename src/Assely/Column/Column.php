@@ -16,7 +16,7 @@ abstract class Column implements ColumnInterface
     /**
      * Renders content of the column.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return void
      */

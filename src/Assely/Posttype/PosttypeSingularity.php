@@ -63,7 +63,7 @@ class PosttypeSingularity extends Singularity
      */
     public function register()
     {
-        if ( ! $this->isBasePosttype()) {
+        if (! $this->isBasePosttype()) {
             return $this->registerPosttype();
         }
     }
@@ -75,7 +75,7 @@ class PosttypeSingularity extends Singularity
      */
     protected function registerPosttype()
     {
-        if ( ! $this->isRegistered()) {
+        if (! $this->isRegistered()) {
             $parameters = array_merge(
                 ['labels' => $this->model->getLabels()],
                 $this->model->getArguments()
@@ -90,7 +90,7 @@ class PosttypeSingularity extends Singularity
     /**
      * Checks if post type is not one of Wordpress base post types.
      *
-     * @return boolean
+     * @return bool
      */
     public function isBasePosttype()
     {
@@ -100,7 +100,7 @@ class PosttypeSingularity extends Singularity
     /**
      * Check if post type is already registered.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRegistered()
     {

@@ -21,8 +21,8 @@ define('ASSELY_FRAMEWORK_URI', plugin_dir_url(__FILE__));
 // that means plugin was installed manually or directly form
 // Wordpress Plugins repository. We need to autoload him.
 if (
-    is_dir(__DIR__ . '/vendor')
+    is_dir(__DIR__.'/vendor')
     && ! class_exists('Assely\Foundation\Application')
 ) {
-    require __DIR__ . '/vendor/autoload.php';
+    require __DIR__.'/vendor/autoload.php';
 }

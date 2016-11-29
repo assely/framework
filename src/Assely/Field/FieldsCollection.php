@@ -7,21 +7,21 @@ use JsonSerializable;
 class FieldsCollection implements JsonSerializable
 {
     /**
-     * Fields collection
+     * Fields collection.
      *
      * @var \Assely\Field\Field[]
      */
     protected $fields = [];
 
     /**
-     * Fields schema
+     * Fields schema.
      *
      * @var \Assely\Field\Field[]
      */
     protected $schema = [];
 
     /**
-     * Fields values
+     * Fields values.
      *
      * @var array
      */
@@ -42,7 +42,7 @@ class FieldsCollection implements JsonSerializable
     protected $parent;
 
     /**
-     * Construnct Fields Collection
+     * Construnct Fields Collection.
      *
      * @param array $fields
      * @param array $schema
@@ -342,7 +342,7 @@ class FieldsCollection implements JsonSerializable
      */
     public function setValues($values)
     {
-        if ( ! empty($values)) {
+        if (! empty($values)) {
             $this->values = $values;
         }
 
@@ -376,7 +376,7 @@ class FieldsCollection implements JsonSerializable
     /**
      * Has field collection a parent field?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasParent()
     {

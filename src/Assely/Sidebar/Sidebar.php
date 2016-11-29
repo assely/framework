@@ -11,7 +11,7 @@ class Sidebar
     use HasSlug, HasArguments, HasTitles;
 
     /**
-     * Default widget area arguments
+     * Default widget area arguments.
      *
      * @var array
      */
@@ -58,7 +58,7 @@ class Sidebar
     /**
      * Register widget area.
      *
-     * @return integer
+     * @return int
      */
     public function register()
     {
@@ -83,7 +83,7 @@ class Sidebar
     /**
      * Check if sidebar has widgets.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasWidgets()
     {

@@ -7,7 +7,7 @@ interface ValidatesScreenInterface
     /**
      * Validates current screen conditions.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidScreen();
 }

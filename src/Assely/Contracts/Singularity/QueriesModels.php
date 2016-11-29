@@ -9,14 +9,14 @@ interface QueriesModels
     /**
      * Find model object.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function find($id);
 
     /**
      * Find model object or trow if unsuccessful.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function findOrFail($id);
 
@@ -42,7 +42,7 @@ interface QueriesModels
     /**
      * Update model object.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      */
     public function update(AdapterInterface $adapter);
@@ -50,7 +50,7 @@ interface QueriesModels
     /**
      * Update model object or trow if unsuccessful.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  array $arguments
      */
     public function updateOrFail(AdapterInterface $adapter);
@@ -58,7 +58,7 @@ interface QueriesModels
     /**
      * Delete model object.
      *
-     * @param  integer $id
+     * @param  int $id
      */
     public function delete($id);
 }

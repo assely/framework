@@ -50,13 +50,13 @@ class Comment extends Adapter
     {
         $adaptees = $this->adaptee->get_children();
 
-        return $this->model->plugAdapter(Comment::class, $adaptees);
+        return $this->model->plugAdapter(self::class, $adaptees);
     }
 
     /**
      * Checks if comment have any replies.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasReplies()
     {

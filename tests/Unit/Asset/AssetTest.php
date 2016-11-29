@@ -109,7 +109,7 @@ class AssetTest extends TestCase
         $filesystem->shouldReceive('exists')->andReturn(true);
 
         $settings->shouldReceive('get')->withArgs(['assets'])->andReturn(
-            require dirname(dirname(__DIR__)) . '/../config/assets.php'
+            require dirname(dirname(__DIR__)).'/../config/assets.php'
         );
 
         $config->shouldReceive('get')->withArgs(['app.path'])->andReturn('path');

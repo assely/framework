@@ -2,7 +2,6 @@
 
 namespace Assely\Cache;
 
-use Assely\Adapter\Adapter;
 use Assely\Support\Accessors\HasArguments;
 
 class BladeDirective
@@ -26,7 +25,7 @@ class BladeDirective
     /**
      * Caching status flag.
      *
-     * @var boolean
+     * @var bool
      */
     protected $cached = false;
 
@@ -53,7 +52,7 @@ class BladeDirective
      * @param \Assely\Adapter\Adapter|string $key
      * @param array $arguments
      *
-     * @return boolean
+     * @return bool
      */
     public function setUp($key, $arguments = [])
     {
@@ -85,7 +84,7 @@ class BladeDirective
 
         // Put output buffer content, if
         // we don't have cached value.
-        if ( ! $this->cached) {
+        if (! $this->cached) {
             $this->cache->put($key, $buffer, $this->getArgument('expire'));
 
             return $buffer;

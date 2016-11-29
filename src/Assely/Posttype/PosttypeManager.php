@@ -18,8 +18,8 @@ class PosttypeManager extends Manager
         $this->posttype = $posttype;
 
         $this->hook->action(
-            "init",
-            [$this->posttype, "register"]
+            'init',
+            [$this->posttype, 'register']
         )->dispatch();
     }
 
@@ -32,7 +32,7 @@ class PosttypeManager extends Manager
     {
         $this->hook->filter(
             "manage_edit-{$this->posttype->getModel()->getSlug()}_columns",
-            [$this->posttype->getColumns(), "setNames"]
+            [$this->posttype->getColumns(), 'setNames']
         )->dispatch();
 
         $this->hook->action(

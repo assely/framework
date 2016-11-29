@@ -71,7 +71,7 @@ class Hook implements HookInterface
     /**
      * Dispach hook.
      *
-     * @return boolean
+     * @return bool
      */
     public function dispatch()
     {
@@ -88,7 +88,7 @@ class Hook implements HookInterface
      *
      * @param mixed $parameters
      *
-     * @return boolean
+     * @return bool
      */
     public function perform($parameters)
     {
@@ -101,7 +101,7 @@ class Hook implements HookInterface
     /**
      * Remove hook.
      *
-     * @return boolean
+     * @return bool
      */
     public function detach()
     {
@@ -118,7 +118,7 @@ class Hook implements HookInterface
      * @param string $action
      * @param array $parameters
      *
-     * @return boolean
+     * @return bool
      */
     public function execute($action, $parameters)
     {
@@ -154,7 +154,7 @@ class Hook implements HookInterface
      *
      * @param string $type
      *
-     * @return boolean
+     * @return bool
      */
     public function isTypeOf($type)
     {

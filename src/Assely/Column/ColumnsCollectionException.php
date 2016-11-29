@@ -6,5 +6,5 @@ use Exception;
 
 class ColumnsCollectionException extends Exception
 {
-	//
+    //
 }

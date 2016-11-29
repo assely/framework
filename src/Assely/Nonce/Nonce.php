@@ -50,7 +50,7 @@ class Nonce
     /**
      * Check if nonce value is valid.
      *
-     * @return boolean
+     * @return bool
      */
     public function check($token)
     {
@@ -62,7 +62,7 @@ class Nonce
      *
      * @throws \Assely\Nonce\NonceException
      *
-     * @return boolean
+     * @return bool
      */
     public function checkOrFail($token)
     {

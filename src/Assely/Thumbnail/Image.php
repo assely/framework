@@ -9,7 +9,7 @@ class Image implements JsonSerializable
     /**
      * Image id.
      *
-     * @var integer
+     * @var int
      */
     public $id;
 
@@ -100,7 +100,7 @@ class Image implements JsonSerializable
     /**
      * Construct image.
      *
-     * @param integer $id
+     * @param int $id
      * @param string $size
      */
     public function __construct($id, $size)

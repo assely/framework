@@ -2,8 +2,6 @@
 
 namespace Assely\Routing;
 
-use Assely\Routing\CallableDispatcher;
-use Assely\Routing\ControllerDispatcher;
 use Closure;
 
 trait ControllerActionResolver
@@ -69,7 +67,7 @@ trait ControllerActionResolver
     {
         list($controller) = explode('@', $this->getAction());
 
-        if ( ! $this->controller) {
+        if (! $this->controller) {
             $this->setController($this->makeController($controller));
         }
 

@@ -2,7 +2,6 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Sidebar\SidebarFactory;
 use Illuminate\Support\Facades\Facade;
 
 /**

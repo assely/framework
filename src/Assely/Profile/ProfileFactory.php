@@ -8,7 +8,7 @@ use Assely\Foundation\Factory;
 class ProfileFactory extends Factory
 {
     /**
-     * Create profile
+     * Create profile.
      *
      * @param  \Assely\Contracts\Singularity\Model\ModelInterface $model
      *

@@ -34,7 +34,7 @@ class CacheServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register @cache blade directive
+     * Register @cache blade directive.
      *
      * @return void
      */
