@@ -4,7 +4,7 @@ namespace Assely\Sidebar;
 
 use Illuminate\Config\Repository;
 
-class SidabarsCollection extends Repository
+class SidebarsCollection extends Repository
 {
     //
 }
