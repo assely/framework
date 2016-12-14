@@ -2,9 +2,9 @@
 
 namespace Assely\Column;
 
+use Illuminate\Support\Arr;
 use Assely\Support\Accessors\HasSlug;
 use Assely\Support\Accessors\HasTitles;
-use Illuminate\Support\Arr;
 
 class ColumnProfile extends Column
 {

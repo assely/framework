@@ -2,8 +2,8 @@
 
 namespace Assely\Field\Support;
 
-use Assely\Field\FieldException;
 use Assely\Support\Descend;
+use Assely\Field\FieldException;
 
 trait CanBeSanitized
 {

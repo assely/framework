@@ -2,14 +2,14 @@
 
 namespace Assely\Singularity;
 
-use Assely\Adapter\AdapterPlugger;
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Assely\Nonce\NonceFactory;
-use Assely\Support\Accessors\HasArguments;
+use Assely\Adapter\AdapterPlugger;
+use Illuminate\Support\Collection;
 use Assely\Support\Accessors\HasSlug;
 use Assely\Support\Accessors\HasTitles;
+use Assely\Support\Accessors\HasArguments;
 use Assely\Support\Accessors\UsesFingerprint;
-use Illuminate\Support\Collection;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 abstract class Model implements ModelInterface
 {

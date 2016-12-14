@@ -2,8 +2,8 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Singularity\Model\PosttypeModel;
 use Illuminate\Support\Facades\Facade;
+use Assely\Singularity\Model\PosttypeModel;
 
 /**
  * @see \Assely\Singularity\Model\PosttypeModel

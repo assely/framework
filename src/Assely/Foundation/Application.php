@@ -2,15 +2,15 @@
 
 namespace Assely\Foundation;
 
-use Assely\Config\ApplicationConfig;
-use Assely\Routing\RoutingServiceProvider;
-use Illuminate\Container\Container;
-use Illuminate\Contracts\Container\Container as ContainerContract;
-use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Arr;
+use Illuminate\Container\Container;
+use Assely\Config\ApplicationConfig;
+use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Finder\Finder;
+use Assely\Routing\RoutingServiceProvider;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Contracts\Container\Container as ContainerContract;
 
 class Application extends Container implements ContainerContract
 {

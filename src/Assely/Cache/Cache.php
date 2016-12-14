@@ -3,8 +3,8 @@
 namespace Assely\Cache;
 
 use Assely\Config\ApplicationConfig;
-use Assely\Support\Accessors\HasArguments;
 use Assely\Support\Accessors\HasSlug;
+use Assely\Support\Accessors\HasArguments;
 
 class Cache
 {

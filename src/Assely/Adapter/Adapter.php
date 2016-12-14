@@ -2,9 +2,9 @@
 
 namespace Assely\Adapter;
 
+use JsonSerializable;
 use Assely\Contracts\Adapter\AdapterInterface;
 use Assely\Contracts\Singularity\Model\ModelInterface;
-use JsonSerializable;
 
 abstract class Adapter implements AdapterInterface, JsonSerializable
 {

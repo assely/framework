@@ -2,9 +2,9 @@
 
 namespace Assely\Singularity\Model;
 
-use Assely\Contracts\Singularity\PreservesMetaInterface;
 use Assely\Singularity\Model;
 use Assely\Singularity\PreservesMeta;
+use Assely\Contracts\Singularity\PreservesMetaInterface;
 
 class MetaboxModel extends Model implements PreservesMetaInterface
 {

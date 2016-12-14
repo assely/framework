@@ -2,8 +2,8 @@
 
 namespace Assely\Comment;
 
-use Assely\Column\ColumnsCollection;
 use Assely\Singularity\Singularity;
+use Assely\Column\ColumnsCollection;
 use Assely\Support\Accessors\HoldsColumns;
 
 class CommentSingularity extends Singularity

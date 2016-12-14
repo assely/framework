@@ -2,8 +2,8 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Singularity\Model\UserModel;
 use Illuminate\Support\Facades\Facade;
+use Assely\Singularity\Model\UserModel;
 
 /**
  * @see \Assely\Singularity\Model\UserModel

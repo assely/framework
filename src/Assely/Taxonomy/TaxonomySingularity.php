@@ -2,15 +2,15 @@
 
 namespace Assely\Taxonomy;
 
-use Assely\Column\ColumnsCollection;
-use Assely\Contracts\Singularity\FillableFieldsInterface;
-use Assely\Contracts\Singularity\ValidatesScreenInterface;
 use Assely\Field\FieldsCollection;
 use Assely\Singularity\Singularity;
-use Assely\Singularity\Traits\BelongsToOther;
-use Assely\Support\Accessors\HoldsColumns;
+use Assely\Column\ColumnsCollection;
 use Assely\Support\Accessors\HoldsFields;
 use Assely\Support\Accessors\StoresValue;
+use Assely\Support\Accessors\HoldsColumns;
+use Assely\Singularity\Traits\BelongsToOther;
+use Assely\Contracts\Singularity\FillableFieldsInterface;
+use Assely\Contracts\Singularity\ValidatesScreenInterface;
 
 class TaxonomySingularity extends Singularity implements ValidatesScreenInterface, FillableFieldsInterface
 {

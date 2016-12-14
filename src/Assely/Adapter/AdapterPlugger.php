@@ -2,8 +2,8 @@
 
 namespace Assely\Adapter;
 
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Illuminate\Support\Collection;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 class AdapterPlugger
 {

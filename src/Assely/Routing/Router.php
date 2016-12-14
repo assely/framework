@@ -2,10 +2,10 @@
 
 namespace Assely\Routing;
 
-use Assely\Foundation\Application;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Assely\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 
 class Router
 {

@@ -2,9 +2,9 @@
 
 namespace Assely\Repository;
 
+use Illuminate\Contracts\Container\Container;
 use Assely\Contracts\Repository\RepositoryInterface;
 use Assely\Contracts\Singularity\Model\ModelInterface;
-use Illuminate\Contracts\Container\Container;
 
 abstract class Repository implements RepositoryInterface
 {

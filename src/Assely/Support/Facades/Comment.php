@@ -2,8 +2,8 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Singularity\Model\CommentModel;
 use Illuminate\Support\Facades\Facade;
+use Assely\Singularity\Model\CommentModel;
 
 /**
  * @see \Assely\Singularity\Model\CommentModel

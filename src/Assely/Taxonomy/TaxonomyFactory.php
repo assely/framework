@@ -2,8 +2,8 @@
 
 namespace Assely\Taxonomy;
 
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Assely\Foundation\Factory;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 class TaxonomyFactory extends Factory
 {

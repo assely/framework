@@ -3,8 +3,8 @@
 namespace Assely\Singularity\Model;
 
 use Assely\Adapter\Comment;
-use Assely\Contracts\Singularity\WPQueryable;
 use Assely\Singularity\QueryException;
+use Assely\Contracts\Singularity\WPQueryable;
 
 class CommentModel extends MetaboxModel implements WPQueryable
 {

@@ -2,10 +2,10 @@
 
 namespace Assely\Column;
 
-use Assely\Support\Accessors\HasArguments;
+use Illuminate\Support\Arr;
 use Assely\Support\Accessors\HasSlug;
 use Assely\Support\Accessors\HasTitles;
-use Illuminate\Support\Arr;
+use Assely\Support\Accessors\HasArguments;
 
 class ColumnTerm extends Column
 {

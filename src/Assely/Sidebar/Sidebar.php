@@ -2,9 +2,9 @@
 
 namespace Assely\Sidebar;
 
-use Assely\Support\Accessors\HasArguments;
 use Assely\Support\Accessors\HasSlug;
 use Assely\Support\Accessors\HasTitles;
+use Assely\Support\Accessors\HasArguments;
 
 class Sidebar
 {

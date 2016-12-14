@@ -2,8 +2,8 @@
 
 namespace Assely\Singularity;
 
-use Assely\Asset\AssetFactory;
 use Assely\Hook\HookFactory;
+use Assely\Asset\AssetFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 abstract class Manager

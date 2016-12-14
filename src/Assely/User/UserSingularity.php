@@ -2,8 +2,8 @@
 
 namespace Assely\User;
 
-use Assely\Column\ColumnsCollection;
 use Assely\Singularity\Singularity;
+use Assely\Column\ColumnsCollection;
 use Assely\Support\Accessors\HoldsColumns;
 
 class UserSingularity extends Singularity

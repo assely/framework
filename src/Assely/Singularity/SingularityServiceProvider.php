@@ -2,8 +2,8 @@
 
 namespace Assely\Singularity;
 
-use Assely\Config\ApplicationConfig;
 use Assely\Config\FrameworkConfig;
+use Assely\Config\ApplicationConfig;
 use Illuminate\Support\ServiceProvider;
 
 class SingularityServiceProvider extends ServiceProvider
