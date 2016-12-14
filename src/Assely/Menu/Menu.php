@@ -3,8 +3,8 @@
 namespace Assely\Menu;
 
 use Assely\Cache\Cache;
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Assely\Support\Accessors\UsesFingerprint;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 class Menu
 {

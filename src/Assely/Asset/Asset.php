@@ -2,14 +2,14 @@
 
 namespace Assely\Asset;
 
-use Assely\Config\ApplicationConfig;
-use Assely\Config\FrameworkConfig;
 use Assely\Hook\HookFactory;
-use Assely\Support\Accessors\HasArguments;
-use Assely\Support\Accessors\HasSlug;
+use Assely\Config\FrameworkConfig;
 use Assely\Support\Facades\Config;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Assely\Config\ApplicationConfig;
+use Assely\Support\Accessors\HasSlug;
 use Illuminate\Filesystem\Filesystem;
+use Assely\Support\Accessors\HasArguments;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class Asset
 {

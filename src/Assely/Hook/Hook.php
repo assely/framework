@@ -2,9 +2,9 @@
 
 namespace Assely\Hook;
 
+use Assely\Support\Accessors\HasSlug;
 use Assely\Contracts\Hook\HookInterface;
 use Assely\Support\Accessors\HasArguments;
-use Assely\Support\Accessors\HasSlug;
 
 class Hook implements HookInterface
 {

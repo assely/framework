@@ -2,8 +2,8 @@
 
 namespace Assely\User;
 
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Assely\Foundation\Factory;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 class UserFactory extends Factory
 {

@@ -3,8 +3,8 @@
 namespace Assely\Foundation\Providers;
 
 use Assely\Config\FrameworkConfig;
-use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Illuminate\Support\ServiceProvider;
 
 class FoundationServiceProvider extends ServiceProvider
 {

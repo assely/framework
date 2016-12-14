@@ -3,9 +3,9 @@
 namespace Assely\Foundation\Console;
 
 use Assely\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Mustache_Engine as StubEngine;
+use Illuminate\Filesystem\Filesystem;
 
 class MakeCommand extends Command
 {

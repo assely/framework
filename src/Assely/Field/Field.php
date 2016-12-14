@@ -2,13 +2,13 @@
 
 namespace Assely\Field;
 
-use Assely\Contracts\Field\FieldInterface;
-use Assely\Support\Accessors\HasArguments;
+use JsonSerializable;
 use Assely\Support\Accessors\HasSlug;
 use Assely\Support\Accessors\HasTitles;
+use Assely\Contracts\Field\FieldInterface;
+use Assely\Support\Accessors\HasArguments;
 use Assely\Support\Accessors\UsesFingerprint;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use JsonSerializable;
 
 abstract class Field implements FieldInterface, JsonSerializable
 {

@@ -2,11 +2,11 @@
 
 namespace Assely\Column;
 
-use Assely\Support\Accessors\HasArguments;
-use Assely\Support\Accessors\HasSlug;
-use Assely\Support\Accessors\HasTitles;
 use Assely\Support\Facades\Post;
 use Assely\Support\Facades\View;
+use Assely\Support\Accessors\HasSlug;
+use Assely\Support\Accessors\HasTitles;
+use Assely\Support\Accessors\HasArguments;
 
 class ColumnTaxonomy extends Column
 {

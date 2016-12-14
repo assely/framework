@@ -3,11 +3,11 @@
 namespace Assely\Singularity\Model;
 
 use Assely\Adapter\User;
-use Assely\Contracts\Singularity\PreservesMetaInterface;
-use Assely\Contracts\Singularity\WPQueryable;
 use Assely\Singularity\Model;
 use Assely\Singularity\PreservesMeta;
 use Assely\Singularity\QueryException;
+use Assely\Contracts\Singularity\WPQueryable;
+use Assely\Contracts\Singularity\PreservesMetaInterface;
 
 class UserModel extends Model implements PreservesMetaInterface, WPQueryable
 {

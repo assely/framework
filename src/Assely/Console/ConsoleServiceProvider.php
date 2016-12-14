@@ -2,8 +2,8 @@
 
 namespace Assely\Console;
 
-use Illuminate\Support\ServiceProvider;
 use WP_CLI;
+use Illuminate\Support\ServiceProvider;
 
 class ConsoleServiceProvider extends ServiceProvider
 {

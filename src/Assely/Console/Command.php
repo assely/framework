@@ -2,13 +2,13 @@
 
 namespace Assely\Console;
 
+use cli;
+use WP_CLI;
+use Exception;
+use WP_CLI\Utils;
+use Assely\Support\Descend;
 use Assely\Foundation\Application;
 use Assely\Support\Accessors\HasArguments;
-use Assely\Support\Descend;
-use cli;
-use Exception;
-use WP_CLI;
-use WP_CLI\Utils;
 
 class Command
 {

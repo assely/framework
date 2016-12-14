@@ -2,9 +2,9 @@
 
 namespace Assely\Auth;
 
+use WP_User;
 use Assely\Adapter\User;
 use Assely\Singularity\Model\UserModel;
-use WP_User;
 
 class AuthManager
 {

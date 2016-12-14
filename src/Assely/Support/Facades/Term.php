@@ -2,8 +2,8 @@
 
 namespace Assely\Support\Facades;
 
-use Assely\Singularity\Model\TaxonomyModel;
 use Illuminate\Support\Facades\Facade;
+use Assely\Singularity\Model\TaxonomyModel;
 
 /**
  * @see \Assely\Singularity\Model\TaxonomyModel

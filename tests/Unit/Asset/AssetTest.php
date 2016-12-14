@@ -1,8 +1,8 @@
 <?php
 
 use Assely\Asset\Asset;
-use Assely\Asset\AssetException;
 use Brain\Monkey\Functions;
+use Assely\Asset\AssetException;
 
 class AssetTest extends TestCase
 {
