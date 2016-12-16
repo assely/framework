@@ -6,6 +6,7 @@ use Assely\Adapter\Post;
 use Assely\Adapter\Term;
 use Assely\Support\Facades\App;
 use Assely\Contracts\Singularity\WPQueryable;
+use Assely\Database\QueryException;
 
 class PosttypeModel extends MetaboxModel implements WPQueryable
 {
@@ -127,8 +128,8 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
     {
         $post = $this->find($id);
 
-        if (! $post->getWrappedObject()) {
-            throw new QueryException("Posttype [{$this->slug}] could not find post with id: {$id}.");
+        if (! $post->getAdaptee()) {
+            throw new QueryException("Posttype [{$this->getSlug()}] could not find post with id  [{$id}].");
         }
 
         return $post;
