@@ -5,8 +5,8 @@ namespace Assely\Singularity\Model;
 use Assely\Adapter\Post;
 use Assely\Adapter\Term;
 use Assely\Support\Facades\App;
-use Assely\Contracts\Singularity\WPQueryable;
 use Assely\Database\QueryException;
+use Assely\Contracts\Singularity\WPQueryable;
 
 class PosttypeModel extends MetaboxModel implements WPQueryable
 {
