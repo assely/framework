@@ -56,7 +56,7 @@ class CommentModel extends MetaboxModel implements WPQueryable
     {
         $comment = $this->find($id);
 
-        if (! $comment->getWrappedObject()) {
+        if (! $comment->getAdaptee()) {
             throw new QueryException("Comment [{$id}] not found.");
         }
 
