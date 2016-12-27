@@ -40,31 +40,32 @@ trait HasArguments
     }
 
     /**
-     * Gets the value of arguments.
+     * Gets the value of argument.
      *
      * @return mixed
      */
-    public function getArgument($propety)
+    public function getArgument($argument)
     {
-        return Arr::get($this->arguments, $propety);
+        return Arr::get($this->arguments, $argument);
     }
 
     /**
-     * Sets the value of arguments.
+     * Sets the value of argument.
      *
-     * @param mixed $arguments the arguments
+     * @param string $argument
+     * @param mixed $value
      *
      * @return self
      */
-    public function setArgument($propety, $value)
+    public function setArgument($argument, $value)
     {
-        Arr::set($this->arguments, $propety, $value);
+        Arr::set($this->arguments, $argument, $value);
 
         return $this;
     }
 
     /**
-     * Gets the Default post type arguments.
+     * Gets the value of defaults arguments.
      *
      * @return array
      */
@@ -74,7 +75,7 @@ trait HasArguments
     }
 
     /**
-     * Sets the value of defaults.
+     * Sets the value of defaults arguments.
      *
      * @param array $defaults the defaults
      *
@@ -83,6 +84,31 @@ trait HasArguments
     protected function setDefaults(array $defaults)
     {
         $this->defaults = $defaults;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of default argument.
+     *
+     * @return mixed
+     */
+    public function getDefault($argument)
+    {
+        return Arr::get($this->defaults, $argument);
+    }
+
+    /**
+     * Sets the value of default argument.
+     *
+     * @param string $argument
+     * @param mixed $value
+     *
+     * @return self
+     */
+    public function setDefault($argument, $value)
+    {
+        Arr::set($this->defaults, $argument, $value);
 
         return $this;
     }
