@@ -1,8 +1,8 @@
 <?php
 
 use Assely\Cache\Cache;
-use Assely\Config\ApplicationConfig;
 use Brain\Monkey\Functions;
+use Assely\Config\ApplicationConfig;
 
 class CacheTest extends TestCase
 {
@@ -73,7 +73,7 @@ class CacheTest extends TestCase
             'cache' => array_merge([
                 'expire' => '1000',
                 'multisite' => false,
-            ], $arguments)
+            ], $arguments),
         ]);
 
         return new Cache($config);
