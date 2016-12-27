@@ -5,8 +5,8 @@ namespace Assely\Adapter;
 use Assely\Thumbnail\Image;
 use Assely\Support\Facades\Config;
 use Assely\Adapter\Traits\PerpetuatesModel;
-use Assely\Adapters\Traits\FormatsCreationDate;
-use Assely\Adapters\Traits\FormatsModificationDate;
+use Assely\Adapter\Traits\FormatsCreationDate;
+use Assely\Adapter\Traits\FormatsModificationDate;
 
 class Post extends Adapter
 {

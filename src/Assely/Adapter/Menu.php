@@ -2,7 +2,7 @@
 
 namespace Assely\Adapter;
 
-use Assely\Adapters\Traits\FormatsModificationDate;
+use Assely\Adapter\Traits\FormatsModificationDate;
 
 class Menu extends Adapter
 {

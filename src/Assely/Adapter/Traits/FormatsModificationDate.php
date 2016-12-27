@@ -1,6 +1,6 @@
 <?php
 
-namespace Assely\Adapters\Traits;
+namespace Assely\Adapter\Traits;
 
 trait FormatsModificationDate
 {

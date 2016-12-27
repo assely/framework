@@ -3,7 +3,7 @@
 namespace Assely\Adapter;
 
 use Assely\Adapter\Traits\PerpetuatesModel;
-use Assely\Adapters\Traits\FormatsCreationDate;
+use Assely\Adapter\Traits\FormatsCreationDate;
 
 class Comment extends Adapter
 {
