@@ -73,11 +73,15 @@ class Command
         $this->setArguments($arguments);
         $this->setOptions($options);
 
-        try {
-            $this->app->call([$this, $method]);
-        } catch (Exception $e) {
-            $this->error($e->getMessage());
+        if (method_exists($this, $method)) {
+            try {
+                return $this->app->call([$this, $method]);
+            } catch (Exception $e) {
+                $this->error($e->getMessage());
+            }
         }
+
+        $this->error("You have to provide command argument [$this->signature <argument>].");
     }
 
     /**
