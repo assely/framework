@@ -11,6 +11,13 @@ class Cache
     use HasSlug, HasArguments;
 
     /**
+     * Multisite cache functions prefix.
+     *
+     * @var string
+     */
+    const MULTISITE_PREFIX = '_site';
+
+    /**
      * Cache defaults arguments.
      *
      * @var array
@@ -37,7 +44,7 @@ class Cache
         return call_user_func_array("set{$this->getPrefix()}_transient", [
             $key,
             $value,
-            $expire ?: $this->getArgument('expire'),
+            $expire ?: $this->getDefault('expire'),
         ]);
     }
 
@@ -79,8 +86,8 @@ class Cache
      */
     public function getPrefix()
     {
-        if ($this->getArgument('multisite')) {
-            return '_site';
+        if ($this->getDefault('multisite')) {
+            return self::MULTISITE_PREFIX;
         }
     }
 }
