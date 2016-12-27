@@ -9,7 +9,6 @@ use WP_CLI\Utils;
 use Assely\Support\Descend;
 use Assely\Foundation\Application;
 use Assely\Support\Accessors\HasArguments;
-use ReflectionClass;
 
 class Command
 {
