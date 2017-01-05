@@ -109,7 +109,7 @@ abstract class Posttype extends Repository
      */
     protected function registerTemplates()
     {
-        $this->hook->filter('theme_page_templates', function ($templates) {
+        $this->hook->filter("theme_{$this->slug}_templates", function ($templates) {
             return array_merge($templates, $this->templates());
         })->dispatch();
     }
