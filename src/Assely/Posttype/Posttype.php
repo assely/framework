@@ -119,7 +119,7 @@ abstract class Posttype extends Repository
     }
 
     /**
-     * Checks if we on post type screen,
+     * Checks if we on post type screen,.
      *
      * @return bool
      */
