@@ -97,8 +97,12 @@ abstract class Posttype extends Repository
      */
     protected function registerColumns()
     {
-        $this->hook->action('admin_init', function () {
-            $this->getSingularity()->columns($this->columns());
+        $this->hook->action('current_screen', function () {
+            if ($this->isValidScreen()) {
+                if ($columns = $this->columns()) {
+                    $this->getSingularity()->columns($columns);
+                }
+            }
         })->dispatch();
     }
 
@@ -112,5 +116,15 @@ abstract class Posttype extends Repository
         $this->hook->filter("theme_{$this->slug}_templates", function ($templates) {
             return array_merge($templates, $this->templates());
         })->dispatch();
+    }
+
+    /**
+     * Checks if we on post type screen,
+     *
+     * @return bool
+     */
+    public function isValidScreen()
+    {
+        return get_current_screen()->post_type === $this->slug;
     }
 }

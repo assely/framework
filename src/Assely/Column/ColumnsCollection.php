@@ -77,7 +77,9 @@ class ColumnsCollection
      */
     public function renderContent($name, $id)
     {
-        $this->getColumn($name)->render($id);
+        if ($column = $this->getColumn($name)) {
+            $column->render($id);
+        }
     }
 
     /**
