@@ -110,8 +110,22 @@ abstract class Taxonomy extends Repository
      */
     protected function registerColumns()
     {
-        $this->hook->action('admin_init', function () {
-            $this->getSingularity()->columns($this->columns());
+        $this->hook->action('current_screen', function () {
+            if ($this->isValidScreen()) {
+                if ($columns = $this->columns()) {
+                    $this->getSingularity()->columns($columns);
+                }
+            }
         })->dispatch();
+    }
+
+    /**
+     * Checks if we on taxonomy screen.
+     *
+     * @return bool
+     */
+    public function isValidScreen()
+    {
+        return get_current_screen()->post_type === $this->slug;
     }
 }

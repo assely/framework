@@ -91,6 +91,18 @@ abstract class Posttype extends Repository
     }
 
     /**
+     * Register posttype templates.
+     *
+     * @return void
+     */
+    protected function registerTemplates()
+    {
+        $this->hook->filter("theme_{$this->slug}_templates", function ($templates) {
+            return array_merge($templates, $this->templates());
+        })->dispatch();
+    }
+
+    /**
      * Register posttype columns.
      *
      * @return void
@@ -107,19 +119,7 @@ abstract class Posttype extends Repository
     }
 
     /**
-     * Register posttype templates.
-     *
-     * @return void
-     */
-    protected function registerTemplates()
-    {
-        $this->hook->filter("theme_{$this->slug}_templates", function ($templates) {
-            return array_merge($templates, $this->templates());
-        })->dispatch();
-    }
-
-    /**
-     * Checks if we on post type screen,.
+     * Checks if we on post type screen.
      *
      * @return bool
      */
