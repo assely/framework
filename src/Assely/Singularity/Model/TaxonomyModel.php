@@ -42,8 +42,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
             ->setModel($this)
             ->setAdapter(Term::class)
             ->plugIn($adaptees)
-            ->getConnected()
-            ->first();
+            ->getConnected();
     }
 
     /**
@@ -81,8 +80,7 @@ class TaxonomyModel extends TermModel implements WPQueryable
             ->setModel($this)
             ->setAdapter(Term::class)
             ->plugIn($adaptees)
-            ->getConnected()
-            ->first();
+            ->getConnected();
     }
 
     /**
