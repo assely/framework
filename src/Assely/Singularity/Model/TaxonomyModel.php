@@ -38,7 +38,12 @@ class TaxonomyModel extends TermModel implements WPQueryable
     {
         $adaptees = get_terms(['taxonomy' => $this->getSlug()]);
 
-        return $this->plugAdapter(Term::class, $adaptees);
+        return $this->getAdapterPlugger()
+            ->setModel($this)
+            ->setAdapter(Term::class)
+            ->plugIn($adaptees)
+            ->getConnected()
+            ->first();
     }
 
     /**
@@ -53,7 +58,12 @@ class TaxonomyModel extends TermModel implements WPQueryable
     {
         $adaptees = get_term_by($key, $id, $this->getSlug());
 
-        return $this->plugAdapter(Term::class, $adaptees)->first();
+        return $this->getAdapterPlugger()
+            ->setModel($this)
+            ->setAdapter(Term::class)
+            ->plugIn($adaptees)
+            ->getConnected()
+            ->first();
     }
 
     /**
@@ -67,7 +77,12 @@ class TaxonomyModel extends TermModel implements WPQueryable
     {
         $adaptees = wp_get_post_terms($post->id, $this->getSlug());
 
-        return $this->plugAdapter(Term::class, $adaptees);
+        return $this->getAdapterPlugger()
+            ->setModel($this)
+            ->setAdapter(Term::class)
+            ->plugIn($adaptees)
+            ->getConnected()
+            ->first();
     }
 
     /**
