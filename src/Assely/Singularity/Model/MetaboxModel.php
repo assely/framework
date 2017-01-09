@@ -30,7 +30,7 @@ class MetaboxModel extends Model implements PreservesMetaInterface
         // Assely specific
         'title' => [],
         'description' => '',
-        'preserve' => 'single',
+        'preserve' => 'multiple',
     ];
 
     /**
