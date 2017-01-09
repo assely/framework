@@ -18,11 +18,8 @@
 		border-bottom: 1px solid #ddd;
 		padding: 9px 14px;
 		background-color: #fff;
+		font-size: 14px;
 		font-weight: bold;
-
-		.title {
-			font-size: 14px;
-		}
 	}
 
 	&__content {
@@ -75,6 +72,10 @@
 			padding-left: 54px !important;
 			padding-right: 54px !important;
 		}
+	}
+
+	&--repeatable {
+		background-color: #f5f5f5;
 	}
 }
 
