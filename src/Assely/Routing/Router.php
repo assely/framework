@@ -2,6 +2,7 @@
 
 namespace Assely\Routing;
 
+use WP;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Assely\Foundation\Application;
@@ -53,10 +54,12 @@ class Router
      */
     public function __construct(
         RoutesCollection $routes,
+        Response $response,
         WordpressConditions $conditions,
         Container $container
     ) {
         $this->routes = $routes;
+        $this->response = $response;
         $this->conditions = $conditions;
         $this->container = $container;
     }
@@ -181,19 +184,23 @@ class Router
      */
     public function execute()
     {
-        // If any errors occurs, do not search for any routes.
-        // Immediately perform `not found` exception.
+        // Global WP instance for picking
+        // current request details.
+        global $wp;
+
+        // If error occurs, do not search for any route.
+        // Immediately process to the `404` route.
         if ($this->conditions->is('404')) {
-            return $this->prepareResponse($this->resolveNotFoundRoute(), Response::HTTP_NOT_FOUND);
+            return $this->prepareResponse(
+                $this->resolveNotFoundRoute(),
+                Response::HTTP_NOT_FOUND
+            );
         }
 
-        foreach ($this->routes->getGroup($this->request->method()) as $route) {
+        foreach ($this->routes->getGroup($_SERVER['REQUEST_METHOD']) as $route) {
             // First we check if path matches any path
             // pattern or wordpress condition.
-            if (
-                $route->matchesPathPattern($this->request->path())
-                || $route->matchesWordpressConditions($this->conditions)
-            ) {
+            if ($route->matches($wp->request, $wp->query_vars)) {
                 // We find a match so return and break from the loop.
                 return $this->prepareResponse($route->run());
             }
@@ -214,29 +221,8 @@ class Router
             return $notFoundRoute->run();
         }
 
-        // Otherwise, redirect to the home page.
+        // Otherwise, redirect to the homepage.
         return wp_redirect(home_url());
-    }
-
-    /**
-     * Register routes rewrite rules.
-     *
-     * @return void
-     */
-    public function registerRewriteRules()
-    {
-        foreach ($this->routes->getGroup($this->request->method()) as $route) {
-            // If route condition is a Wordpress condition, we do not
-            // want to generate rewrite rules for this route, so skip
-            // this loop interaction and process to the next one.
-            if (in_array($route->getCondition(), $this->conditions->all())) {
-                continue;
-            }
-
-            // Add route rewrite
-            // and tag rules.
-            $route->hookRewriteRules();
-        }
     }
 
     /**
@@ -248,15 +234,13 @@ class Router
      */
     public function prepareResponse($content, $status = null)
     {
-        $response = new Response();
-
-        $response->setContent($content);
+        $this->response->setContent($content);
 
         if (isset($status)) {
-            $response->setStatusCode($status);
+            $this->response->setStatusCode($status);
         }
 
-        return $response->send();
+        return $this->response->send();
     }
 
     /**
@@ -277,18 +261,6 @@ class Router
         }
 
         return $methods;
-    }
-
-    /**
-     * Dispatch the request to the application.
-     *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return void
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
     }
 
     /**

@@ -26,23 +26,25 @@ class HttpServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(
-        Router $router,
-        Request $request
-    ) {
-        // Dispach router with request object.
-        $router->setRequest($request->capture());
-
+    public function boot(Router $router)
+    {
         // Set route namespace for controller creation.
-        $router->setNamespace($this->namespace);
+        $router->setNamespace($this->getNamespace());
 
         // Add custom conditions to the router.
         $router->addConditions($this->routeConditions());
 
         // Map application defined routes.
         $this->load();
+    }
 
-        // Register custom routes rewrite rules.
-        $router->registerRewriteRules();
+    /**
+     * Gets value of the namespace.
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 }

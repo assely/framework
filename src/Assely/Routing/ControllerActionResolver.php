@@ -14,13 +14,6 @@ trait ControllerActionResolver
     protected $controller;
 
     /**
-     * Route action callback.
-     *
-     * @var string|callable
-     */
-    protected $action;
-
-    /**
      * Run route.
      *
      * @return mixed
@@ -116,29 +109,5 @@ trait ControllerActionResolver
         }
 
         throw new RoutingException("Controller [{$classname}] do not exists.");
-    }
-
-    /**
-     * Gets the value of action.
-     *
-     * @return mixed
-     */
-    public function getAction()
-    {
-        return $this->action;
-    }
-
-    /**
-     * Sets the value of action.
-     *
-     * @param mixed $action the action
-     *
-     * @return self
-     */
-    public function setAction($action)
-    {
-        $this->action = $action;
-
-        return $this;
     }
 }

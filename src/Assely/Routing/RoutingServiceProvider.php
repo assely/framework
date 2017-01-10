@@ -2,6 +2,7 @@
 
 namespace Assely\Routing;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 
 class RoutingServiceProvider extends ServiceProvider
@@ -58,8 +59,11 @@ class RoutingServiceProvider extends ServiceProvider
     public function registerRouter()
     {
         $this->app->singleton('router', function ($app) {
+            $response = new Response;
+
             return new Router(
                 $app['routes.collection'],
+                $response,
                 $app['wpconditions'],
                 $app
             );

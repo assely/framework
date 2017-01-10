@@ -47,6 +47,6 @@ class CallableDispatcher
             return [];
         }
 
-        return $route->getParametersValues();
+        return $route->getQueries();
     }
 }
