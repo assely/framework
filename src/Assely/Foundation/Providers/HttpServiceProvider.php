@@ -3,7 +3,6 @@
 namespace Assely\Foundation\Providers;
 
 use Assely\Routing\Router;
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class HttpServiceProvider extends ServiceProvider

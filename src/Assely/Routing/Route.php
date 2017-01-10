@@ -2,9 +2,7 @@
 
 namespace Assely\Routing;
 
-use Assely\Contracts\Routing\RouteInterface;
 use Assely\Hook\HookFactory;
-use Assely\Routing\ControllerActionResolver;
 use Illuminate\Contracts\Container\Container;
 
 class Route
@@ -89,7 +87,7 @@ class Route
 
         foreach ($queries as $query => $value) {
             $condition = preg_replace("/\\{({$query})\\}/", $value, $condition);
-        };
+        }
 
         return $condition;
     }
@@ -97,7 +95,7 @@ class Route
     /**
      * Checks if this route condition is home.
      *
-     * @return boolean
+     * @return bool
      */
     public function isHomeCondition()
     {
