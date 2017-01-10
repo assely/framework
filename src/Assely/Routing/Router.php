@@ -5,7 +5,6 @@ namespace Assely\Routing;
 use WP;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Assely\Foundation\Application;
 use Illuminate\Contracts\Container\Container;
 
 class Router
