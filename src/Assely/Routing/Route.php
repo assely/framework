@@ -33,9 +33,9 @@ class Route
     /**
      * Route query arguments.
      *
-     * @var array|null
+     * @var array
      */
-    protected $queries;
+    protected $queries = [];
 
     /**
      * Construct route.
