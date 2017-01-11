@@ -183,9 +183,10 @@ class Router
      */
     public function execute()
     {
-        // Global WP instance for picking
-        // current request details.
+        // Global WP and Query instance for picking
+        // current request and query details.
         global $wp;
+        global $wp_query;
 
         // If error occurs, do not search for any route.
         // Immediately process to the `404` route.
@@ -199,7 +200,7 @@ class Router
         foreach ($this->routes->getGroup($_SERVER['REQUEST_METHOD']) as $route) {
             // First we check if path matches any path
             // pattern or wordpress condition.
-            if ($route->matches($wp->request, $wp->query_vars)) {
+            if ($route->matches($wp->request, array_filter($wp_query->query_vars))) {
                 // We find a match so return and break from the loop.
                 return $this->prepareResponse($route->run());
             }
