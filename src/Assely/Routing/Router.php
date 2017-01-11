@@ -5,6 +5,7 @@ namespace Assely\Routing;
 use WP;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Assely\Foundation\Application;
 use Illuminate\Contracts\Container\Container;
 
 class Router
@@ -210,19 +211,22 @@ class Router
     }
 
     /**
-     * Resolve 404 route or redirect if not exsist.
+     * Resolve 404 route or redirect if not exist.
      *
-     * @return mixed|bool
+     * @return mixed
      */
     public function resolveNotFoundRoute()
     {
-        // If we have route with `404` condition, resolve it.
-        if ($notFoundRoute = $this->routes->get('404')) {
-            return $notFoundRoute->run();
+        // Try to resolve 404 route. If such route don't
+        // exist just redirect to the homepage.
+        try {
+            if ($notFoundRoute = $this->routes->get('404')) {
+                return $notFoundRoute->run();
+            }
+        } catch (RoutingException $e) {
+            wp_redirect(home_url());
+            exit();
         }
-
-        // Otherwise, redirect to the homepage.
-        return wp_redirect(home_url());
     }
 
     /**

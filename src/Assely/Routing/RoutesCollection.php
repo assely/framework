@@ -63,7 +63,11 @@ class RoutesCollection
      */
     public function getGroup($method)
     {
-        return self::$routes[$method];
+        if (isset(self::$routes[$method])) {
+            return self::$routes[$method];
+        }
+
+        throw new RoutingException("Routes group [{$path}] does not exist.");
     }
 
     /**
@@ -75,7 +79,11 @@ class RoutesCollection
      */
     public function get($path)
     {
-        return self::$allRoutes[$path];
+        if (isset(self::$allRoutes[$path])) {
+            return self::$allRoutes[$path];
+        }
+
+        throw new RoutingException("Route [{$path}] does not exist.");
     }
 
     /**
