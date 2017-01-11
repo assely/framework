@@ -235,7 +235,7 @@ class Post extends Adapter
             'meta' => $this->rejectHiddenMeta($this->meta),
             'mime_type' => $this->mime_type,
             'modified_at' => $this->modified_at,
-            'parent' => $this->parent_id,
+            'parent_id' => $this->parent_id,
             'password' => $this->password,
             'ping' => $this->ping,
             'ping_status' => $this->ping_status,
