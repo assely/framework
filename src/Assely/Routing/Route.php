@@ -2,9 +2,7 @@
 
 namespace Assely\Routing;
 
-use Assely\Contracts\Routing\RouteInterface;
 use Assely\Hook\HookFactory;
-use Assely\Routing\ControllerActionResolver;
 use Illuminate\Contracts\Container\Container;
 
 class Route
@@ -106,7 +104,7 @@ class Route
             }
 
             $path = preg_replace("/\\{({$query})\\}/", $value, $path);
-        };
+        }
 
         return $path;
     }
@@ -114,7 +112,7 @@ class Route
     /**
      * Checks if this route path is home.
      *
-     * @return boolean
+     * @return bool
      */
     public function isHomePath()
     {
@@ -151,7 +149,7 @@ class Route
     /**
      * Checks if all rules passed a verification.
      *
-     * @return boolean
+     * @return bool
      */
     public function rulesNotPassed()
     {
