@@ -48,9 +48,9 @@ class RoutesCollection
     public function store(Route $route)
     {
         foreach ($route->getMethods() as $method) {
-            self::$routes[$method][$route->getCondition()] = $route;
+            self::$routes[$method][$route->getPath()] = $route;
 
-            self::$allRoutes[$route->getCondition()] = $route;
+            self::$allRoutes[$route->getPath()] = $route;
         }
     }
 

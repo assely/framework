@@ -2,7 +2,9 @@
 
 namespace Assely\Routing;
 
+use Assely\Contracts\Routing\RouteInterface;
 use Assely\Hook\HookFactory;
+use Assely\Routing\ControllerActionResolver;
 use Illuminate\Contracts\Container\Container;
 
 class Route
@@ -17,11 +19,11 @@ class Route
     protected $methods;
 
     /**
-     * Route condition.
+     * Route path.
      *
      * @var string
      */
-    protected $condition;
+    protected $path;
 
     /**
      * Route action callback.
@@ -38,6 +40,13 @@ class Route
     protected $queries = [];
 
     /**
+     * Route rules.
+     *
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
      * Construct route.
      *
      * @param \Assely\Routing\Router $router
@@ -46,10 +55,12 @@ class Route
      */
     public function __construct(
         Router $router,
+        WordpressConditions $conditions,
         HookFactory $hook,
         Container $container
     ) {
         $this->router = $router;
+        $this->conditions = $conditions;
         $this->hook = $hook;
         $this->container = $container;
     }
@@ -65,41 +76,86 @@ class Route
     {
         $this->setQueries($queries);
 
-        if (! $request && $this->isHomeCondition()) {
+        if (! $request && $this->isHomePath()) {
             return true;
         }
 
-        $schema = $this->getConditionMock($queries);
+        if ($matches = preg_match("@^{$this->getPathMock($queries)}$@", $request)) {
+            if ($this->rulesNotPassed()) {
+                return false;
+            }
+        }
 
-        return preg_match("@^{$schema}$@", $request);
+        return $matches;
     }
 
     /**
-     * Gets condition mocked with queries values.
+     * Gets path mocked with queries values.
      *
      * @param  array $queries
      *
      * @return array
      */
-    public function getConditionMock(array $queries)
+    public function getPathMock(array $queries)
     {
-        $condition = $this->getCondition();
+        $path = $this->getPath();
 
         foreach ($queries as $query => $value) {
-            $condition = preg_replace("/\\{({$query})\\}/", $value, $condition);
-        }
+            if (is_array($value)) {
+                $value = reset($value);
+            }
 
-        return $condition;
+            $path = preg_replace("/\\{({$query})\\}/", $value, $path);
+        };
+
+        return $path;
     }
 
     /**
-     * Checks if this route condition is home.
+     * Checks if this route path is home.
      *
-     * @return bool
+     * @return boolean
      */
-    public function isHomeCondition()
+    public function isHomePath()
     {
-        return $this->getCondition() === '/';
+        return $this->getPath() === '/';
+    }
+
+    /**
+     * Sets route additional matching rules.
+     *
+     * @param  array  $rules
+     * @return self
+     */
+    public function where(array $rules)
+    {
+        $this->rules = $rules;
+
+        return $this;
+    }
+
+    /**
+     * Evaluates statuses of rules.
+     *
+     * @return array
+     */
+    public function evaluateRules()
+    {
+        foreach ($this->rules as $rule => $condition) {
+            $this->rules[$rule] = $this->conditions->is($rule, [$condition]);
+        }
+
+        return $this->rules;
+    }
+
+    /**
+     * Checks if all rules passed a verification.
+     *
+     * @return boolean
+     */
+    public function rulesNotPassed()
+    {
+        return in_array(false, $this->evaluateRules(), true);
     }
 
     /**
@@ -127,25 +183,25 @@ class Route
     }
 
     /**
-     * Gets the value of condition.
+     * Gets the value of path.
      *
      * @return mixed
      */
-    public function getCondition()
+    public function getPath()
     {
-        return $this->condition;
+        return $this->path;
     }
 
     /**
-     * Sets the value of condition.
+     * Sets the value of path.
      *
-     * @param string $condition the condition
+     * @param string $path the path
      *
      * @return self
      */
-    public function setCondition($condition)
+    public function setPath($path)
     {
-        $this->condition = trim($condition, '/');
+        $this->path = trim($path, '/');
 
         return $this;
     }

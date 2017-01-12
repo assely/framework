@@ -63,8 +63,8 @@ class RoutingServiceProvider extends ServiceProvider
 
             return new Router(
                 $app['routes.collection'],
-                $response,
                 $app['wpconditions'],
+                $response,
                 $app
             );
         });
@@ -82,6 +82,7 @@ class RoutingServiceProvider extends ServiceProvider
         $this->app->bind('route', function ($app) {
             return new Route(
                 $app['router'],
+                $app['wpconditions'],
                 $app['hook.factory'],
                 $app
             );

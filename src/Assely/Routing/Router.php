@@ -2,7 +2,6 @@
 
 namespace Assely\Routing;
 
-use WP;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Container\Container;
@@ -48,129 +47,129 @@ class Router
      * Construct Router.
      *
      * @param \Assely\Routing\RoutesCollection $routes
-     * @param \Assely\Routing\WordpressConditions $conditions
+     * @param \Illuminate\Http\Response $response
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(
         RoutesCollection $routes,
-        Response $response,
         WordpressConditions $conditions,
+        Response $response,
         Container $container
     ) {
         $this->routes = $routes;
-        $this->response = $response;
         $this->conditions = $conditions;
+        $this->response = $response;
         $this->container = $container;
     }
 
     /**
      * Create GET route.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function get($condition, $action)
+    public function get($path, $action)
     {
-        return $this->addRoute(['GET'], $condition, $action);
+        return $this->addRoute(['GET'], $path, $action);
     }
 
     /**
      * Create HEAD route.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function head($condition, $action)
+    public function head($path, $action)
     {
-        return $this->addRoute(['HEAD'], $condition, $action);
+        return $this->addRoute(['HEAD'], $path, $action);
     }
 
     /**
      * Create POST route.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function post($condition, $action)
+    public function post($path, $action)
     {
-        return $this->addRoute(['POST'], $condition, $action);
+        return $this->addRoute(['POST'], $path, $action);
     }
 
     /**
      * Create PUT route.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function put($condition, $action)
+    public function put($path, $action)
     {
-        return $this->addRoute(['PUT'], $condition, $action);
+        return $this->addRoute(['PUT'], $path, $action);
     }
 
     /**
      * Create DELETE route.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function delete($condition, $action)
+    public function delete($path, $action)
     {
-        return $this->addRoute(['DELETE'], $condition, $action);
+        return $this->addRoute(['DELETE'], $path, $action);
     }
 
     /**
      * Create route that match any request method.
      *
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function any($condition, $action)
+    public function any($path, $action)
     {
-        return $this->addRoute(['GET', 'HEAD', 'POST', 'PUT', 'DELETE'], $condition, $action);
+        return $this->addRoute(['GET', 'HEAD', 'POST', 'PUT', 'DELETE'], $path, $action);
     }
 
     /**
      * Create route that match specifed request method.
      *
      * @param  array $methods
-     * @param  string $condition
+     * @param  string $path
      * @param  string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function match(array $methods, $condition, $action)
+    public function match(array $methods, $path, $action)
     {
         $methods = $this->normalizeRequestMethods($methods);
 
-        return $this->addRoute($methods, $condition, $action);
+        return $this->addRoute($methods, $path, $action);
     }
 
     /**
      * Create route and store it in routes collection.
      *
      * @param array $method
-     * @param string $condition
+     * @param string $path
      * @param string|callable $action
      *
      * @return \Assely\Routing\Route
      */
-    public function addRoute($method, $condition, $action)
+    public function addRoute($method, $path, $action)
     {
         $route = $this->container->make(Route::class)
             ->setMethods($method)
-            ->setCondition($condition)
+            ->setPath($path)
             ->setAction($action);
 
         return $this->routes->add($route);
@@ -295,7 +294,7 @@ class Router
      *
      * @return array
      */
-    public function getConditions()
+    public function getPaths()
     {
         return $this->conditions;
     }
@@ -303,10 +302,10 @@ class Router
     /**
      * Add router conditions.
      *
-     * @param array $conditions
+     * @param array $paths
      */
-    public function addConditions(array $conditions)
+    public function addPaths(array $paths)
     {
-        return $this->conditions->add($conditions);
+        return $this->conditions->add($paths);
     }
 }

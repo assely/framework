@@ -8,16 +8,6 @@ use Illuminate\Support\ServiceProvider;
 class HttpServiceProvider extends ServiceProvider
 {
     /**
-     * Register route service.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
      * Boot routes.
      *
      * @param \Assely\Routing\Router $router
@@ -29,9 +19,6 @@ class HttpServiceProvider extends ServiceProvider
     {
         // Set route namespace for controller creation.
         $router->setNamespace($this->getNamespace());
-
-        // Add custom conditions to the router.
-        $router->addConditions($this->routeConditions());
 
         // Map application defined routes.
         $this->load();
