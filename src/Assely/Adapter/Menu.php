@@ -47,14 +47,16 @@ class Menu extends Adapter
     /**
      * Is current menu item active?
      *
-     * @return boolean
+     * @return bool
      */
     public function active()
     {
         $classes = $this->getAdaptee()->classes;
 
-        foreach($classes as $class) {
-            if (strpos($class, 'current') !== false) return true;
+        foreach ($classes as $class) {
+            if (strpos($class, 'current') !== false) {
+                return true;
+            }
         }
 
         return false;
