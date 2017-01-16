@@ -45,6 +45,22 @@ class Menu extends Adapter
     }
 
     /**
+     * Is current menu item active?
+     *
+     * @return boolean
+     */
+    public function active()
+    {
+        $classes = $this->getAdaptee()->classes;
+
+        foreach($classes as $class) {
+            if (strpos($class, 'current') !== false) return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Get menu item children.
      *
      * @return \Assely\Adapter\Menu[]

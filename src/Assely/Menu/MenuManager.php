@@ -40,5 +40,13 @@ class MenuManager extends Manager
             'wp_update_nav_menu',
             [$this->menu, 'clearCache']
         )->dispatch();
+
+        // The `wp_get_nav_menu_items` function do not generate
+        // menu items classes. This filter helps with that.
+        $this->hook->filter('wp_get_nav_menu_items', function ($items, $menu, $args) {
+            _wp_menu_item_classes_by_context($items);
+
+            return $items;
+        }, ['numberOfArguments' => 3])->dispatch();
     }
 }
