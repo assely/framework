@@ -140,7 +140,7 @@ class Route
     public function evaluateRules()
     {
         foreach ($this->rules as $rule => $condition) {
-            $this->rules[$rule] = $this->conditions->is($rule, [$condition]);
+            $this->rules[$rule] = $this->conditions->is($rule, $condition);
         }
 
         return $this->rules;

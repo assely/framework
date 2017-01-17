@@ -67,7 +67,11 @@ class WordpressConditions
      */
     public function is($condition, $arguments = [])
     {
-        return call_user_func_array($this->{$condition}, $arguments);
+        if (is_array($arguments)) {
+            return call_user_func_array($this->{$condition}, $arguments);
+        }
+
+        return call_user_func($this->{$condition}, $arguments);
     }
 
     /**
@@ -84,5 +88,7 @@ class WordpressConditions
         if (in_array($condition, $this->conditions)) {
             return array_search($condition, $this->conditions);
         }
+
+        throw new RoutingException("Used condition [{$condition}] is not allowed.");
     }
 }
