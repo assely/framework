@@ -67,6 +67,30 @@ class CacheTest extends TestCase
         $cache->flush('key');
     }
 
+    /**
+     * @test
+     */
+    public function it_should_return_site_prefix_when_multisite_option_is_true()
+    {
+        $cache = $this->getCache();
+
+        $cache->setDefault('multisite', true);
+
+        $this->assertEquals($cache->getPrefix(), '_site');
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_return_empty_prefix_when_multisite_option_is_false()
+    {
+        $cache = $this->getCache();
+
+        $cache->setDefault('multisite', false);
+
+        $this->assertEquals($cache->getPrefix(), '');
+    }
+
     public function getCache($arguments = [])
     {
         $config = new ApplicationConfig([
