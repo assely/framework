@@ -3,9 +3,10 @@
 namespace Assely\Routing;
 
 use Assely\Hook\HookFactory;
+use Assely\Contracts\Routing\RouteInterface;
 use Illuminate\Contracts\Container\Container;
 
-class Route
+class Route implements RouteInterface
 {
     use ControllerActionResolver;
 
@@ -205,7 +206,7 @@ class Route
     }
 
     /**
-     * Gets the value of methods.
+     * Gets the value of action.
      *
      * @return string|callable
      */

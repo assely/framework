@@ -37,6 +37,13 @@ class Ajax implements RouteInterface
     protected $nonce;
 
     /**
+     * Route action callback.
+     *
+     * @var string|callable
+     */
+    protected $action;
+
+    /**
      * Default arguments.
      *
      * @var array
@@ -168,5 +175,29 @@ class Ajax implements RouteInterface
                 'message' => 'Nonce token is invalid or missing.',
             ],
         ];
+    }
+
+    /**
+     * Gets the value of action.
+     *
+     * @return string|callable
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Sets the value of action.
+     *
+     * @param mixed $action the action
+     *
+     * @return self
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
     }
 }
