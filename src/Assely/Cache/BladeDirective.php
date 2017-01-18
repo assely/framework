@@ -84,7 +84,7 @@ class BladeDirective
 
         // Put output buffer content, if
         // we don't have cached value.
-        if ( ! $this->cached) {
+        if (! $this->cached) {
             $this->cache->put($key, $buffer, $this->getArgument('expire'));
 
             return $buffer;
@@ -97,7 +97,7 @@ class BladeDirective
     /**
      * Gets the value of cached flag.
      *
-     * @return boolean
+     * @return bool
      */
     public function isCached()
     {

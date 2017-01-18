@@ -1,7 +1,6 @@
 <?php
 
 use Assely\Cache\BladeDirective;
-use Assely\Cache\Cache;
 
 class BladeDirectiveTest extends TestCase
 {
