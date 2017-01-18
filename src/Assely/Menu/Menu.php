@@ -35,7 +35,8 @@ class Menu
      *
      * @param \Assely\Menu\MenuManager $manager
      */
-    public function __construct(MenuManager $manager) {
+    public function __construct(MenuManager $manager)
+    {
         $this->manager = $manager;
 
         $this->manager->boot($this);
