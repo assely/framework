@@ -2,7 +2,6 @@
 
 namespace Assely\Menu;
 
-use Assely\Cache\Cache;
 use Assely\Support\Accessors\UsesFingerprint;
 use Assely\Contracts\Singularity\Model\ModelInterface;
 
@@ -35,15 +34,9 @@ class Menu
      * Construct menu.
      *
      * @param \Assely\Menu\MenuManager $manager
-     * @param string $slug
-     * @param array $arguments
      */
-    public function __construct(
-        MenuManager $manager,
-        Cache $cache
-    ) {
+    public function __construct(MenuManager $manager) {
         $this->manager = $manager;
-        $this->cache = $cache;
 
         $this->manager->boot($this);
     }
@@ -87,18 +80,9 @@ class Menu
      */
     public function items()
     {
-        // Transform flat menu structure to the tree.
-        // For better performance - cache results.
-        if (! $this->cache->get($this->getFingerprint())) {
-            $items = $this->generateTree($this->model->items());
-
-            $this->cache->put($this->getFingerprint(), $items);
-
-            return $items;
-        }
-
-        // We already have generated menu tree. Get it form the cache.
-        return $this->cache->get($this->getFingerprint());
+        // Transform flat menu structure
+        // to the tree structure.
+        return $this->generateTree($this->model->items());
     }
 
     /**

@@ -33,14 +33,6 @@ class MenuManager extends Manager
             [$this->menu, 'register']
         )->dispatch();
 
-        // For better performance we are caching generated menu
-        // tree, because of that we need to clear cache
-        // when menu has been updated or saved.
-        $this->hook->action(
-            'wp_update_nav_menu',
-            [$this->menu, 'clearCache']
-        )->dispatch();
-
         // The `wp_get_nav_menu_items` function do not generate
         // menu items classes. This filter helps with that.
         $this->hook->filter('wp_get_nav_menu_items', function ($items, $menu, $args) {
