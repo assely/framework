@@ -63,6 +63,16 @@ class Menu extends Adapter
     }
 
     /**
+     * Gets menu item classes.
+     *
+     * @return array
+     */
+    public function classes()
+    {
+        return $this->getAdaptee()->classes;
+    }
+
+    /**
      * Get menu item children.
      *
      * @return \Assely\Adapter\Menu[]
