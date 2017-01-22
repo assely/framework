@@ -71,21 +71,6 @@ class Thumbnail
     }
 
     /**
-     * Set thumbnail size as default
-     * post type featured image.
-     *
-     * @return void
-     */
-    public function default()
-    {
-        return set_post_thumbnail_size(
-            $this->getArgument('size')[0],
-            $this->getArgument('size')[1],
-            $this->getArgument('crop')
-        );
-    }
-
-    /**
      * Remove thumbnail.
      *
      * @return void
@@ -93,6 +78,21 @@ class Thumbnail
     public function remove()
     {
         return remove_image_size($this->getSlug());
+    }
+
+    /**
+     * Makes thumbnail as default
+     * post featured image size.
+     *
+     * @return void
+     */
+    public function makeAsDefault()
+    {
+        return set_post_thumbnail_size(
+            $this->getArgument('size')[0],
+            $this->getArgument('size')[1],
+            $this->getArgument('crop')
+        );
     }
 
     /**
