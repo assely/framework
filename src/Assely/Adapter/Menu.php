@@ -21,7 +21,9 @@ class Menu extends Adapter
      * @var array
      */
     protected $touches = [
+        'active' => 'active',
         'attr' => 'attr_title',
+        'classes' => 'classes',
         'description' => 'description',
         'id' => 'ID',
         'item_id' => 'object_id',
@@ -140,7 +142,9 @@ class Menu extends Adapter
     public function jsonSerialize()
     {
         return [
+            'active' => $this->active,
             'attr' => $this->attr,
+            'classes' => $this->classes,
             'description' => $this->description,
             'id' => $this->id,
             'item_id' => $this->item_id,
