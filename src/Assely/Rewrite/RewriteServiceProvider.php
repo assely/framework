@@ -2,10 +2,9 @@
 
 namespace Assely\Routing;
 
-use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 
-class RoutingServiceProvider extends ServiceProvider
+class RewriteServiceProvider extends ServiceProvider
 {
     /**
      * Register routing services.
