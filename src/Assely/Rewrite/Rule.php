@@ -24,7 +24,7 @@ class Rule
      */
     public function resolve($pattern)
     {
-        # code...
+        // code...
     }
 
     public function add()
