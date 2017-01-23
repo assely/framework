@@ -79,7 +79,7 @@ class Rewrite
     }
 
     /**
-     * [where description]
+     * [where description].
      * @param  array  $conditions [description]
      * @return [type]             [description]
      */
