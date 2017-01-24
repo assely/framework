@@ -2,165 +2,61 @@
 
 namespace Assely\Foundation;
 
-use Illuminate\Support\Arr;
-use Illuminate\Container\Container;
 use Assely\Config\ApplicationConfig;
-use Symfony\Component\Finder\Finder;
+use Assely\Foundation\AliasLoader;
+use Assely\Routing\RoutingServiceProvider;
+use Illuminate\Container\Container;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-use Assely\Routing\RoutingServiceProvider;
-use Illuminate\Events\EventServiceProvider;
-use Illuminate\Contracts\Container\Container as ContainerContract;
+use Symfony\Component\Finder\Finder;
 
-class Application extends Container implements ContainerContract
+class Application extends Container
 {
     /**
-     * The Assely framework version.
-     *
-     * @var string
+     * @var mixed
      */
-    const VERSION = '0.1.0';
+    protected $booted;
 
     /**
-     * Application instance.
-     *
-     * @var self
-     */
-    public static $instance;
-
-    /**
-     * Indicates if the application has been bootstrapped before.
-     *
-     * @var bool
-     */
-    protected $hasBeenBootstrapped = false;
-
-    /**
-     * Indicates if the application has "booted".
-     *
-     * @var bool
-     */
-    protected $booted = false;
-
-    /**
-     * The array of booting callbacks.
-     *
-     * @var array
-     */
-    protected $bootingCallbacks = [];
-
-    /**
-     * The array of booted callbacks.
-     *
-     * @var array
-     */
-    protected $bootedCallbacks = [];
-
-    /**
-     * All of the registered service providers.
-     *
      * @var array
      */
     protected $serviceProviders = [];
 
     /**
-     * The names of the loaded service providers.
-     *
      * @var array
      */
     protected $loadedProviders = [];
 
     /**
-     * The deferred services and their providers.
-     *
-     * @var array
-     */
-    protected $deferredServices = [];
-
-    /**
-     * The custom storage path defined by the developer.
-     *
-     * @var string
-     */
-    protected $storagePath;
-
-    /**
-     * The custom environment path defined by the developer.
-     *
-     * @var string
-     */
-    protected $environmentPath;
-
-    /**
-     * The environment file to load during bootstrapping.
-     *
-     * @var string
-     */
-    protected $environmentFile = '.env';
-
-    /**
-     * The application namespace.
-     *
-     * @var string
-     */
-    protected $namespace = null;
-
-    /**
      * Create a new Illuminate application instance.
      *
-     * @param string|null $basePath
-     *
+     * @param  string|null  $basePath
      * @return void
      */
     public function __construct($basePath = null)
     {
-        $this->registerBaseBindings();
-
-        $this->registerBaseServiceProviders();
-
-        $this->registerCoreContainerAliases();
-
         if ($basePath) {
             $this->setBasePath($basePath);
-
-            $this->loadConfigs();
         }
-    }
 
-    /**
-     * Get the version number of the application.
-     *
-     * @return string
-     */
-    public function version()
-    {
-        return static::VERSION;
-    }
-
-    /**
-     * Register the basic bindings into the container.
-     *
-     * @return void
-     */
-    protected function registerBaseBindings()
-    {
-        static::setInstance($this);
-
-        $this->instance('app', $this);
-        $this->instance('Assely\Foundation\Application', $this);
+        $this->registerBaseBindings();
+        $this->registerCoreContainerAliases();
+        $this->registerApplicationConfig();
+        $this->registerBaseFacades();
+        $this->registerServiceProviders();
     }
 
     /**
      * Set the base path for the application.
      *
-     * @param string $basePath
-     *
+     * @param  string  $basePath
      * @return $this
      */
     public function setBasePath($basePath)
     {
         $this->basePath = rtrim($basePath, '\/');
-
         $this->bindPathsInContainer();
 
         return $this;
@@ -174,10 +70,13 @@ class Application extends Container implements ContainerContract
     protected function bindPathsInContainer()
     {
         $this->instance('path', $this->path());
-
-        foreach (['base', 'config', 'lang', 'public', 'storage'] as $path) {
-            $this->instance('path.'.$path, $this->{$path.'Path'}());
-        }
+        $this->instance('path.base', $this->basePath());
+        $this->instance('path.lang', $this->langPath());
+        $this->instance('path.config', $this->configPath());
+        $this->instance('path.public', $this->publicPath());
+        $this->instance('path.storage', $this->storagePath());
+        $this->instance('path.resources', $this->resourcePath());
+        $this->instance('path.bootstrap', $this->bootstrapPath());
     }
 
     /**
@@ -187,7 +86,7 @@ class Application extends Container implements ContainerContract
      */
     public function path()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'app';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'app';
     }
 
     /**
@@ -201,13 +100,23 @@ class Application extends Container implements ContainerContract
     }
 
     /**
+     * Get the path to the bootstrap directory.
+     *
+     * @return string
+     */
+    public function bootstrapPath()
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'bootstrap';
+    }
+
+    /**
      * Get the path to the application configuration files.
      *
      * @return string
      */
     public function configPath()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'config';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'config';
     }
 
     /**
@@ -217,7 +126,7 @@ class Application extends Container implements ContainerContract
      */
     public function langPath()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang';
+        return $this->resourcePath() . DIRECTORY_SEPARATOR . 'lang';
     }
 
     /**
@@ -227,17 +136,7 @@ class Application extends Container implements ContainerContract
      */
     public function publicPath()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'public';
-    }
-
-    /**
-     * Get the path to the resources directory.
-     *
-     * @return string
-     */
-    public function resourcePath()
-    {
-        return $this->basePath.DIRECTORY_SEPARATOR.'resources';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
     }
 
     /**
@@ -247,7 +146,31 @@ class Application extends Container implements ContainerContract
      */
     public function storagePath()
     {
-        return $this->storagePath ?: $this->basePath.DIRECTORY_SEPARATOR.'storage';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'storage';
+    }
+
+    /**
+     * Get the path to the resources directory.
+     *
+     * @return string
+     */
+    public function resourcePath()
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
+    }
+
+    /**
+     * Register the basic bindings into the container.
+     *
+     * @return void
+     */
+    protected function registerBaseBindings()
+    {
+        static::setInstance($this);
+
+        $this->instance('app', $this);
+
+        $this->instance(Container::class, $this);
     }
 
     /**
@@ -255,7 +178,7 @@ class Application extends Container implements ContainerContract
      *
      * @return void
      */
-    public function loadConfigs()
+    public function registerApplicationConfig()
     {
         $this->singleton(ApplicationConfig::class, function () {
             return new ApplicationConfig($this->getConfigFiles());
@@ -269,11 +192,14 @@ class Application extends Container implements ContainerContract
      *
      * @return array
      */
-    public function getConfigFiles()
+    public function getConfigFiles($configs = [])
     {
-        $configs = [];
+        $finder = $this->make(Finder::class)
+            ->files()
+            ->in($this->configPath())
+            ->name('*.php');
 
-        foreach (Finder::create()->files()->in($this->configPath())->name('*.php') as $file) {
+        foreach ($finder as $file) {
             $configs[basename($file->getFilename(), '.php')] = require $file->getRealPath();
         }
 
@@ -281,15 +207,70 @@ class Application extends Container implements ContainerContract
     }
 
     /**
-     * Register a service provider with the application.
+     * Register the core class aliases in the container.
      *
-     * @param \Illuminate\Support\ServiceProvider|string $provider
-     * @param array $options
-     * @param bool $force
-     *
-     * @return \Illuminate\Support\ServiceProvider
+     * @return void
      */
-    public function register($provider, $options = [], $force = false)
+    public function registerCoreContainerAliases()
+    {
+        $aliases = [
+            'app' => [
+                'Assely\Foundation\Application',
+                'Illuminate\Contracts\Container\Container',
+                'Illuminate\Contracts\Foundation\Application',
+            ],
+            'blade.compiler' => [
+                'Illuminate\View\Compilers\BladeCompiler',
+            ],
+            'view' => [
+                'Illuminate\View\Factory',
+                'Illuminate\Contracts\View\Factory',
+            ],
+        ];
+
+        foreach ($aliases as $key => $aliases) {
+            foreach ($aliases as $alias) {
+                $this->alias($key, $alias);
+            }
+        }
+    }
+
+    /**
+     * Register Base Facades.
+     *
+     * @return void
+     */
+    private function registerBaseFacades()
+    {
+        Facade::clearResolvedInstances();
+
+        Facade::setFacadeApplication($this);
+
+        AliasLoader::getInstance($this->make('config')->get('app.aliases'))->register();
+    }
+
+    /**
+     * Register all of the base service providers.
+     *
+     * @return void
+     */
+    protected function registerServiceProviders()
+    {
+        $this->register(new EventServiceProvider($this));
+        $this->register(new RoutingServiceProvider($this));
+
+        foreach ($this->make('config')->get('app.providers') as $provider) {
+            $this->register($provider);
+        }
+    }
+
+    /**
+     * @param $provider
+     * @param array $options
+     * @param $force
+     * @return null
+     */
+    public function register($provider, array $options = [], $force = false)
     {
         if (($registered = $this->getProvider($provider)) && ! $force) {
             return $registered;
@@ -352,101 +333,16 @@ class Application extends Container implements ContainerContract
     }
 
     /**
-     * Register all of the base service providers.
-     *
-     * @return void
-     */
-    protected function registerBaseServiceProviders()
-    {
-        $this->register(new EventServiceProvider($this));
-        $this->register(new RoutingServiceProvider($this));
-    }
-
-    /**
      * Mark the given provider as registered.
      *
-     * @param \Illuminate\Support\ServiceProvider $provider
-     *
+     * @param  \Illuminate\Support\ServiceProvider  $provider
      * @return void
      */
     protected function markAsRegistered($provider)
     {
-        $this['events']->fire($class = get_class($provider), [$provider]);
-
         $this->serviceProviders[] = $provider;
 
-        $this->loadedProviders[$class] = true;
-    }
-
-    /**
-     * Register the core class aliases in the container.
-     *
-     * @return void
-     */
-    public function registerCoreContainerAliases()
-    {
-        $aliases = [
-            'app' => ['Assely\Foundation\Application', 'Illuminate\Contracts\Container\Container', 'Illuminate\Contracts\Foundation\Application'],
-            'events' => ['Illuminate\Events\Dispatcher', 'Illuminate\Contracts\Events\Dispatcher'],
-            'files' => ['Illuminate\Filesystem\Filesystem'],
-            'blade.compiler' => ['Illuminate\View\Compilers\BladeCompiler'],
-            'view' => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory'],
-        ];
-
-        foreach ($aliases as $key => $aliases) {
-            foreach ($aliases as $alias) {
-                $this->alias($key, $alias);
-            }
-        }
-    }
-
-    /**
-     * Determine if the given abstract type has been bound.
-     *
-     * (Overriding Container::bound)
-     *
-     * @param  string  $abstract
-     *
-     * @return bool
-     */
-    public function bound($abstract)
-    {
-        return isset($this->deferredServices[$abstract]) || parent::bound($abstract);
-    }
-
-    /**
-     * Determine if the application has booted.
-     *
-     * @return boolan
-     */
-    public function isBooted()
-    {
-        return $this->booted;
-    }
-
-    /**
-     * Boot the application's service providers.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        if ($this->booted) {
-            return;
-        }
-
-        // Once the application has booted we will also fire some "booted" callbacks
-        // for any listeners that need to do work after this initial booting gets
-        // finished. This is useful when ordering the boot-up processes we run.
-        $this->fireAppCallbacks($this->bootingCallbacks);
-
-        array_walk($this->serviceProviders, function ($p) {
-            $this->bootProvider($p);
-        });
-
-        $this->booted = true;
-
-        $this->fireAppCallbacks($this->bootedCallbacks);
+        $this->loadedProviders[get_class($provider)] = true;
     }
 
     /**
@@ -464,99 +360,20 @@ class Application extends Container implements ContainerContract
     }
 
     /**
-     * Register a new boot listener.
-     *
-     * @param mixed $callback
+     * Boot the application's service providers.
      *
      * @return void
      */
-    public function booting($callback)
+    public function boot()
     {
-        $this->bootingCallbacks[] = $callback;
-    }
-
-    /**
-     * Register a new "booted" listener.
-     *
-     * @param mixed $callback
-     *
-     * @return void
-     */
-    public function booted($callback)
-    {
-        $this->bootedCallbacks[] = $callback;
-
-        if ($this->isBooted()) {
-            $this->fireAppCallbacks([$callback]);
+        if ($this->booted) {
+            return;
         }
-    }
 
-    /**
-     * Call the booting callbacks for the application.
-     *
-     * @param array $callbacks
-     *
-     * @return void
-     */
-    protected function fireAppCallbacks(array $callbacks)
-    {
-        foreach ($callbacks as $callback) {
-            call_user_func($callback, $this);
-        }
-    }
+        array_walk($this->serviceProviders, function ($p) {
+            $this->bootProvider($p);
+        });
 
-    /**
-     * Flush the container of all bindings and resolved instances.
-     *
-     * @return void
-     */
-    public function flush()
-    {
-        parent::flush();
-
-        $this->loadedProviders = [];
-    }
-
-    /**
-     * Register Base Facades.
-     *
-     * @return void
-     */
-    private function registerBaseFacades()
-    {
-        Facade::clearResolvedInstances();
-
-        Facade::setFacadeApplication($this);
-
-        AliasLoader::getInstance($this->make(ApplicationConfig::class)
-                ->get('app.aliases'))
-            ->register();
-    }
-
-    /**
-     * Run the Application.
-     *
-     * @return self
-     */
-    public function run()
-    {
-        $this->registerBaseFacades();
-        $this->registerConfiguredProviders();
-
-        return $this;
-    }
-
-    /**
-     * Register all of the configured providers.
-     *
-     * @return void
-     */
-    public function registerConfiguredProviders()
-    {
-        $config = $this->make(ApplicationConfig::class);
-
-        foreach ($config->get('app.providers') as $provider) {
-            $this->register($this->resolveProviderClass($provider));
-        }
+        $this->booted = true;
     }
 }
