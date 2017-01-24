@@ -2,8 +2,8 @@
 
 namespace Assely\Foundation\Providers;
 
-use Assely\Hook\HookFactory;
 use Assely\Routing\Router;
+use Assely\Hook\HookFactory;
 use Illuminate\Support\ServiceProvider;
 
 class HttpServiceProvider extends ServiceProvider
