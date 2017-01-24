@@ -2,26 +2,36 @@
 
 namespace Assely\Foundation\Providers;
 
+use Assely\Hook\HookFactory;
 use Assely\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class HttpServiceProvider extends ServiceProvider
 {
     /**
-     * Boot routes.
+     * Boot routes and execute route.
      *
+     * @param \Assely\Hook\HookFactory $hook
      * @param \Assely\Routing\Router $router
-     * @param \Illuminate\Http\Request $request
      *
      * @return void
      */
-    public function boot(Router $router)
-    {
-        // Set route namespace for controller creation.
-        $router->setNamespace($this->getNamespace());
-
-        // Map application defined routes.
+    public function boot(
+        HookFactory $hook,
+        Router $router
+    ) {
+        // Load application defined routes.
         $this->load();
+
+        // We going to run application router before
+        // WordPress default template matching.
+        $hook->action('template_redirect', function () use ($router) {
+            $router
+                ->setNamespace($this->getNamespace())
+                ->execute();
+
+            exit();
+        })->dispatch();
     }
 
     /**
