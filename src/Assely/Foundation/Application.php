@@ -2,15 +2,14 @@
 
 namespace Assely\Foundation;
 
-use Assely\Config\ApplicationConfig;
-use Assely\Foundation\AliasLoader;
-use Assely\Routing\RoutingServiceProvider;
-use Illuminate\Container\Container;
-use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Arr;
+use Illuminate\Container\Container;
+use Assely\Config\ApplicationConfig;
+use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Finder\Finder;
+use Assely\Routing\RoutingServiceProvider;
+use Illuminate\Events\EventServiceProvider;
 
 class Application extends Container
 {
@@ -86,7 +85,7 @@ class Application extends Container
      */
     public function path()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'app';
+        return $this->basePath.DIRECTORY_SEPARATOR.'app';
     }
 
     /**
@@ -106,7 +105,7 @@ class Application extends Container
      */
     public function bootstrapPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'bootstrap';
+        return $this->basePath.DIRECTORY_SEPARATOR.'bootstrap';
     }
 
     /**
@@ -116,7 +115,7 @@ class Application extends Container
      */
     public function configPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'config';
+        return $this->basePath.DIRECTORY_SEPARATOR.'config';
     }
 
     /**
@@ -126,7 +125,7 @@ class Application extends Container
      */
     public function langPath()
     {
-        return $this->resourcePath() . DIRECTORY_SEPARATOR . 'lang';
+        return $this->resourcePath().DIRECTORY_SEPARATOR.'lang';
     }
 
     /**
@@ -136,7 +135,7 @@ class Application extends Container
      */
     public function publicPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
+        return $this->basePath.DIRECTORY_SEPARATOR.'public';
     }
 
     /**
@@ -146,7 +145,7 @@ class Application extends Container
      */
     public function storagePath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'storage';
+        return $this->basePath.DIRECTORY_SEPARATOR.'storage';
     }
 
     /**
@@ -156,7 +155,7 @@ class Application extends Container
      */
     public function resourcePath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
+        return $this->basePath.DIRECTORY_SEPARATOR.'resources';
     }
 
     /**
