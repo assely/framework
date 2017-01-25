@@ -26,7 +26,7 @@ class RewriteFactory extends Depot
      * Create rewrite endpoint.
      *
      * @param  string|array $points
-     * @param  integer $places
+     * @param  int $places
      *
      * @return \Assely\Rewrite\Endpoint
      */

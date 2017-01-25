@@ -5,7 +5,12 @@ namespace Assely\Rewrite;
 class Tag
 {
     /**
-     * @param $parameters
+     * Adds rewrite rule tags.
+     *
+     * @param string|array $parameters
+     * @param string|null $condition
+     *
+     * @return void
      */
     public function add($parameters, $condition = null)
     {
@@ -21,8 +26,12 @@ class Tag
     }
 
     /**
-     * @param $parameter
-     * @param $condition
+     * Registers rewrite tag.
+     *
+     * @param string $parameter
+     * @param string $condition
+     *
+     * @return void
      */
     public function register($parameter, $condition)
     {

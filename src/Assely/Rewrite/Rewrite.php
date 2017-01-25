@@ -68,7 +68,7 @@ class Rewrite
             $this->conditions
         )->add();
 
-        if ( ! empty($parameters = $this->rule->getParameters())) {
+        if (! empty($parameters = $this->rule->getParameters())) {
             $this->tag->add($parameters);
         }
     }
