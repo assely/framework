@@ -13,7 +13,7 @@ class RewriteManager extends Manager
      *
      * @return void
      */
-    public function boot(Rewrite $rewrite)
+    public function boot($rewrite)
     {
         $this->hook->action(
             'init',
