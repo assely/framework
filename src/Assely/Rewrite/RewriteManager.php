@@ -7,17 +7,17 @@ use Assely\Singularity\Manager;
 class RewriteManager extends Manager
 {
     /**
-     * Bootstrap posttype manager.
+     * Bootstraps rule manager.
      *
-     * @param \Assely\Rewrite\Rewrite $posttype
+     * @param \Assely\Rewrite\Rewrite $rewrite
      *
      * @return void
      */
-    public function boot($rule)
+    public function boot(Rewrite $rewrite)
     {
         $this->hook->action(
             'init',
-            [$rule, 'register']
+            [$rewrite, 'register']
         )->dispatch();
     }
 }

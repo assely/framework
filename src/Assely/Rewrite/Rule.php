@@ -12,24 +12,35 @@ class Rule
     const DEFAULT_REGREX = '([^/]+)';
 
     /**
+     * Rule regrex.
+     *
      * @var string
      */
     protected $regrex = '';
 
     /**
+     * Rule guid URI path.
+     *
      * @var string
      */
     protected $guid = 'index.php';
 
     /**
+     * Rule parameters.
+     *
      * @var array
      */
     protected $parameters = [];
 
     /**
-     * @param $pattern
+     * Resolves rule pattern, regrex and parameters.
+     *
+     * @param  string $pattern
+     * @param  array $conditions
+     *
+     * @return self
      */
-    public function resolve($pattern, $conditions)
+    public function resolve($pattern, array $conditions)
     {
         $this
             ->setRegrex($pattern)
@@ -40,15 +51,25 @@ class Rule
         return $this;
     }
 
-    public function add()
+    /**
+     * Adds rule.
+     *
+     * @return void
+     */
+    protected function add()
     {
         return add_rewrite_rule("{$this->regrex}/?$", $this->guid);
     }
 
     /**
-     * @param $pattern
+     * Extracts parameters from rule pattern and conditions.
+     *
+     * @param  string $pattern
+     * @param  array $conditions
+     *
+     * @return self
      */
-    public function extractParameters($pattern, $conditions)
+    public function extractParameters($pattern, array $conditions)
     {
         preg_match_all('/{(\w+)}/', $pattern, $matches, PREG_PATTERN_ORDER);
 
@@ -64,7 +85,9 @@ class Rule
     }
 
     /**
-     * @param $conditions
+     * Replaces mocked pararameters with conditions in regrex string.
+     *
+     * @return self
      */
     public function replaceMocksWithConditions()
     {
@@ -75,6 +98,11 @@ class Rule
         return $this;
     }
 
+    /**
+     * Generates guid URI path.
+     *
+     * @return self
+     */
     public function generateGuid()
     {
         $index = 1;

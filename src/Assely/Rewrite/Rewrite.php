@@ -33,13 +33,6 @@ class Rewrite
     protected $tag;
 
     /**
-     * Rewrite endpoint instance.
-     *
-     * @var \Assely\Rewrite\Endpoint
-     */
-    protected $endpoint;
-
-    /**
      * Rewrite manager instance.
      *
      * @var \Assely\Rewrite\RewriteManager
@@ -49,23 +42,25 @@ class Rewrite
     /**
      * @param \Assely\Rewrite\Rule $rule
      * @param \Assely\Rewrite\Tag $tag
-     * @param \Assely\Rewrite\Endpoint $endpoint
      * @param \Assely\Rewrite\RewriteManager $manager
      */
     public function __construct(
         Rule $rule,
         Tag $tag,
-        Endpoint $endpoint,
         RewriteManager $manager
     ) {
         $this->rule = $rule;
         $this->tag = $tag;
-        $this->endpoint = $endpoint;
         $this->manager = $manager;
 
         $this->manager->boot($this);
     }
 
+    /**
+     * Registers rewrite rule and tags.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->rule->resolve(
@@ -73,15 +68,17 @@ class Rewrite
             $this->conditions
         )->add();
 
-        $this->tag->add($this->rule->getParameters());
-
-        // $this->endpoint->add();
+        if ( ! empty($parameters = $this->rule->getParameters())) {
+            $this->tag->add($parameters);
+        }
     }
 
     /**
-     * [where description].
-     * @param  array  $conditions [description]
-     * @return [type]             [description]
+     * Sets formats of rewrite tags.
+     *
+     * @param  array  $conditions
+     *
+     * @return self
      */
     public function where(array $conditions)
     {
@@ -127,7 +124,7 @@ class Rewrite
     /**
      * Sets the Rewrite rule instance.
      *
-     * @param \Assely\Rewrite\Rule $rule the rule
+     * @param \Assely\Rewrite\Rule $rule
      *
      * @return self
      */
@@ -151,37 +148,13 @@ class Rewrite
     /**
      * Sets the Rewrite tag instance.
      *
-     * @param \Assely\Rewrite\Tag $tag the tag
+     * @param \Assely\Rewrite\Tag $tag
      *
      * @return self
      */
     public function setTag(Tag $tag)
     {
         $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Gets the Rewrite endpoint instance.
-     *
-     * @return \Assely\Rewrite\Endpoint
-     */
-    public function getEndpoint()
-    {
-        return $this->endpoint;
-    }
-
-    /**
-     * Sets the Rewrite endpoint instance.
-     *
-     * @param \Assely\Rewrite\Endpoint $endpoint the endpoint
-     *
-     * @return self
-     */
-    public function setEndpoint(Endpoint $endpoint)
-    {
-        $this->endpoint = $endpoint;
 
         return $this;
     }
