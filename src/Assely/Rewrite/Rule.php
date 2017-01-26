@@ -40,11 +40,11 @@ class Rule
      *
      * @return self
      */
-    public function resolve($pattern, array $conditions)
+    public function resolve($pattern, array $conditions = [])
     {
         $this
             ->setRegrex($pattern)
-            ->extractParameters($pattern, $conditions)
+            ->extractParameters($conditions)
             ->replaceMocksWithConditions()
             ->generateGuid();
 
@@ -69,9 +69,9 @@ class Rule
      *
      * @return self
      */
-    public function extractParameters($pattern, array $conditions)
+    public function extractParameters(array $conditions)
     {
-        preg_match_all('/{(\w+)}/', $pattern, $matches, PREG_PATTERN_ORDER);
+        preg_match_all('/{(\w+)}/', $this->regrex, $matches, PREG_PATTERN_ORDER);
 
         array_map(function ($parameter) use ($conditions) {
             if (isset($conditions[$parameter])) {
@@ -135,7 +135,7 @@ class Rule
      *
      * @return self
      */
-    protected function setRegrex($regrex)
+    public function setRegrex($regrex)
     {
         $this->regrex = $regrex;
 
@@ -153,16 +153,12 @@ class Rule
     }
 
     /**
-     * Sets the value of parameters.
+     * Gets the Rule guid URI path.
      *
-     * @param array $parameters the parameters
-     *
-     * @return self
+     * @return string
      */
-    protected function setParameters(array $parameters)
+    public function getGuid()
     {
-        $this->parameters = $parameters;
-
-        return $this;
+        return $this->guid;
     }
 }
