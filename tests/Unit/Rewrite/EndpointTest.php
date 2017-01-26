@@ -1,7 +1,7 @@
 <?php
 
-use Assely\Rewrite\Endpoint;
 use Brain\Monkey\Functions;
+use Assely\Rewrite\Endpoint;
 
 class EndpointTest extends TestCase
 {
