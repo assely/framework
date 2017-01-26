@@ -1,7 +1,6 @@
 <?php
 
 use Assely\Rewrite\RewriteFactory;
-use Illuminate\Container\Container;
 
 class RewriteFactoryTest extends TestCase
 {
