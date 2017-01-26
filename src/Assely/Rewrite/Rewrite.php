@@ -68,7 +68,7 @@ class Rewrite
             $this->conditions
         )->add();
 
-        if (! empty($parameters = $this->rule->getParameters())) {
+        if (!empty($parameters = $this->rule->getParameters())) {
             $this->tag->add($parameters);
         }
     }
@@ -85,6 +85,16 @@ class Rewrite
         $this->conditions = $conditions;
 
         return $this;
+    }
+
+    /**
+     * Gets the Rewrite conditions.
+     *
+     * @return array
+     */
+    public function getConditions()
+    {
+        return $this->conditions;
     }
 
     /**
@@ -122,20 +132,6 @@ class Rewrite
     }
 
     /**
-     * Sets the Rewrite rule instance.
-     *
-     * @param \Assely\Rewrite\Rule $rule
-     *
-     * @return self
-     */
-    public function setRule(Rule $rule)
-    {
-        $this->rule = $rule;
-
-        return $this;
-    }
-
-    /**
      * Gets the Rewrite tag instance.
      *
      * @return \Assely\Rewrite\Tag
@@ -143,20 +139,6 @@ class Rewrite
     public function getTag()
     {
         return $this->tag;
-    }
-
-    /**
-     * Sets the Rewrite tag instance.
-     *
-     * @param \Assely\Rewrite\Tag $tag
-     *
-     * @return self
-     */
-    public function setTag(Tag $tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
     }
 
     /**
