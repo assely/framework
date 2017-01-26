@@ -5,18 +5,24 @@ namespace Assely\Rewrite;
 class Endpoint
 {
     /**
-     * @var mixed
+     * Endpoint name.
+     *
+     * @var string
      */
     protected $point;
 
     /**
-     * @var mixed
+     * Endpoint apply places.
+     *
+     * @var int
      */
     protected $places;
 
     /**
-     * @param $point
-     * @param $places
+     * Construct endpoint.
+     *
+     * @param string $point
+     * @param int $places
      */
     public function __construct($point, $places = EP_NONE)
     {
@@ -25,9 +31,9 @@ class Endpoint
     }
 
     /**
-     * @param $point
-     * @param $places
-     * @return mixed
+     * Register endpoint.
+     *
+     * @return void
      */
     public function add()
     {
