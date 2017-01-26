@@ -40,7 +40,7 @@ class RewriteFactory extends Depot
             return;
         }
 
-        $endpoint = new Endpoint($points, $places);
+        $endpoint = $this->container->make(Endpoint::class, [$points, $places]);
 
         $endpoint->add();
 

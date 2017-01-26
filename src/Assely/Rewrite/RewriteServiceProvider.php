@@ -16,6 +16,8 @@ class RewriteServiceProvider extends ServiceProvider
         $this->registerRewritesCollection();
 
         $this->registerRewriteFactory();
+
+        $this->registerEndpoint();
     }
 
     /**
@@ -44,5 +46,19 @@ class RewriteServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('rewrite.factory', RewriteFactory::class);
+    }
+
+    /**
+     * Register rewrite factory.
+     *
+     * @return void
+     */
+    public function registerEndpoint()
+    {
+        $this->app->bind('endpoint', function ($app, $arguments) {
+            return new Endpoint($arguments[0], $arguments[1]);
+        });
+
+        $this->app->alias('endpoint', Endpoint::class);
     }
 }
