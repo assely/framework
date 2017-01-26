@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class RewriteServiceProvider extends ServiceProvider
 {
     /**
-     * Register routing services.
+     * Register rewrite services.
      *
      * @return void
      */
