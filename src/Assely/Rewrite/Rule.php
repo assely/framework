@@ -56,7 +56,7 @@ class Rule
      *
      * @return void
      */
-    protected function add()
+    public function add()
     {
         return add_rewrite_rule("{$this->regrex}/?$", $this->guid);
     }
