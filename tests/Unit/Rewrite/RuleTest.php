@@ -22,7 +22,7 @@ class RuleTest extends TestCase
 
         Functions::expect('add_rewrite_rule')
             ->once()
-            ->with(Rule::DEFAULT_REGREX . '/?$', 'index.php?regrex=$matches[1]');
+            ->with(Rule::DEFAULT_REGREX.'/?$', 'index.php?regrex=$matches[1]');
 
         $rule
             ->resolve('{regrex}')
@@ -82,7 +82,7 @@ class RuleTest extends TestCase
             ])
             ->replaceMocksWithConditions();
 
-        $this->assertEquals($rule->getRegrex(), 'regrex_one/' . Rule::DEFAULT_REGREX);
+        $this->assertEquals($rule->getRegrex(), 'regrex_one/'.Rule::DEFAULT_REGREX);
     }
 
     /**
