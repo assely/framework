@@ -223,8 +223,9 @@ class Router
                 return $notFoundRoute->run();
             }
         } catch (RoutingException $e) {
-            wp_redirect(home_url());
-            exit();
+            if (wp_redirect(home_url())) {
+                exit();
+            }
         }
     }
 
@@ -288,25 +289,5 @@ class Router
     public function getNamespace()
     {
         return $this->namespace;
-    }
-
-    /**
-     * Gets the WordPress conditional tags.
-     *
-     * @return array
-     */
-    public function getPaths()
-    {
-        return $this->conditions;
-    }
-
-    /**
-     * Add router conditions.
-     *
-     * @param array $paths
-     */
-    public function addPaths(array $paths)
-    {
-        return $this->conditions->add($paths);
     }
 }
