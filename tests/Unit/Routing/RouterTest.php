@@ -72,13 +72,25 @@ class RouterTest extends TestCase
     /**
      * @test
      */
+    public function test_response_preparation_without_specific_status()
+    {
+        $this->response->shouldReceive('setContent')->once()->with('content');
+        $this->response->shouldReceive('setStatusCode')->never();
+        $this->response->shouldReceive('send')->once();
+
+        $this->router->prepareResponse('content');
+    }
+
+    /**
+     * @test
+     */
     public function test_creating_routes()
     {
         $this->container->shouldReceive('make')->andReturn($this->route);
         $this->routes->shouldReceive('add')->with($this->route)->andReturn($this->route);
 
-        $this->route->shouldReceive('setPath')->times()->with('route/path')->andReturn($this->route);
-        $this->route->shouldReceive('setAction')->times()->with('Controller@method')->andReturn($this->route);
+        $this->route->shouldReceive('setPath')->with('route/path')->andReturn($this->route);
+        $this->route->shouldReceive('setAction')->with('Controller@method')->andReturn($this->route);
 
         $this->route->shouldReceive('setMethods')->once()->with(['GET'])->andReturn($this->route);
         $this->router->get('route/path', 'Controller@method');
@@ -100,6 +112,38 @@ class RouterTest extends TestCase
 
         $this->route->shouldReceive('setMethods')->once()->with(['GET', 'POST'])->andReturn($this->route);
         $this->router->match(['GET', 'POST'], 'route/path', 'Controller@method');
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_resolve_404_route_with_not_found_condition_on_execution()
+    {
+        $this->conditions->shouldReceive('is')->once()->with('404')->andReturn(true);
+        $this->routes->shouldReceive('get')->once()->with('404')->andReturn($this->route);
+        $this->route->shouldReceive('run')->once()->andReturn('content');
+
+        $this->response->shouldReceive('setContent')->once()->with('content');
+        $this->response->shouldReceive('setStatusCode')->once()->with(404);
+        $this->response->shouldReceive('send')->once();
+
+        $this->router->execute(new WP, new WP_Query);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_when_no_matching_route_on_execution()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+
+        $this->expectException('Assely\Routing\RoutingException');
+
+        $this->conditions->shouldReceive('is')->once()->with('404')->andReturn(false);
+        $this->routes->shouldReceive('getGroup')->once()->with('GET')->andReturn([$this->route]);
+        $this->route->shouldReceive('matches')->once()->andReturn(false);
+
+        $this->router->execute(new WP, new WP_Query);
     }
 
     public function getRoute()

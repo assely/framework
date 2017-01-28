@@ -2,6 +2,8 @@
 
 namespace Assely\Routing;
 
+use WP;
+use WP_Query;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Container\Container;
@@ -181,13 +183,8 @@ class Router
      *
      * @return mixed
      */
-    public function execute()
+    public function execute(WP $wp, WP_Query $wp_query)
     {
-        // Global WP and Query instance for picking
-        // current request and query details.
-        global $wp;
-        global $wp_query;
-
         // If error occurs, do not search for any route.
         // Immediately process to the `404` route.
         if ($this->conditions->is('404')) {
@@ -224,7 +221,11 @@ class Router
             }
         } catch (RoutingException $e) {
             if (wp_redirect(home_url())) {
+                // WordPress requires to call exit after wp_reditect.
+                // We can test it in any way, so ignore this line.
+                // @codeCoverageIgnoreStart
                 exit();
+                // @codeCoverageIgnoreEnd
             }
         }
     }
