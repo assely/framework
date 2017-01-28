@@ -47,6 +47,7 @@ class Router
      * Construct Router.
      *
      * @param \Assely\Routing\RoutesCollection $routes
+     * @param \Assely\Routing\WordpressConditions $conditions
      * @param \Illuminate\Http\Response $response
      * @param \Illuminate\Contracts\Container\Container $container
      */
