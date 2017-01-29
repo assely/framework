@@ -2,6 +2,8 @@
 
 namespace Assely\Foundation\Providers;
 
+use WP;
+use WP_Query;
 use Assely\Routing\Router;
 use Assely\Hook\HookFactory;
 use Illuminate\Support\ServiceProvider;

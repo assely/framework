@@ -3,6 +3,7 @@
 namespace Assely\Foundation\Providers;
 
 use WP;
+use WP_Query;
 use Assely\Config\FrameworkConfig;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Support\ServiceProvider;
@@ -18,10 +19,9 @@ class FoundationServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(ASSELY_FRAMEWORK_DIR . 'resources/views', 'Assely');
 
-        $this->registerWordpressGlobals();
-
+        $this->registerGlobalWP();
+        $this->registerGlobalWPQuery();
         $this->registerAssets();
-
         $this->registerJSVariables();
     }
 
