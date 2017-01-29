@@ -221,8 +221,8 @@ class Router
             }
         } catch (RoutingException $e) {
             if (wp_redirect(home_url())) {
-                // WordPress requires to call exit after wp_reditect.
-                // We can test it in any way, so ignore this line.
+                // WordPress requires to call exit after wp_redirect.
+                // We cannot test it, so ignore this single line.
                 // @codeCoverageIgnoreStart
                 exit();
                 // @codeCoverageIgnoreEnd
