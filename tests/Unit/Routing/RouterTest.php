@@ -72,18 +72,6 @@ class RouterTest extends TestCase
     /**
      * @test
      */
-    public function test_response_preparation_without_specific_status()
-    {
-        $this->response->shouldReceive('setContent')->once()->with('content');
-        $this->response->shouldReceive('setStatusCode')->never();
-        $this->response->shouldReceive('send')->once();
-
-        $this->router->prepareResponse('content');
-    }
-
-    /**
-     * @test
-     */
     public function test_creating_routes()
     {
         $this->container->shouldReceive('make')->andReturn($this->route);
@@ -142,6 +130,30 @@ class RouterTest extends TestCase
         $this->conditions->shouldReceive('is')->once()->with('404')->andReturn(false);
         $this->routes->shouldReceive('getGroup')->once()->with('GET')->andReturn([$this->route]);
         $this->route->shouldReceive('matches')->once()->andReturn(false);
+
+        $this->router->execute(new WP, new WP_Query);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_run_route_on_match_and_prepare_response()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+
+        $route1 = Mockery::mock('Assely\Routing\Route');
+        $route2 = Mockery::mock('Assely\Routing\Route');
+
+        $this->conditions->shouldReceive('is')->once()->with('404')->andReturn(false);
+        $this->routes->shouldReceive('getGroup')->once()->with('GET')->andReturn([$route1, $route2]);
+        $route1->shouldReceive('matches')->once()->andReturn(false);
+        $route2->shouldReceive('matches')->once()->andReturn(true);
+
+        $route2->shouldReceive('run')->once()->andReturn('content');
+
+        $this->response->shouldReceive('setContent')->once()->with('content');
+        $this->response->shouldReceive('setStatusCode')->never();
+        $this->response->shouldReceive('send')->once();
 
         $this->router->execute(new WP, new WP_Query);
     }
