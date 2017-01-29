@@ -10,27 +10,27 @@ class WordpressConditions
      * @var array
      */
     protected $conditions = [
-         'is_404' => '404',
-         'is_home' => 'home',
-         'is_front_page' => 'front',
-         'is_page' => 'page',
-         'is_single' => 'post',
-         'is_sticky' => 'sticky',
-         'is_singular' => 'single',
-         'is_tax' => 'taxonomy',
-         'is_tag' => 'tag',
-         'is_archive' => 'archive',
-         'is_post_type_archive' => 'list',
-         'is_attachment' => 'attachment',
-         'is_author' => 'user',
-         'is_category' => 'category',
-         'is_date' => 'date',
-         'is_day' => 'day',
-         'is_month' => 'month',
-         'is_time' => 'time',
-         'is_year' => 'year',
-         'is_paged' => 'paged',
-         'is_search' => 'search',
+        'is_404' => '404',
+        'is_home' => 'home',
+        'is_front_page' => 'front',
+        'is_page' => 'page',
+        'is_single' => 'post',
+        'is_sticky' => 'sticky',
+        'is_singular' => 'single',
+        'is_tax' => 'taxonomy',
+        'is_tag' => 'tag',
+        'is_archive' => 'archive',
+        'is_post_type_archive' => 'list',
+        'is_attachment' => 'attachment',
+        'is_author' => 'user',
+        'is_category' => 'category',
+        'is_date' => 'date',
+        'is_day' => 'day',
+        'is_month' => 'month',
+        'is_time' => 'time',
+        'is_year' => 'year',
+        'is_paged' => 'paged',
+        'is_search' => 'search',
     ];
 
     /**
@@ -45,6 +45,16 @@ class WordpressConditions
         $this->conditions = array_merge($this->conditions, $conditions);
 
         return $this->conditions;
+    }
+
+    /**
+     * Get selected condition.
+     *
+     * @return string
+     */
+    public function get($name)
+    {
+        return $this->conditions[$name];
     }
 
     /**
