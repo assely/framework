@@ -37,7 +37,7 @@ class InfoCommand extends Command
     {
         $assets = $this->app->make('assets.collection')->all();
 
-        if (! $this->getOption('all')) {
+        if (!$this->getOption('all')) {
             $assets = array_filter($assets, function ($asset) {
                 return $asset->getArea() !== 'admin';
             });
@@ -69,7 +69,7 @@ class InfoCommand extends Command
      */
     public function routes()
     {
-        $routes = $this->app->make('routes.collection')->all();
+        $routes = $this->app->make('routes.collection')->getAll();
 
         $headers = ['Condition', 'Filter', 'Action', 'Parameters', 'Pattern', 'Guid'];
 

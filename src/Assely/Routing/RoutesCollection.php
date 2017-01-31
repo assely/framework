@@ -5,12 +5,11 @@ namespace Assely\Routing;
 class RoutesCollection
 {
     /**
-     * Routes collection mapped
-     * to requests methods.
+     * Routes collection mapped to requests methods.
      *
      * @var array
      */
-    public static $routes = [
+    protected static $routes = [
         'GET' => [],
         'HEAD' => [],
         'POST' => [],
@@ -19,12 +18,11 @@ class RoutesCollection
     ];
 
     /**
-     * Collection of all routes no
-     * gruped by request methods.
+     * Collection of all ungrouped routes.
      *
      * @var array
      */
-    public static $allRoutes = [];
+    protected static $allRoutes = [];
 
     /**
      * Add route to the collection.
@@ -33,41 +31,13 @@ class RoutesCollection
      */
     public function add(Route $route)
     {
-        $this->store($route);
-
-        return $route;
-    }
-
-    /**
-     * Store route by his request methods.
-     *
-     * @param  Route  $route
-     *
-     * @return void
-     */
-    public function store(Route $route)
-    {
         foreach ($route->getMethods() as $method) {
             self::$routes[$method][$route->getPath()] = $route;
 
             self::$allRoutes[$route->getPath()] = $route;
         }
-    }
 
-    /**
-     * Get the route group form collection.
-     *
-     * @param  string $method
-     *
-     * @return Assely\Routing\Route
-     */
-    public function getGroup($method)
-    {
-        if (isset(self::$routes[$method])) {
-            return self::$routes[$method];
-        }
-
-        throw new RoutingException("Routes group [{$path}] does not exist.");
+        return $route;
     }
 
     /**
@@ -91,8 +61,34 @@ class RoutesCollection
      *
      * @return array
      */
-    public function all()
+    public function getAll()
     {
         return self::$allRoutes;
+    }
+
+    /**
+     * Get the route group form collection.
+     *
+     * @param  string $method
+     *
+     * @return Assely\Routing\Route
+     */
+    public function getGroup($method)
+    {
+        if (isset(self::$routes[$method])) {
+            return self::$routes[$method];
+        }
+
+        throw new RoutingException("Routes group [{$method}] does not exist.");
+    }
+
+    /**
+     * Gets all grouped routes.
+     *
+     * @return array
+     */
+    public function getGroups()
+    {
+        return self::$routes;
     }
 }
