@@ -37,7 +37,7 @@ class InfoCommand extends Command
     {
         $assets = $this->app->make('assets.collection')->all();
 
-        if (!$this->getOption('all')) {
+        if (! $this->getOption('all')) {
             $assets = array_filter($assets, function ($asset) {
                 return $asset->getArea() !== 'admin';
             });
