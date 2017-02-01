@@ -128,7 +128,7 @@ if (! function_exists('mix')) {
 
         if (! $manifest) {
             if (! file_exists($manifestPath = public_path('mix-manifest.json'))) {
-                throw new Exception('The Mix manifest does not exist.');
+                throw new \Exception('The Mix manifest does not exist.');
             }
 
             $manifest = json_decode(file_get_contents($manifestPath), true);
@@ -139,14 +139,14 @@ if (! function_exists('mix')) {
         }
 
         if (! array_key_exists($path, $manifest)) {
-            throw new Exception(
+            throw new \Exception(
                 "Unable to locate Mix file: {$path}. Please check your ".
                 'webpack.mix.js output paths and try again.'
             );
         }
 
         return $shouldHotReload = file_exists(public_path('hot'))
-                    ? new HtmlString("http://localhost:8080{$manifest[$path]}")
-                    : new HtmlString(url($manifest[$path]));
+                ? new \Illuminate\Support\HtmlString("http://localhost:8080{$manifest[$path]}")
+                : new \Illuminate\Support\HtmlString(url($manifest[$path]));
     }
 }
