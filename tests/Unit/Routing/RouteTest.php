@@ -85,7 +85,7 @@ class RouteTest extends TestCase
 
         $mock = $route->getPathMock([
             'path' => ['path_value'],
-            'query' => 'query_value'
+            'query' => 'query_value',
         ]);
 
         $this->assertEquals('route/path_value/with/query_value', $mock);
@@ -100,7 +100,7 @@ class RouteTest extends TestCase
 
         $route->where([
             'page' => 1,
-            'post' => [2, 3]
+            'post' => [2, 3],
         ]);
 
         $this->conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(true);
@@ -119,7 +119,7 @@ class RouteTest extends TestCase
 
         $route->where([
             'page' => 1,
-            'post' => [2, 3]
+            'post' => [2, 3],
         ]);
 
         $this->conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(false);
