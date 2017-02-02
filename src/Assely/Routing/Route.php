@@ -2,8 +2,8 @@
 
 namespace Assely\Routing;
 
-use Assely\Contracts\Routing\RouteInterface;
 use Assely\Hook\HookFactory;
+use Assely\Contracts\Routing\RouteInterface;
 use Illuminate\Contracts\Container\Container;
 
 class Route extends ActionResolver implements RouteInterface

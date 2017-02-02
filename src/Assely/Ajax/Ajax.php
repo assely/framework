@@ -2,14 +2,13 @@
 
 namespace Assely\Ajax;
 
-use Assely\Contracts\Routing\RouteInterface;
+use Assely\Routing\Router;
 use Assely\Hook\HookFactory;
 use Assely\Nonce\NonceFactory;
 use Assely\Routing\ActionResolver;
-use Assely\Routing\ControllerActionResolver;
-use Assely\Routing\Router;
-use Assely\Support\Accessors\HasArguments;
 use Assely\Support\Accessors\HasSlug;
+use Assely\Support\Accessors\HasArguments;
+use Assely\Contracts\Routing\RouteInterface;
 use Illuminate\Contracts\Container\Container;
 
 class Ajax extends ActionResolver implements RouteInterface
