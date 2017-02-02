@@ -2,14 +2,12 @@
 
 namespace Assely\Routing;
 
-use Assely\Hook\HookFactory;
 use Assely\Contracts\Routing\RouteInterface;
+use Assely\Hook\HookFactory;
 use Illuminate\Contracts\Container\Container;
 
-class Route implements RouteInterface
+class Route extends ActionResolver implements RouteInterface
 {
-    use ControllerActionResolver;
-
     /**
      * Route request methods.
      *
