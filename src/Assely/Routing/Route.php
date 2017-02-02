@@ -65,11 +65,12 @@ class Route extends ActionResolver implements RouteInterface
     /**
      * Checks if route matches request.
      *
-     * @param  string $pattern
+     * @param  string $request [description]
+     * @param  array  $queries [description]
      *
      * @return bool
      */
-    public function matches($request, $queries)
+    public function matches($request, $queries = [])
     {
         $this->setQueries($queries);
 
@@ -83,7 +84,7 @@ class Route extends ActionResolver implements RouteInterface
             }
         }
 
-        return $matches;
+        return (bool) $matches;
     }
 
     /**
@@ -115,7 +116,7 @@ class Route extends ActionResolver implements RouteInterface
      */
     public function isHomePath()
     {
-        return $this->getPath() === '/';
+        return empty($this->getPath());
     }
 
     /**
@@ -249,5 +250,15 @@ class Route extends ActionResolver implements RouteInterface
         $this->queries = $queries;
 
         return $this;
+    }
+
+    /**
+     * Gets the Route rules.
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+        return $this->rules;
     }
 }
