@@ -4,7 +4,7 @@ namespace Assely\Routing;
 
 use Closure;
 
-trait ControllerActionResolver
+abstract class ActionResolver
 {
     /**
      * Route controller.
