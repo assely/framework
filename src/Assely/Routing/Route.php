@@ -43,6 +43,13 @@ class Route extends ActionResolver implements RouteInterface
     protected $rules = [];
 
     /**
+     * Router instance.
+     *
+     * @var \Assely\Routing\Router
+     */
+    protected $router;
+
+    /**
      * Construct route.
      *
      * @param \Assely\Routing\WordpressConditions $conditions
@@ -254,5 +261,19 @@ class Route extends ActionResolver implements RouteInterface
     public function getRules()
     {
         return $this->rules;
+    }
+
+    /**
+     * Sets the Router instance.
+     *
+     * @param \Assely\Routing\Router $router the router
+     *
+     * @return self
+     */
+    public function setRouter(Router $router)
+    {
+        $this->router = $router;
+
+        return $this;
     }
 }

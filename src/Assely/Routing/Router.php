@@ -163,7 +163,8 @@ class Router
         $route = (new Route($this->conditions, $this->container))
             ->setMethods($method)
             ->setPath($path)
-            ->setAction($action);
+            ->setAction($action)
+            ->setRouter($this);
 
         return $this->routes->add($route);
     }
