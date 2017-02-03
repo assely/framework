@@ -39,7 +39,7 @@ class CacheTest extends TestCase
 
         Functions::expect('set_transient')->once()->andReturn(true);
 
-        $cache->put('key', 'value');
+        $this->assertTrue($cache->put('key', 'value'));
     }
 
     /**
@@ -49,10 +49,11 @@ class CacheTest extends TestCase
     {
         $cache = $this->getCache();
 
-        Functions::expect('get_transient')->twice()->andReturn(true);
+        Functions::expect('get_transient')->twice()->andReturn('value');
 
         $cache->has('key');
-        $cache->get('key');
+
+        $this->assertEquals('value', $cache->get('key'));
     }
 
     /**
@@ -64,7 +65,7 @@ class CacheTest extends TestCase
 
         Functions::expect('delete_transient')->once()->andReturn(true);
 
-        $cache->flush('key');
+        $this->assertTrue($cache->flush('key'));
     }
 
     /**

@@ -28,16 +28,6 @@ class Controller
     }
 
     /**
-     * Gets the Request.
-     *
-     * @return \Illuminate\Http\Request
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
      * Sets the Request.
      *
      * @param \Illuminate\Http\Request $request
