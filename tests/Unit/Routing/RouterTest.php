@@ -3,7 +3,6 @@
 use Assely\Routing\Router;
 use Illuminate\Container\Container;
 use Assely\Routing\RoutesCollection;
-use Assely\Routing\WordpressConditions;
 
 class RouterTest extends TestCase
 {
