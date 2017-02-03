@@ -9,7 +9,7 @@ class RoutesCollection
      *
      * @var array
      */
-    protected static $routes = [
+    protected $routes = [
         'GET' => [],
         'HEAD' => [],
         'POST' => [],
@@ -22,7 +22,7 @@ class RoutesCollection
      *
      * @var array
      */
-    protected static $allRoutes = [];
+    protected $allRoutes = [];
 
     /**
      * Add route to the collection.
@@ -32,9 +32,9 @@ class RoutesCollection
     public function add(Route $route)
     {
         foreach ($route->getMethods() as $method) {
-            self::$routes[$method][$route->getPath()] = $route;
+            $this->routes[$method][$route->getPath()] = $route;
 
-            self::$allRoutes[$route->getPath()] = $route;
+            $this->allRoutes[$route->getPath()] = $route;
         }
 
         return $route;
@@ -49,8 +49,8 @@ class RoutesCollection
      */
     public function get($path)
     {
-        if (isset(self::$allRoutes[$path])) {
-            return self::$allRoutes[$path];
+        if (isset($this->allRoutes[$path])) {
+            return $this->allRoutes[$path];
         }
 
         throw new RoutingException("Route [{$path}] does not exist.");
@@ -63,7 +63,7 @@ class RoutesCollection
      */
     public function getAll()
     {
-        return self::$allRoutes;
+        return $this->allRoutes;
     }
 
     /**
@@ -75,8 +75,8 @@ class RoutesCollection
      */
     public function getGroup($method)
     {
-        if (isset(self::$routes[$method])) {
-            return self::$routes[$method];
+        if (isset($this->routes[$method])) {
+            return $this->routes[$method];
         }
 
         throw new RoutingException("Routes group [{$method}] does not exist.");
@@ -89,6 +89,6 @@ class RoutesCollection
      */
     public function getGroups()
     {
-        return self::$routes;
+        return $this->routes;
     }
 }

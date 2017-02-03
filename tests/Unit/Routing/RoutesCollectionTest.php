@@ -28,13 +28,13 @@ class RoutesCollectionTest extends TestCase
 
         $collection->add($route);
 
-        $this->assertEquals($collection->getGroups(), [
+        $this->assertEquals([
             'GET' => [$route->getPath() => $route],
             'HEAD' => [],
             'POST' => [],
             'PUT' => [],
             'DELETE' => [],
-        ]);
+        ], $collection->getGroups());
     }
 
     /**

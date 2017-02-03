@@ -5,30 +5,25 @@ use Illuminate\Container\Container;
 
 class RouteTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->conditions = $this->getConditions();
-        $this->route = $this->getRoute($this->conditions);
-    }
-
     /**
      * @test
      */
     public function test_getters_and_setters()
     {
-        $this->route->where(['query', 'rule']);
-        $this->route->setMethods(['GET', 'POST']);
-        $this->route->setPath('route/path');
-        $this->route->setAction('Controller@method');
-        $this->route->setQueries(['query' => 'name']);
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->assertEquals($this->route->getMethods(), ['GET', 'POST']);
-        $this->assertEquals($this->route->getPath(), 'route/path');
-        $this->assertEquals($this->route->getAction(), 'Controller@method');
-        $this->assertEquals($this->route->getQueries(), ['query' => 'name']);
-        $this->assertEquals($this->route->getRules(), ['query', 'rule']);
+        $route->where(['query', 'rule']);
+        $route->setMethods(['GET', 'POST']);
+        $route->setPath('route/path');
+        $route->setAction('Controller@method');
+        $route->setQueries(['query' => 'name']);
+
+        $this->assertEquals($route->getMethods(), ['GET', 'POST']);
+        $this->assertEquals($route->getPath(), 'route/path');
+        $this->assertEquals($route->getAction(), 'Controller@method');
+        $this->assertEquals($route->getQueries(), ['query' => 'name']);
+        $this->assertEquals($route->getRules(), ['query', 'rule']);
     }
 
     /**
@@ -36,20 +31,23 @@ class RouteTest extends TestCase
      */
     public function it_should_trim_trailing_slashes_on_path_setter()
     {
-        $this->route->setPath('/route/path');
-        $this->assertEquals($this->route->getPath(), 'route/path');
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->route->setPath('/route/path/');
-        $this->assertEquals($this->route->getPath(), 'route/path');
+        $route->setPath('/route/path');
+        $this->assertEquals($route->getPath(), 'route/path');
 
-        $this->route->setPath('/route/{path}');
-        $this->assertEquals($this->route->getPath(), 'route/{path}');
+        $route->setPath('/route/path/');
+        $this->assertEquals($route->getPath(), 'route/path');
 
-        $this->route->setPath('/route/{path}/');
-        $this->assertEquals($this->route->getPath(), 'route/{path}');
+        $route->setPath('/route/{path}');
+        $this->assertEquals($route->getPath(), 'route/{path}');
 
-        $this->route->setPath('/{path}');
-        $this->assertEquals($this->route->getPath(), '{path}');
+        $route->setPath('/route/{path}/');
+        $this->assertEquals($route->getPath(), 'route/{path}');
+
+        $route->setPath('/{path}');
+        $this->assertEquals($route->getPath(), '{path}');
     }
 
     /**
@@ -57,17 +55,20 @@ class RouteTest extends TestCase
      */
     public function test_home_path_positive_check()
     {
-        $this->route->setPath('');
-        $this->assertTrue($this->route->isHomePath());
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->route->setPath('/');
-        $this->assertTrue($this->route->isHomePath());
+        $route->setPath('');
+        $this->assertTrue($route->isHomePath());
 
-        $this->route->setPath('//');
-        $this->assertTrue($this->route->isHomePath());
+        $route->setPath('/');
+        $this->assertTrue($route->isHomePath());
 
-        $this->route->setPath('///');
-        $this->assertTrue($this->route->isHomePath());
+        $route->setPath('//');
+        $this->assertTrue($route->isHomePath());
+
+        $route->setPath('///');
+        $this->assertTrue($route->isHomePath());
     }
 
     /**
@@ -75,20 +76,23 @@ class RouteTest extends TestCase
      */
     public function test_home_path_negative_check()
     {
-        $this->route->setPath('route/path');
-        $this->assertFalse($this->route->isHomePath());
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->route->setPath('/route/path');
-        $this->assertFalse($this->route->isHomePath());
+        $route->setPath('route/path');
+        $this->assertFalse($route->isHomePath());
 
-        $this->route->setPath('/route/path/');
-        $this->assertFalse($this->route->isHomePath());
+        $route->setPath('/route/path');
+        $this->assertFalse($route->isHomePath());
 
-        $this->route->setPath('{name}');
-        $this->assertFalse($this->route->isHomePath());
+        $route->setPath('/route/path/');
+        $this->assertFalse($route->isHomePath());
 
-        $this->route->setPath('/{name}');
-        $this->assertFalse($this->route->isHomePath());
+        $route->setPath('{name}');
+        $this->assertFalse($route->isHomePath());
+
+        $route->setPath('/{name}');
+        $this->assertFalse($route->isHomePath());
     }
 
     /**
@@ -96,9 +100,12 @@ class RouteTest extends TestCase
      */
     public function test_path_mocking_with_queries()
     {
-        $this->route->setPath('route/{path}/with/{query}');
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $mock = $this->route->getPathMock([
+        $route->setPath('route/{path}/with/{query}');
+
+        $mock = $route->getPathMock([
             'path' => ['path_value'],
             'query' => 'query_value',
         ]);
@@ -111,15 +118,18 @@ class RouteTest extends TestCase
      */
     public function test_passing_rules_evaluation()
     {
-        $this->route->where([
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
+
+        $route->where([
             'page' => 1,
             'post' => [2, 3],
         ]);
 
-        $this->conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(true);
-        $this->conditions->shouldReceive('is')->once()->with('post', [2, 3])->andReturn(true);
+        $conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(true);
+        $conditions->shouldReceive('is')->once()->with('post', [2, 3])->andReturn(true);
 
-        $this->assertFalse($this->route->rulesNotPassed());
+        $this->assertFalse($route->rulesNotPassed());
     }
 
     /**
@@ -127,15 +137,18 @@ class RouteTest extends TestCase
      */
     public function test_not_passing_rules_evaluation()
     {
-        $this->route->where([
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
+
+        $route->where([
             'page' => 1,
             'post' => [2, 3],
         ]);
 
-        $this->conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(false);
-        $this->conditions->shouldReceive('is')->once()->with('post', [2, 3])->andReturn(true);
+        $conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(false);
+        $conditions->shouldReceive('is')->once()->with('post', [2, 3])->andReturn(true);
 
-        $this->assertTrue($this->route->rulesNotPassed());
+        $this->assertTrue($route->rulesNotPassed());
     }
 
     /**
@@ -143,17 +156,20 @@ class RouteTest extends TestCase
      */
     public function test_route_request_matching_without_rules()
     {
-        $this->route->setPath('/');
-        $this->assertTrue($this->route->matches(''));
-        $this->assertFalse($this->route->matches('route/path'));
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->route->setPath('route/path');
-        $this->assertTrue($this->route->matches('route/path'));
-        $this->assertFalse($this->route->matches('route/path/deeper'));
+        $route->setPath('/');
+        $this->assertTrue($route->matches(''));
+        $this->assertFalse($route->matches('route/path'));
 
-        $this->route->setPath('route/{query}');
-        $this->assertTrue($this->route->matches('route/query_value', ['query' => 'query_value']));
-        $this->assertFalse($this->route->matches('route/{query_value}/deeper', ['query' => 'query_value']));
+        $route->setPath('route/path');
+        $this->assertTrue($route->matches('route/path'));
+        $this->assertFalse($route->matches('route/path/deeper'));
+
+        $route->setPath('route/{query}');
+        $this->assertTrue($route->matches('route/query_value', ['query' => 'query_value']));
+        $this->assertFalse($route->matches('route/{query_value}/deeper', ['query' => 'query_value']));
     }
 
     /**
@@ -161,21 +177,19 @@ class RouteTest extends TestCase
      */
     public function test_route_request_matching_with_rules()
     {
-        $this->route->setPath('route/{query}')->where(['page' => 1]);
+        $conditions = $this->getConditions();
+        $route = $this->getRoute($conditions);
 
-        $this->conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(false);
+        $route->setPath('route/{query}')->where(['page' => 1]);
 
-        $this->assertFalse($this->route->matches('route/query_value', ['query' => 'query_value']));
+        $conditions->shouldReceive('is')->once()->with('page', 1)->andReturn(false);
+
+        $this->assertFalse($route->matches('route/query_value', ['query' => 'query_value']));
     }
 
     public function getConditions()
     {
         return Mockery::mock('Assely\Routing\WordpressConditions');
-    }
-
-    public function getHook()
-    {
-        return Mockery::mock('Assely\Hook\HookFactory');
     }
 
     public function getRoute($conditions)
