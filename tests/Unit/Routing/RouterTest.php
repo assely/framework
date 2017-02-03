@@ -1,8 +1,9 @@
 <?php
 
 use Assely\Routing\Router;
-use Illuminate\Container\Container;
 use Assely\Routing\RoutesCollection;
+use Brain\Monkey\Functions;
+use Illuminate\Container\Container;
 
 class RouterTest extends TestCase
 {
@@ -74,6 +75,83 @@ class RouterTest extends TestCase
     /**
      * @test
      */
+    public function test_routes_with_queries_execution()
+    {
+        $conditions = $this->getConditions();
+        $router = $this->getRouter($conditions);
+
+        $conditions->shouldReceive('is')->with('404')->andReturn(false);
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+
+        $wp = new WP('postname');
+        $wp_query = new WP_Query(['name' => 'postname']);
+        $router->get('{name}', function ($name) { return $name; });
+        $this->assertEquals('postname', $router->execute($wp, $wp_query)->getContent());
+
+        $wp = new WP('rewrite/path');
+        $wp_query = new WP_Query(['custom' => 'rewrite', 'rule' => 'path']);
+        $router->get('{custom}/{rule}', function ($custom, $rule) { return $custom . ' ' . $rule; });
+        $this->assertEquals('rewrite path', $router->execute($wp, $wp_query)->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_route_dont_exist()
+    {
+        $conditions = $this->getConditions();
+        $router = $this->getRouter($conditions);
+        $wp = new WP('route/path');
+        $wp_query = new WP_Query;
+
+        $conditions->shouldReceive('is')->with('404')->andReturn(false);
+
+        $this->expectException('Assely\Routing\RoutingException');
+
+        $router->execute($wp, $wp_query);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_resolve_404_route_on_not_found_error_when_route_exist()
+    {
+        $conditions = $this->getConditions();
+        $router = $this->getRouter($conditions);
+        $wp = new WP('route/path');
+        $wp_query = new WP_Query;
+
+        $conditions->shouldReceive('is')->with('404')->andReturn(true);
+
+        $router->get('404', function () {
+            return 'not found';
+        });
+
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $this->assertEquals('not found', $router->execute($wp, $wp_query)->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_redirect_to_the_homepage_on_not_found_error_when_404_route_dont_exist()
+    {
+        $conditions = $this->getConditions();
+        $router = $this->getRouter($conditions);
+        $wp = new WP('route/path');
+        $wp_query = new WP_Query;
+
+        $conditions->shouldReceive('is')->with('404')->andReturn(true);
+
+        Functions::expect('home_url')->once()->andReturn('home/url');
+        Functions::expect('wp_redirect')->with('home/url')->andReturn(false);
+
+        $router->execute($wp, $wp_query);
+    }
+
+    /**
+     * @test
+     */
     public function test_routes_methods_normalizer()
     {
         $conditions = $this->getConditions();
@@ -111,5 +189,21 @@ class RouterTest extends TestCase
             $conditions,
             new Container
         );
+    }
+}
+
+class WP
+{
+    public function __construct($request = '')
+    {
+        $this->request = $request;
+    }
+}
+
+class WP_Query
+{
+    public function __construct($query_vars = [])
+    {
+        $this->query_vars = $query_vars;
     }
 }
