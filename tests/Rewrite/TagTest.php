@@ -12,7 +12,7 @@ class TagTest extends TestCase
     {
         $endpoint = new Tag;
 
-        Functions::expect('add_rewrite_tag')->once()->andReturn(null);
+        Functions::expect('add_rewrite_tag')->with('%tag%', 'regrex')->once();
 
         $endpoint->add('tag', 'regrex');
     }
@@ -24,7 +24,8 @@ class TagTest extends TestCase
     {
         $endpoint = new Tag;
 
-        Functions::expect('add_rewrite_tag')->twice()->andReturn(null);
+        Functions::expect('add_rewrite_tag')->once()->with('%tag1%', 'regrex1');
+        Functions::expect('add_rewrite_tag')->once()->with('%tag2%', 'regrex2');
 
         $endpoint->add([
             'tag1' => 'regrex1',
