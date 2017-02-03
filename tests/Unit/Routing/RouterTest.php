@@ -1,9 +1,9 @@
 <?php
 
 use Assely\Routing\Router;
-use Assely\Routing\RoutesCollection;
 use Brain\Monkey\Functions;
 use Illuminate\Container\Container;
+use Assely\Routing\RoutesCollection;
 
 class RouterTest extends TestCase
 {
@@ -85,12 +85,16 @@ class RouterTest extends TestCase
 
         $wp = new WP('postname');
         $wp_query = new WP_Query(['name' => 'postname']);
-        $router->get('{name}', function ($name) { return $name; });
+        $router->get('{name}', function ($name) {
+            return $name;
+        });
         $this->assertEquals('postname', $router->execute($wp, $wp_query)->getContent());
 
         $wp = new WP('rewrite/path');
         $wp_query = new WP_Query(['custom' => 'rewrite', 'rule' => 'path']);
-        $router->get('{custom}/{rule}', function ($custom, $rule) { return $custom . ' ' . $rule; });
+        $router->get('{custom}/{rule}', function ($custom, $rule) {
+            return $custom . ' ' . $rule;
+        });
         $this->assertEquals('rewrite path', $router->execute($wp, $wp_query)->getContent());
     }
 
