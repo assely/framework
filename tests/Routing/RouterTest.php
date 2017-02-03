@@ -7,6 +7,20 @@ use Assely\Routing\RoutesCollection;
 
 class RouterTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        ob_start();
+    }
+
+    public function tearDown()
+    {
+        ob_get_clean();
+
+        parent::tearDown();
+    }
+
     /**
      * @test
      */
@@ -146,7 +160,7 @@ class RouterTest extends TestCase
 
         $conditions->shouldReceive('is')->with('404')->andReturn(false);
 
-        $this->expectException('Assely\Routing\RoutingException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
         $router->get('route/path', 'MyController@nonexist');
         $_SERVER['REQUEST_METHOD'] = 'GET';

@@ -2,17 +2,10 @@
 
 namespace Assely\Routing;
 
-use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Controller
 {
-    /**
-     * Request.
-     *
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
     /**
      * Missing method on the controller.
      *
@@ -24,20 +17,6 @@ class Controller
      */
     public function missingMethod($method)
     {
-        throw new RoutingException("Controller method [{$method}] not found.");
-    }
-
-    /**
-     * Sets the Request.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return self
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
-
-        return $this;
+        throw new NotFoundHttpException("Controller method [{$method}] not found.");
     }
 }
