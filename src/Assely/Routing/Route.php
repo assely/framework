@@ -2,7 +2,6 @@
 
 namespace Assely\Routing;
 
-use Assely\Hook\HookFactory;
 use Assely\Contracts\Routing\RouteInterface;
 use Illuminate\Contracts\Container\Container;
 
