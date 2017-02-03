@@ -7,7 +7,7 @@ class RewriteManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_hook_init_action_to_register_method_on_boot()
+    public function it_should_register_rewrite_on_init_action_hook()
     {
         $hook = $this->getHookFactory();
         $asset = $this->getAssetFactory();

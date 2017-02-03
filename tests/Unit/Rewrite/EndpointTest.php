@@ -12,7 +12,7 @@ class EndpointTest extends TestCase
     {
         $endpoint = new Endpoint('point', 1);
 
-        Functions::expect('add_rewrite_endpoint')->once()->andReturn(null);
+        Functions::expect('add_rewrite_endpoint')->once();
 
         $endpoint->add();
     }

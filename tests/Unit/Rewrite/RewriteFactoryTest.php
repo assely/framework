@@ -83,10 +83,6 @@ class RewriteFactoryTest extends TestCase
         return Mockery::mock('Illuminate\Container\Container');
     }
 
-    /**
-     * @param $collection
-     * @param $container
-     */
     public function getFactory($collection, $container)
     {
         return new RewriteFactory($collection, $container);
