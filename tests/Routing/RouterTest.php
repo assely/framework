@@ -118,6 +118,25 @@ class RouterTest extends TestCase
     /**
      * @test
      */
+    public function it_should_throw_exception_on_routing_to_missing_controller()
+    {
+        $conditions = $this->getConditions();
+        $router = $this->getRouter($conditions);
+        $wp = new WP('route/path');
+        $wp_query = new WP_Query;
+
+        $conditions->shouldReceive('is')->with('404')->andReturn(false);
+
+        $this->expectException('Assely\Routing\RoutingException');
+
+        $router->get('route/path', 'NonExistController@action');
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $router->execute($wp, $wp_query);
+    }
+
+    /**
+     * @test
+     */
     public function it_should_throw_exception_on_routing_to_missing_controller_method()
     {
         $conditions = $this->getConditions();
