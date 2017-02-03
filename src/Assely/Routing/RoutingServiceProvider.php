@@ -19,8 +19,6 @@ class RoutingServiceProvider extends ServiceProvider
         $this->registerWordPressConditions();
 
         $this->registerRouter();
-
-        $this->registerRoute();
     }
 
     /**
@@ -64,30 +62,10 @@ class RoutingServiceProvider extends ServiceProvider
             return new Router(
                 $app['routes.collection'],
                 $app['wpconditions'],
-                $response,
                 $app
             );
         });
 
         $this->app->alias('router', Router::class);
-    }
-
-    /**
-     * Register router instance.
-     *
-     * @return void
-     */
-    public function registerRoute()
-    {
-        $this->app->bind('route', function ($app) {
-            return new Route(
-                $app['router'],
-                $app['wpconditions'],
-                $app['hook.factory'],
-                $app
-            );
-        });
-
-        $this->app->alias('route', Route::class);
     }
 }

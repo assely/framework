@@ -46,19 +46,14 @@ class Route extends ActionResolver implements RouteInterface
     /**
      * Construct route.
      *
-     * @param \Assely\Routing\Router $router
-     * @param \Assely\Hook\HookFactory $hook
+     * @param \Assely\Routing\WordpressConditions $conditions
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(
-        Router $router,
         WordpressConditions $conditions,
-        HookFactory $hook,
         Container $container
     ) {
-        $this->router = $router;
         $this->conditions = $conditions;
-        $this->hook = $hook;
         $this->container = $container;
     }
 

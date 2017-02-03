@@ -25,13 +25,6 @@ class Router
     protected $conditions;
 
     /**
-     * Request.
-     *
-     * @var \Illuminate\Http\Request
-     */
-    public $request;
-
-    /**
      * Container instance.
      *
      * @var \Illuminate\Contracts\Container\Container
@@ -50,18 +43,15 @@ class Router
      *
      * @param \Assely\Routing\RoutesCollection $routes
      * @param \Assely\Routing\WordpressConditions $conditions
-     * @param \Illuminate\Http\Response $response
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(
         RoutesCollection $routes,
         WordpressConditions $conditions,
-        Response $response,
         Container $container
     ) {
         $this->routes = $routes;
         $this->conditions = $conditions;
-        $this->response = $response;
         $this->container = $container;
     }
 
@@ -170,7 +160,7 @@ class Router
      */
     public function addRoute($method, $path, $action)
     {
-        $route = $this->container->make(Route::class)
+        $route = (new Route($this->conditions, $this->container))
             ->setMethods($method)
             ->setPath($path)
             ->setAction($action);
@@ -239,13 +229,15 @@ class Router
      */
     public function prepareResponse($content, $status = null)
     {
-        $this->response->setContent($content);
+        $response = new Response;
+
+        $response->setContent($content);
 
         if (isset($status)) {
-            $this->response->setStatusCode($status);
+            $response->setStatusCode($status);
         }
 
-        return $this->response->send();
+        return $response->send();
     }
 
     /**
