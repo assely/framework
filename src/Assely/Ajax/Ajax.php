@@ -139,17 +139,11 @@ class Ajax implements RouteInterface
     public function register($name)
     {
         $this->hook->action($name, function () {
-            header('Content-Type: application/json');
-
             if (! $this->nonceValid()) {
-                echo json_encode($this->getErrorMessage());
-
-                die();
+                wp_send_json($this->getErrorMessage());
             }
 
-            echo json_encode($this->run());
-
-            die();
+            wp_send_json($this->run());
         })->dispatch();
     }
 
