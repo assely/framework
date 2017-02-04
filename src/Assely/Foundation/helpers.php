@@ -127,7 +127,7 @@ if (! function_exists('mix')) {
         static $shouldHotReload;
 
         if (! $manifest) {
-            if (! file_exists($manifestPath = public_path('mix-manifest.json'))) {
+            if (! file_exists($manifestPath = public_dir('mix-manifest.json'))) {
                 throw new \Exception('The Mix manifest does not exist.');
             }
 
@@ -147,6 +147,6 @@ if (! function_exists('mix')) {
 
         return $shouldHotReload = file_exists(public_path('hot'))
                 ? new \Illuminate\Support\HtmlString("http://localhost:8080{$manifest[$path]}")
-                : new \Illuminate\Support\HtmlString(url($manifest[$path]));
+                : new \Illuminate\Support\HtmlString($manifest[$path]);
     }
 }
