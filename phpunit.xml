@@ -5,13 +5,13 @@
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
-	>
+>
 	<testsuites>
 		<testsuite>
-			<directory suffix="Test.php">./tests/Unit</directory>
-			<directory suffix="Test.php">./tests/Integration</directory>
+			<directory suffix="Test.php">./tests</directory>
 		</testsuite>
 	</testsuites>
+
 	<filter>
   		<whitelist processUncoveredFilesFromWhitelist="true">
     		<directory suffix=".php">./src/</directory>
