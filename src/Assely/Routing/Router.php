@@ -2,6 +2,8 @@
 
 namespace Assely\Routing;
 
+use WP;
+use WP_Query;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Container\Container;
@@ -23,13 +25,6 @@ class Router
     protected $conditions;
 
     /**
-     * Request.
-     *
-     * @var \Illuminate\Http\Request
-     */
-    public $request;
-
-    /**
      * Container instance.
      *
      * @var \Illuminate\Contracts\Container\Container
@@ -47,18 +42,16 @@ class Router
      * Construct Router.
      *
      * @param \Assely\Routing\RoutesCollection $routes
-     * @param \Illuminate\Http\Response $response
+     * @param \Assely\Routing\WordpressConditions $conditions
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(
         RoutesCollection $routes,
         WordpressConditions $conditions,
-        Response $response,
         Container $container
     ) {
         $this->routes = $routes;
         $this->conditions = $conditions;
-        $this->response = $response;
         $this->container = $container;
     }
 
@@ -167,10 +160,11 @@ class Router
      */
     public function addRoute($method, $path, $action)
     {
-        $route = $this->container->make(Route::class)
+        $route = (new Route($this->conditions, $this->container))
             ->setMethods($method)
             ->setPath($path)
-            ->setAction($action);
+            ->setAction($action)
+            ->setRouter($this);
 
         return $this->routes->add($route);
     }
@@ -180,13 +174,8 @@ class Router
      *
      * @return mixed
      */
-    public function execute()
+    public function execute(WP $wp, WP_Query $wp_query)
     {
-        // Global WP and Query instance for picking
-        // current request and query details.
-        global $wp;
-        global $wp_query;
-
         // If error occurs, do not search for any route.
         // Immediately process to the `404` route.
         if ($this->conditions->is('404')) {
@@ -222,8 +211,13 @@ class Router
                 return $notFoundRoute->run();
             }
         } catch (RoutingException $e) {
-            wp_redirect(home_url());
-            exit();
+            if (wp_redirect(home_url())) {
+                // WordPress requires to call exit after wp_redirect.
+                // We cannot test it, so ignore this single line.
+                // @codeCoverageIgnoreStart
+                exit();
+                // @codeCoverageIgnoreEnd
+            }
         }
     }
 
@@ -236,13 +230,15 @@ class Router
      */
     public function prepareResponse($content, $status = null)
     {
-        $this->response->setContent($content);
+        $response = new Response;
+
+        $response->setContent($content);
 
         if (isset($status)) {
-            $this->response->setStatusCode($status);
+            $response->setStatusCode($status);
         }
 
-        return $this->response->send();
+        return $response->send();
     }
 
     /**
@@ -287,25 +283,5 @@ class Router
     public function getNamespace()
     {
         return $this->namespace;
-    }
-
-    /**
-     * Gets the WordPress conditional tags.
-     *
-     * @return array
-     */
-    public function getPaths()
-    {
-        return $this->conditions;
-    }
-
-    /**
-     * Add router conditions.
-     *
-     * @param array $paths
-     */
-    public function addPaths(array $paths)
-    {
-        return $this->conditions->add($paths);
     }
 }

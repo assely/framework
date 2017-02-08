@@ -2,14 +2,11 @@
 
 namespace Assely\Routing;
 
-use Assely\Hook\HookFactory;
 use Assely\Contracts\Routing\RouteInterface;
 use Illuminate\Contracts\Container\Container;
 
-class Route implements RouteInterface
+class Route extends ActionResolver implements RouteInterface
 {
-    use ControllerActionResolver;
-
     /**
      * Route request methods.
      *
@@ -46,32 +43,35 @@ class Route implements RouteInterface
     protected $rules = [];
 
     /**
+     * Router instance.
+     *
+     * @var \Assely\Routing\Router
+     */
+    protected $router;
+
+    /**
      * Construct route.
      *
-     * @param \Assely\Routing\Router $router
-     * @param \Assely\Hook\HookFactory $hook
+     * @param \Assely\Routing\WordpressConditions $conditions
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(
-        Router $router,
         WordpressConditions $conditions,
-        HookFactory $hook,
         Container $container
     ) {
-        $this->router = $router;
         $this->conditions = $conditions;
-        $this->hook = $hook;
         $this->container = $container;
     }
 
     /**
      * Checks if route matches request.
      *
-     * @param  string $pattern
+     * @param  string $request [description]
+     * @param  array  $queries [description]
      *
      * @return bool
      */
-    public function matches($request, $queries)
+    public function matches($request, $queries = [])
     {
         $this->setQueries($queries);
 
@@ -85,7 +85,7 @@ class Route implements RouteInterface
             }
         }
 
-        return $matches;
+        return (bool) $matches;
     }
 
     /**
@@ -117,7 +117,7 @@ class Route implements RouteInterface
      */
     public function isHomePath()
     {
-        return $this->getPath() === '/';
+        return empty($this->getPath());
     }
 
     /**
@@ -249,6 +249,30 @@ class Route implements RouteInterface
     public function setQueries(array $queries)
     {
         $this->queries = $queries;
+
+        return $this;
+    }
+
+    /**
+     * Gets the Route rules.
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
+    /**
+     * Sets the Router instance.
+     *
+     * @param \Assely\Routing\Router $router the router
+     *
+     * @return self
+     */
+    public function setRouter(Router $router)
+    {
+        $this->router = $router;
 
         return $this;
     }

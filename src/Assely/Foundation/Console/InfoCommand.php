@@ -69,7 +69,7 @@ class InfoCommand extends Command
      */
     public function routes()
     {
-        $routes = $this->app->make('routes.collection')->all();
+        $routes = $this->app->make('routes.collection')->getAll();
 
         $headers = ['Condition', 'Filter', 'Action', 'Parameters', 'Pattern', 'Guid'];
 
