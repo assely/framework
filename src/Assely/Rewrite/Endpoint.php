@@ -2,6 +2,8 @@
 
 namespace Assely\Rewrite;
 
+use Assely\Hook\HookFactory;
+
 class Endpoint
 {
     /**
@@ -12,32 +14,88 @@ class Endpoint
     protected $point;
 
     /**
-     * Endpoint apply places.
+     * Endpoint apply place.
      *
-     * @var int
+     * @var string
      */
-    protected $places;
+    protected $place;
 
     /**
      * Construct endpoint.
      *
-     * @param string $point
-     * @param int $places
+     * @param \Assely\Hook\HookFactory $hook
      */
-    public function __construct($point, $places = EP_NONE)
+    public function __construct(HookFactory $hook)
     {
-        $this->point = $point;
-        $this->places = $places;
+        $this->hook = $hook;
     }
 
     /**
-     * Register endpoint.
+     * Adds endpoint.
      *
      * @return void
      */
     public function add()
     {
-        return add_rewrite_endpoint($this->point, $this->places);
+        $this->hook->action('init', [$this, 'register'])->dispatch();
+    }
+
+    /**
+     * Registers endpoint.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        return add_rewrite_endpoint($this->point, $this->place);
+    }
+
+    /**
+     * Sets the Endpoint apply place.
+     *
+     * @param int $place the place
+     *
+     * @return self
+     */
+    public function to($place)
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Gets the Endpoint apply place.
+     *
+     * @return string
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    /**
+     * Gets the Endpoint name.
+     *
+     * @return string
+     */
+    public function getPoint()
+    {
+        return $this->point;
+    }
+
+    /**
+     * Sets the Endpoint name.
+     *
+     * @param string $point the point
+     *
+     * @return self
+     */
+    public function setPoint($point)
+    {
+        $this->point = $point;
+
+        return $this;
     }
 
     /**
@@ -47,6 +105,6 @@ class Endpoint
      */
     public function getSlug()
     {
-        return $this->point;
+        return $this->getPoint();
     }
 }

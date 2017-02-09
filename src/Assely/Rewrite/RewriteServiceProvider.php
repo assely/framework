@@ -55,8 +55,8 @@ class RewriteServiceProvider extends ServiceProvider
      */
     public function registerEndpoint()
     {
-        $this->app->bind('endpoint', function ($app, $arguments) {
-            return new Endpoint($arguments[0], $arguments[1]);
+        $this->app->bind('endpoint', function ($app) {
+            return new Endpoint($app['hook.factory']);
         });
 
         $this->app->alias('endpoint', Endpoint::class);

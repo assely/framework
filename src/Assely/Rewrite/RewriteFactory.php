@@ -25,24 +25,18 @@ class RewriteFactory extends Depot
     /**
      * Create rewrite endpoint.
      *
-     * @param  string|array $points
+     * @param  string $points
      * @param  int $places
      *
      * @return \Assely\Rewrite\Endpoint
      */
-    public function endpoint($points, $places = null)
+    public function endpoint($point)
     {
-        if (is_array($points)) {
-            foreach ($points as $point => $place) {
-                $this->endpoint($point, $place);
-            }
+        $endpoint = $this->container->make(Endpoint::class);
 
-            return;
-        }
-
-        $endpoint = $this->container->make(Endpoint::class, [$points, $places]);
-
-        $endpoint->add();
+        $endpoint
+            ->setPoint($point)
+            ->add();
 
         return $this->hang($endpoint);
     }

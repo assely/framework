@@ -35,32 +35,14 @@ class RewriteFactoryTest extends TestCase
         $factory = $this->getFactory($collection, $container);
 
         $container->shouldReceive('make')->once()->andReturn($endpoint);
+        $endpoint->shouldReceive('setPoint')->once()->with('point')->andReturn($endpoint);
         $endpoint->shouldReceive('add')->once()->andReturn(null);
+        $endpoint->shouldReceive('getSlug')->once()->andReturn('point');
         $collection->shouldReceive('set')->once()->with('point', $endpoint)->andReturn($endpoint);
 
         $output = $factory->endpoint('point', 1);
 
         $this->assertEquals($output, $endpoint);
-    }
-
-    /**
-     * @test
-     */
-    public function test_multiple_endpoint_creation()
-    {
-        $collection = $this->getCollection();
-        $container = $this->getContainer();
-        $endpoint = $this->getEndpoint();
-        $factory = $this->getFactory($collection, $container);
-
-        $container->shouldReceive('make')->twice()->andReturn($endpoint);
-        $endpoint->shouldReceive('add')->twice()->andReturn(null);
-        $collection->shouldReceive('set')->twice()->with('point', $endpoint)->andReturn($endpoint);
-
-        $factory->endpoint([
-            'point1' => 1,
-            'point2' => 2,
-        ]);
     }
 
     public function getRewrite()
@@ -70,7 +52,7 @@ class RewriteFactoryTest extends TestCase
 
     public function getEndpoint()
     {
-        return Mockery::mock('Assely\Rewrite\Endpoint[add]', ['point', 1]);
+        return Mockery::mock('Assely\Rewrite\Endpoint');
     }
 
     public function getCollection()
