@@ -54,6 +54,68 @@ class PostTest extends TestCase
     /**
      * @test
      */
+    public function test_getting_the_post_metadata()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        $model->shouldReceive('findMeta')->once()->with(1, 'key')->andReturn('key-metadata');
+        $model->shouldReceive('getMeta')->once()->with(1)->andReturn('all-metadata');
+
+        $this->assertEquals('key-metadata', $post->meta('key'));
+        $this->assertEquals('all-metadata', $post->meta);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_post_terms()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        $model->shouldReceive('getTerms')->once()->with($post, 'taxonomy', [])->andReturn('tax-terms');
+        $model->shouldReceive('getTerms')->once()->with($post, 'taxonomy', ['arguments'])->andReturn('tax-terms-with-argument');
+        $model->shouldReceive('getAllTerms')->once()->with($post)->andReturn('all-terms');
+
+        $this->assertEquals('tax-terms', $post->terms('taxonomy'));
+        $this->assertEquals('tax-terms-with-argument', $post->terms('taxonomy', ['arguments']));
+        $this->assertEquals('all-terms', $post->terms);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_post_comments()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        $model->shouldReceive('findMeta')->with(1, '_wp_page_template')->andReturn('template-name');
+
+        $this->assertEquals('template-name', $post->template);
+        $this->assertTrue($post->isTemplate('template-name'));
+        $this->assertFalse($post->isTemplate('wrong-template-name'));
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_post_template()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        $model->shouldReceive('getComments')->twice()->with(['post_id' => 1])->andReturn('post-comments');
+
+        $this->assertEquals('post-comments', $post->comments);
+        // The `post_id` cannot be overwrite by arguments.
+        $this->assertEquals('post-comments', $post->comments(['post_id' => 12]));
+    }
+
+    /**
+     * @test
+     */
     public function test_destroying_of_the_post()
     {
         $model = $this->getModel();
