@@ -69,7 +69,8 @@ class PostTest extends TestCase
         return Mockery::mock('Assely\Singularity\Model\PosttypeModel');
     }
 
-    public function getPost($model) {
+    public function getPost($model)
+    {
         $post = new Post;
 
         $post
