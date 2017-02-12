@@ -2,6 +2,7 @@
 
 namespace Assely\Adapter;
 
+use Exception;
 use JsonSerializable;
 use Assely\Contracts\Adapter\AdapterInterface;
 use Assely\Contracts\Singularity\Model\ModelInterface;
@@ -50,6 +51,8 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
         if (array_key_exists($name, $this->touches)) {
             return $this->adaptee->{$this->touches[$name]};
         }
+
+        throw new Exception("Property [{$name}] does not exist on this instance.");
     }
 
     /**

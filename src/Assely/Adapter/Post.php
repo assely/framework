@@ -56,7 +56,7 @@ class Post extends Adapter
      */
     public function destroy()
     {
-        $this->model->delete($this->id);
+        return $this->model->delete($this->id);
     }
 
     /**
