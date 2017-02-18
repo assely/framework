@@ -107,69 +107,61 @@ class Image implements JsonSerializable
     {
         $this->id = $id;
         $this->size = $size;
-
-        $this->link = $this->getLink();
-        $this->data = $this->getData();
-        $this->info = $this->getInfo();
-
-        $this->resolveInfoMeta();
-        $this->resolveDataMeta();
     }
 
-    /**
-     * Resolve image info.
-     *
-     * @return void
-     */
-    public function resolveInfoMeta()
+    public function link()
     {
-        $this->title = $this->info->post_title;
-        $this->caption = $this->info->post_excerpt;
-        $this->description = $this->info->post_content;
-        $this->type = $this->info->post_type;
-        $this->mime_type = $this->info->post_mime_type;
+        return $this->link = wp_get_attachment_image_src($this->id, $this->size)[0];
     }
 
-    /**
-     * Resolve image meta data.
-     *
-     * @return void
-     */
-    public function resolveDataMeta()
+    public function data()
     {
-        $this->meta = $this->data['image_meta'];
-        $this->width = $this->data['width'];
-        $this->height = $this->data['height'];
+        return $this->data = wp_get_attachment_metadata($this->id);
     }
 
-    /**
-     * Gets image url.
-     *
-     * @return string
-     */
-    public function getLink()
+    public function info()
     {
-        return wp_get_attachment_image_src($this->id, $this->size)[0];
+        return $this->info = get_post($this->id);
     }
 
-    /**
-     * Gets image meta data.
-     *
-     * @return array
-     */
-    protected function getData()
+    public function title()
     {
-        return wp_get_attachment_metadata($this->id);
+        return $this->title = $this->info->post_title;
     }
 
-    /**
-     * Gets image meta info.
-     *
-     * @return \WP_Post
-     */
-    protected function getInfo()
+    public function caption()
     {
-        return get_post($this->id);
+        return $this->caption = $this->info->post_excerpt;
+    }
+
+    public function description()
+    {
+        return $this->description = $this->info->post_content;
+    }
+
+    public function type()
+    {
+        return $this->type = $this->info->post_type;
+    }
+
+    public function mime_type()
+    {
+        return $this->mime_type = $this->info->post_mime_type;
+    }
+
+    public function meta()
+    {
+        return $this->meta = $this->data['image_meta'];
+    }
+
+    public function width()
+    {
+        return $this->width = $this->data['width'];
+    }
+
+    public function height()
+    {
+        return $this->height = $this->data['height'];
     }
 
     /**
@@ -192,5 +184,12 @@ class Image implements JsonSerializable
             'width' => $this->width,
             'height' => $this->height,
         ];
+    }
+
+    public function __get($name)
+    {
+        if (!isset($this->{$name}) && method_exists($this, $name)) {
+            return $this->{$name}();
+        }
     }
 }

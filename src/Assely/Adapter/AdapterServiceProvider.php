@@ -13,9 +13,11 @@ class AdapterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('adapter.user', 'Assely\Adapter\User');
+        $this->app->bind('adapter.post', function ($app) {
+            return new Post($app['config']);
+        });
 
-        $this->app->bind('adapter.post', 'Assely\Adapter\Post');
+        $this->app->bind('adapter.user', 'Assely\Adapter\User');
 
         $this->app->bind('adapter.term', 'Assely\Adapter\Term');
 

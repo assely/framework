@@ -1,6 +1,7 @@
 <?php
 
 use Assely\Adapter\Post;
+use Assely\Config\ApplicationConfig;
 use Brain\Monkey\Functions;
 
 class PostTest extends TestCase
@@ -64,6 +65,23 @@ class PostTest extends TestCase
 
         $this->assertEquals('key-metadata', $post->meta('key'));
         $this->assertEquals('all-metadata', $post->meta);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_post_thumbnail()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        Functions::expect('get_post_thumbnail_id')->with(1)->andReturn(10);
+
+        $thumbnail = $post->thumbnail;
+
+        $this->assertInstanceOf('Assely\Thumbnail\Image', $thumbnail);
+        $this->assertEquals(10, $thumbnail->id);
+        $this->assertEquals('thumbnail', $thumbnail->size);
     }
 
     /**
@@ -133,12 +151,15 @@ class PostTest extends TestCase
 
     public function getPost($model)
     {
-        $post = new Post;
+        $config = new ApplicationConfig([
+            'images' => ['size' => 'thumbnail'],
+        ]);
+
+        $post = new Post($config);
 
         $post
             ->setAdaptee(new WP_Post)
-            ->setModel($model)
-            ->connect();
+            ->setModel($model);
 
         return $post;
     }

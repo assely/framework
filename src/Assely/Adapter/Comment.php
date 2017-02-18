@@ -32,16 +32,6 @@ class Comment extends Adapter
     ];
 
     /**
-     * Connect post adapter.
-     *
-     * @return void
-     */
-    public function connect()
-    {
-        //
-    }
-
-    /**
      * Get replies comments.
      *
      * @return \Illuminate\Support\Collection

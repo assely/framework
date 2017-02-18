@@ -2,11 +2,12 @@
 
 namespace Assely\Adapter;
 
-use Assely\Thumbnail\Image;
-use Assely\Support\Facades\Config;
-use Assely\Adapter\Traits\PerpetuatesModel;
 use Assely\Adapter\Traits\FormatsCreationDate;
 use Assely\Adapter\Traits\FormatsModificationDate;
+use Assely\Adapter\Traits\PerpetuatesModel;
+use Assely\Config\ApplicationConfig;
+use Assely\Support\Facades\Config;
+use Assely\Thumbnail\Image;
 
 class Post extends Adapter
 {
@@ -39,14 +40,11 @@ class Post extends Adapter
         'type' => 'post_type',
     ];
 
-    /**
-     * Connect post adapter.
-     *
-     * @return void
-     */
-    public function connect()
+    public $config;
+
+    public function __construct(ApplicationConfig $config)
     {
-        //
+        $this->config = $config;
     }
 
     /**
@@ -145,8 +143,10 @@ class Post extends Adapter
      */
     public function thumbnail($size = null)
     {
-        if ($id = $this->thumbnailId()) {
-            return new Image($id, $size ?: Config::get('images.size'));
+        $size = ($size) ? $size : $this->config->get('images.size');
+
+        if ($id = $this->thumbnailId) {
+            return new Image($id, $size);
         }
     }
 

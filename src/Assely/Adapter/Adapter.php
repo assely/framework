@@ -3,11 +3,11 @@
 namespace Assely\Adapter;
 
 use Exception;
+use Serializable;
 use JsonSerializable;
-use Assely\Contracts\Adapter\AdapterInterface;
 use Assely\Contracts\Singularity\Model\ModelInterface;
 
-abstract class Adapter implements AdapterInterface, JsonSerializable
+abstract class Adapter implements JsonSerializable
 {
     /**
      * Adapter adaptee.
@@ -19,7 +19,7 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     /**
      * Adapter model.
      *
-     * @var mixed
+     * @var \Assely\Contracts\Singularity\Model\ModelInterface
      */
     protected $model;
 
@@ -31,11 +31,6 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     protected $touches = [];
 
     /**
-     * Connecting adapter to the adaptee.
-     */
-    abstract public function connect();
-
-    /**
      * Dynamically get adaptee properties.
      *
      * @param string $name
@@ -44,6 +39,10 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
      */
     public function __get($name)
     {
+        if (property_exists($this, $name)) {
+            return $this->{$name};
+        }
+
         if (! property_exists($this, $name) && method_exists($this, $name)) {
             return $this->{$name}();
         }
@@ -79,6 +78,26 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
             get_class($this),
             $this->id
         );
+    }
+
+    /**
+     * Encode adapter to json.
+     *
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this);
+    }
+
+    /**
+     * Encode adapter to array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->JsonSerialize();
     }
 
     /**
@@ -158,25 +177,5 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
         $this->model = $model;
 
         return $this;
-    }
-
-    /**
-     * Encode adapter to json.
-     *
-     * @return string
-     */
-    public function toJson()
-    {
-        return json_encode($this);
-    }
-
-    /**
-     * Encode adapter to array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->JsonSerialize();
     }
 }
