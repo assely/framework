@@ -2,12 +2,12 @@
 
 namespace Assely\Adapter;
 
+use Assely\Thumbnail\Image;
+use Assely\Support\Facades\Config;
+use Assely\Config\ApplicationConfig;
+use Assely\Adapter\Traits\PerpetuatesModel;
 use Assely\Adapter\Traits\FormatsCreationDate;
 use Assely\Adapter\Traits\FormatsModificationDate;
-use Assely\Adapter\Traits\PerpetuatesModel;
-use Assely\Config\ApplicationConfig;
-use Assely\Support\Facades\Config;
-use Assely\Thumbnail\Image;
 
 class Post extends Adapter
 {

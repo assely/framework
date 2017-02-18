@@ -3,7 +3,6 @@
 namespace Assely\Adapter;
 
 use Exception;
-use Serializable;
 use JsonSerializable;
 use Assely\Contracts\Singularity\Model\ModelInterface;
 
