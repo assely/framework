@@ -188,7 +188,7 @@ class Image implements JsonSerializable
 
     public function __get($name)
     {
-        if (!isset($this->{$name}) && method_exists($this, $name)) {
+        if (! isset($this->{$name}) && method_exists($this, $name)) {
             return $this->{$name}();
         }
     }

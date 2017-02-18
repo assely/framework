@@ -1,8 +1,8 @@
 <?php
 
 use Assely\Adapter\Post;
-use Assely\Config\ApplicationConfig;
 use Brain\Monkey\Functions;
+use Assely\Config\ApplicationConfig;
 
 class PostTest extends TestCase
 {
