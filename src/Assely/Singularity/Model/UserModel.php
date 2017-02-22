@@ -31,7 +31,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      */
     public function query(array $arguments = [])
     {
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(User::class)
             ->plugIn(get_users($arguments))
@@ -48,7 +48,7 @@ class UserModel extends Model implements PreservesMetaInterface, WPQueryable
      */
     public function findBy($key, $value)
     {
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(User::class)
             ->plugIn(get_user_by($key, $value))

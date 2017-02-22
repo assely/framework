@@ -25,7 +25,7 @@ class MenuModel extends Model
      */
     public function items($arguments = [])
     {
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(Menu::class)
             ->plugIn(wp_get_nav_menu_items($this->getNavigation()->name, $arguments))
