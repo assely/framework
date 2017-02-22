@@ -30,7 +30,11 @@ class CommentModel extends MetaboxModel implements WPQueryable
             'hierarchical' => 'threaded',
         ], $arguments);
 
-        return $this->plugAdapter(Comment::class, get_comments($options));
+        return $this->plugger
+            ->setModel($this)
+            ->setAdapter(Comment::class)
+            ->plugIn(get_comments($options))
+            ->getConnected();
     }
 
     /**
