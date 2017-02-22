@@ -157,7 +157,7 @@ class Post extends Adapter
      */
     public function hasThumbnail()
     {
-        return  ! empty($this->thumbnail);
+        return ! is_null($this->thumbnail);
     }
 
     /**
@@ -197,7 +197,7 @@ class Post extends Adapter
      */
     public function setFormat($type)
     {
-        return set_post_format($this, $type);
+        return set_post_format($this->id, $type);
     }
 
     /**

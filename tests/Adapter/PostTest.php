@@ -1,8 +1,9 @@
 <?php
 
 use Assely\Adapter\Post;
-use Brain\Monkey\Functions;
 use Assely\Config\ApplicationConfig;
+use Brain\Monkey\Functions;
+use Illuminate\Support\Collection;
 
 class PostTest extends TestCase
 {
@@ -14,8 +15,10 @@ class PostTest extends TestCase
         $model = $this->getModel();
         $post = $this->getPost($model);
 
+        $timestamp = strtotime('1997-07-16 19:20:00');
+
         Functions::expect('get_option')->with('date_format')->andReturn('dd.mm.yyyy');
-        Functions::expect('date_i18n')->with('dd.mm.yyyy', strtotime('1997-07-16 19:20:00'))->andReturn('16.07.1997');
+        Functions::expect('date_i18n')->with('dd.mm.yyyy', $timestamp)->andReturn('16.07.1997');
 
         $this->assertEquals('Post Name', $post->title);
         $this->assertEquals('1', $post->author);
@@ -70,7 +73,7 @@ class PostTest extends TestCase
     /**
      * @test
      */
-    public function test_getting_the_post_thumbnail()
+    public function test_getting_the_exsiting_post_thumbnail()
     {
         $model = $this->getModel();
         $post = $this->getPost($model);
@@ -79,9 +82,54 @@ class PostTest extends TestCase
 
         $thumbnail = $post->thumbnail;
 
+        $this->assertTrue($post->hasThumbnail);
         $this->assertInstanceOf('Assely\Thumbnail\Image', $thumbnail);
         $this->assertEquals(10, $thumbnail->id);
         $this->assertEquals('thumbnail', $thumbnail->size);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_nonexsiting_post_thumbnail()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        Functions::expect('get_post_thumbnail_id')->with(1)->andReturn(false);
+
+        $thumbnail = $post->thumbnail;
+
+        $this->assertFalse($post->hasThumbnail);
+        $this->assertNull($thumbnail);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getting_the_post_format()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        Functions::expect('get_post_format')->once()->with(1)->andReturn('format');
+        Functions::expect('has_post_format')->once()->with('format', 1)->andReturn(true);
+
+        $this->assertEquals('format', $post->format);
+        $this->assertTrue($post->hasFormat('format'));
+    }
+
+    /**
+     * @test
+     */
+    public function test_setting_the_post_format()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        Functions::expect('set_post_format')->once()->with(1, 'new-format');
+
+        $post->setFormat('new-format');
     }
 
     /**
@@ -142,6 +190,35 @@ class PostTest extends TestCase
         $model->shouldReceive('delete')->with(1)->andReturn($post);
 
         $this->assertEquals($post, $post->destroy());
+    }
+
+    /**
+     * @test
+     */
+    public function test_converting_post_adapter_instance_to_string()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        $timestamp = strtotime($post->modified_at);
+
+        $this->assertEquals("Assely\Adapter\Post/1-{$timestamp}", (string) $post);
+    }
+
+    /**
+     * @test
+     */
+    public function test_converting_post_adapter_instance_to_json()
+    {
+        $model = $this->getModel();
+        $post = $this->getPost($model);
+
+        Functions::expect('get_post_thumbnail_id')->with(1)->andReturn(10);
+
+        $model->shouldReceive('getMeta')->once()->with(1)->andReturn(new Collection(['meta' => 'data']));
+        $model->shouldReceive('findMeta')->with(1, '_wp_page_template')->andReturn('template-name');
+
+        $this->assertEquals('{"author":"1","comment_count":"10","comment_status":"open","content":"Post Content","created_at":null,"excerpt":"Post Excerpt","format":null,"id":1,"link":null,"menu_order":"0","meta":{"meta":"data"},"mime_type":"mime","modified_at":null,"parent_id":0,"password":"password","ping":"ping-url","ping_status":"open","pinged":"pinged-url","slug":"post-name","status":"draft","template":"template-name","thumbnail":{"id":10,"size":"thumbnail","link":null,"title":null,"caption":null,"description":null,"type":null,"mimeType":null,"meta":null,"width":null,"height":null},"title":"Post Name","type":"post"}', $post->toJson());
     }
 
     public function getModel()
