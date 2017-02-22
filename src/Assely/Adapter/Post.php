@@ -40,13 +40,6 @@ class Post extends Adapter
         'type' => 'post_type',
     ];
 
-    public $config;
-
-    public function __construct(ApplicationConfig $config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * Destroy post.
      *

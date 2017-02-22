@@ -72,7 +72,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
             'post_type' => $this->getSlug(),
         ]);
 
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(Post::class)
             ->plugIn(get_posts(array_merge($arguments, $defaults)))
@@ -92,7 +92,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
             return $this->findBySlug($id);
         }
 
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(Post::class)
             ->plugIn(get_post($id))
@@ -109,7 +109,7 @@ class PosttypeModel extends MetaboxModel implements WPQueryable
      */
     public function findBySlug($slug)
     {
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($this)
             ->setAdapter(Post::class)
             ->plugIn(get_page_by_path($slug, OBJECT, $this->getSlug()))

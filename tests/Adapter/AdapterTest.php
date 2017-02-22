@@ -1,6 +1,7 @@
 <?php
 
 use Assely\Adapter\Adapter;
+use Assely\Config\ApplicationConfig;
 
 class AdapterTest extends TestCase
 {
@@ -41,7 +42,7 @@ class AdapterTest extends TestCase
 
     public function getAdapter()
     {
-        return new AdapterStub;
+        return new AdapterStub(new ApplicationConfig);
     }
 }
 

@@ -2,12 +2,20 @@
 
 namespace Assely\Adapter;
 
+use Assely\Config\ApplicationConfig;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 use Exception;
 use JsonSerializable;
-use Assely\Contracts\Singularity\Model\ModelInterface;
 
 abstract class Adapter implements JsonSerializable
 {
+    /**
+     * Application config instance.
+     *
+     * @var Assely\Config\ApplicationConfig
+     */
+    protected $config;
+
     /**
      * Adapter adaptee.
      *
@@ -28,6 +36,16 @@ abstract class Adapter implements JsonSerializable
      * @var array
      */
     protected $touches = [];
+
+    /**
+     * Construct adapter.
+     *
+     * @param \Assely\Config\ApplicationConfig $config
+     */
+    public function __construct(ApplicationConfig $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Dynamically get adaptee properties.
