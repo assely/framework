@@ -38,9 +38,12 @@ abstract class Model implements ModelInterface
      *
      * @param \Assely\Nonce\NonceFactory $nonce
      */
-    public function __construct(NonceFactory $nonce)
-    {
+    public function __construct(
+        NonceFactory $nonce,
+        AdapterPlugger $plugger
+    ) {
         $this->nonce = $nonce;
+        $this->plugger = $plugger;
 
         $this->setArguments($this->getDefaults());
     }
@@ -197,16 +200,6 @@ abstract class Model implements ModelInterface
     }
 
     /**
-     * Gets adapters plugger.
-     *
-     * @return \Assely\Adapter\AdapterPlugger
-     */
-    public function getAdapterPlugger()
-    {
-        return new AdapterPlugger(new Collection);
-    }
-
-    /**
      * Plug adapters to adaptee.
      *
      * @param  \Assely\Contracts\Adapter\AdapterInterface $adapter
@@ -220,7 +213,7 @@ abstract class Model implements ModelInterface
         array $adaptees,
         ModelInterface $model = null
     ) {
-        return $this->getAdapterPlugger()
+        return $this->plugger
             ->setModel($model ?: $this)
             ->setAdapter($adapter)
             ->plugIn($adaptees)
