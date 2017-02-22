@@ -2,8 +2,10 @@
 
 namespace Assely\Adapter;
 
-use Illuminate\Support\Collection;
+use Assely\Config\ApplicationConfig;
 use Assely\Contracts\Singularity\Model\ModelInterface;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Collection;
 
 class AdapterPlugger
 {
@@ -33,9 +35,12 @@ class AdapterPlugger
      *
      * @param \Illuminate\Support\Collection $collection
      */
-    public function __construct(Collection $collection)
-    {
+    public function __construct(
+        Collection $collection,
+        ApplicationConfig $config
+    ) {
         $this->collection = $collection;
+        $this->config = $config;
     }
 
     /**
@@ -67,12 +72,11 @@ class AdapterPlugger
      */
     public function connectAdapter($adaptee)
     {
-        $adapter = new $this->adapter;
+        $adapter = new $this->adapter($this->config);
 
         $adapter
             ->setAdaptee($adaptee)
-            ->setModel($this->model)
-            ->connect();
+            ->setModel($this->model);
 
         return $adapter;
     }

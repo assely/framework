@@ -2,6 +2,7 @@
 
 namespace Assely\Adapter;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 
 class AdapterServiceProvider extends ServiceProvider
@@ -13,6 +14,14 @@ class AdapterServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('adapter.plugger', function ($app) {
+            $collection = new Collection;
+
+            return new AdapterPlugger($collection, $app['config']);
+        });
+
+        $this->app->alias('adapter.plugger', AdapterPlugger::class);
+
         $this->app->bind('adapter.post', function ($app) {
             return new Post($app['config']);
         });

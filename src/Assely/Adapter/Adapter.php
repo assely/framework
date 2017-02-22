@@ -29,6 +29,13 @@ abstract class Adapter implements JsonSerializable
      */
     protected $touches = [];
 
+    protected $config;
+
+    public function __construct(ApplicationConfig $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * Dynamically get adaptee properties.
      *
