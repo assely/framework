@@ -2,10 +2,9 @@
 
 namespace Assely\Adapter;
 
+use Illuminate\Support\Collection;
 use Assely\Config\ApplicationConfig;
 use Assely\Contracts\Singularity\Model\ModelInterface;
-use Illuminate\Contracts\Container\Container;
-use Illuminate\Support\Collection;
 
 class AdapterPlugger
 {
