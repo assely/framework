@@ -2,10 +2,10 @@
 
 namespace Assely\Adapter;
 
-use Assely\Config\ApplicationConfig;
-use Assely\Contracts\Singularity\Model\ModelInterface;
 use Exception;
 use JsonSerializable;
+use Assely\Config\ApplicationConfig;
+use Assely\Contracts\Singularity\Model\ModelInterface;
 
 abstract class Adapter implements JsonSerializable
 {
