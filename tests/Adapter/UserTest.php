@@ -78,6 +78,17 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function test_converting_user_adapter_instance_to_string()
+    {
+        $model = $this->getModel();
+        $user = $this->getUser($model);
+
+        $this->assertEquals("Assely\Adapter\User/1", (string) $user);
+    }
+
+    /**
+     * @test
+     */
     public function test_converting_user_adapter_instance_to_json()
     {
         $model = $this->getModel();
