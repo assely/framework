@@ -19,10 +19,8 @@ class AdapterServiceProvider extends ServiceProvider
         $this->registerPostAdapter();
         $this->registerTermAdapter();
         $this->registerUserAdapter();
-
-        $this->app->bind('adapter.comment', 'Assely\Adapter\Comment');
-
-        $this->app->bind('adapter.menu', 'Assely\Adapter\Menu');
+        $this->registerMenuAdapter();
+        $this->registerCommentAdapter();
     }
 
     /**
@@ -81,5 +79,33 @@ class AdapterServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('adapter.user', User::class);
+    }
+
+    /**
+     * Register Comment Adapter.
+     *
+     * @return void
+     */
+    protected function registerCommentAdapter()
+    {
+        $this->app->bind('adapter.comment', function ($app) {
+            return new Comment($app['config']);
+        });
+
+        $this->app->alias('adapter.comment', Comment::class);
+    }
+
+    /**
+     * Register Menu Adapter.
+     *
+     * @return void
+     */
+    protected function registerMenuAdapter()
+    {
+        $this->app->bind('adapter.menu', function ($app) {
+            return new Menu($app['config']);
+        });
+
+        $this->app->alias('adapter.menu', Menu::class);
     }
 }
