@@ -17,12 +17,8 @@ class AdapterServiceProvider extends ServiceProvider
         $this->registerAdapterPlugger();
 
         $this->registerPostAdapter();
-
-        $this->app->bind('adapter.user', 'Assely\Adapter\User');
-
-        $this->app->bind('adapter.term', 'Assely\Adapter\Term');
-
-        $this->app->bind('adapter.image', 'Assely\Adapter\Image');
+        $this->registerTermAdapter();
+        $this->registerUserAdapter();
 
         $this->app->bind('adapter.comment', 'Assely\Adapter\Comment');
 
@@ -57,5 +53,33 @@ class AdapterServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('adapter.post', Post::class);
+    }
+
+    /**
+     * Register Term Adapter.
+     *
+     * @return void
+     */
+    protected function registerTermAdapter()
+    {
+        $this->app->bind('adapter.term', function ($app) {
+            return new Term($app['config']);
+        });
+
+        $this->app->alias('adapter.term', Term::class);
+    }
+
+    /**
+     * Register User Adapter.
+     *
+     * @return void
+     */
+    protected function registerUserAdapter()
+    {
+        $this->app->bind('adapter.user', function ($app) {
+            return new User($app['config']);
+        });
+
+        $this->app->alias('adapter.user', User::class);
     }
 }
