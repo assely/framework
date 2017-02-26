@@ -67,7 +67,7 @@ class TermTest extends TestCase
 
         $this->assertEquals('{"count":15,"description":"Term description","group":"group","id":2,"meta":{"meta":"data"},"parent_id":1,"slug":"term","taxonomy_id":10,"taxonomy_slug":"taxonomy","title":"Term"}', $term->toJson());
 
-        $this->assertEquals(["count"=>15,"description"=>"Term description","group"=>"group","id"=>2,"meta"=>["meta"=>"data"],"parent_id"=>1,"slug"=>"term","taxonomy_id"=>10,"taxonomy_slug"=>"taxonomy","title"=>"Term"], $term->toArray());
+        $this->assertEquals(['count'=>15, 'description'=>'Term description', 'group'=>'group', 'id'=>2, 'meta'=>['meta'=>'data'], 'parent_id'=>1, 'slug'=>'term', 'taxonomy_id'=>10, 'taxonomy_slug'=>'taxonomy', 'title'=>'Term'], $term->toArray());
     }
 
     public function getModel()
