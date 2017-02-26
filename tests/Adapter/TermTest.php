@@ -1,7 +1,6 @@
 <?php
 
 use Assely\Adapter\Term;
-use Brain\Monkey\Functions;
 use Illuminate\Support\Collection;
 use Assely\Config\ApplicationConfig;
 
@@ -56,7 +55,7 @@ class TermTest extends TestCase
         $this->assertEquals(['posttype-post1', 'posttype-post2'], $term->posts('posttype'));
     }
 
-        /**
+    /**
      * @test
      */
     public function test_converting_term_adapter_instance_to_json()
