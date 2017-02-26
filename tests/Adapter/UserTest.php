@@ -89,14 +89,16 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function test_converting_user_adapter_instance_to_json()
+    public function test_converting_user_adapter_instance_to_json_and_array()
     {
         $model = $this->getModel();
         $user = $this->getUser($model);
 
-        $model->shouldReceive('getMeta')->once()->with(1)->andReturn(new Collection(['meta' => 'data']));
+        $model->shouldReceive('getMeta')->with(1)->andReturn(new Collection(['meta' => 'data']));
 
         $this->assertEquals('{"activation_key":"activation_key","capabilities":["cap1","cap2"],"capability_key":"cap_key","created_at":null,"email":"example@email.com","id":1,"login":"user","meta":{"meta":"data"},"name":"User","password":"password","premissions":["cap1","cap2","cap3"],"roles":["role1","role2"],"status":"status","username":"username","website":"http:\/\/website.com"}', $user->toJson());
+
+        $this->assertEquals(["activation_key"=>"activation_key","capabilities"=>["cap1","cap2"],"capability_key"=>"cap_key","created_at"=>null,"email"=>"example@email.com","id"=>1,"login"=>"user","meta"=>["meta"=>"data"],"name"=>"User","password"=>"password","premissions"=>["cap1","cap2","cap3"],"roles"=>["role1","role2"],"status"=>"status","username"=>"username","website"=>"http://website.com"], $user->toArray());
     }
 
     public function getModel()

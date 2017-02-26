@@ -208,17 +208,19 @@ class PostTest extends TestCase
     /**
      * @test
      */
-    public function test_converting_post_adapter_instance_to_json()
+    public function test_converting_post_adapter_instance_to_json_and_array()
     {
         $model = $this->getModel();
         $post = $this->getPost($model);
 
         Functions::expect('get_post_thumbnail_id')->with(1)->andReturn(10);
 
-        $model->shouldReceive('getMeta')->once()->with(1)->andReturn(new Collection(['meta' => 'data']));
+        $model->shouldReceive('getMeta')->with(1)->andReturn(new Collection(['meta' => 'data']));
         $model->shouldReceive('findMeta')->with(1, '_wp_page_template')->andReturn('template-name');
 
         $this->assertEquals('{"author":"1","comment_count":"10","comment_status":"open","content":"Post Content","created_at":null,"excerpt":"Post Excerpt","format":null,"id":1,"link":null,"menu_order":"0","meta":{"meta":"data"},"mime_type":"mime","modified_at":null,"parent_id":0,"password":"password","ping":"ping-url","ping_status":"open","pinged":"pinged-url","slug":"post-name","status":"draft","template":"template-name","thumbnail":{"id":10,"size":"thumbnail","link":null,"title":null,"caption":null,"description":null,"type":null,"mimeType":null,"meta":null,"width":null,"height":null},"title":"Post Name","type":"post"}', $post->toJson());
+
+        $this->assertEquals(["author"=>"1","comment_count"=>"10","comment_status"=>"open","content"=>"Post Content","created_at"=>null,"excerpt"=>"Post Excerpt","format"=>null,"id"=>1,"link"=>null,"menu_order"=>"0","meta"=>["meta"=>"data"],"mime_type"=>"mime","modified_at"=>null,"parent_id"=>0,"password"=>"password","ping"=>"ping-url","ping_status"=>"open","pinged"=>"pinged-url","slug"=>"post-name","status"=>"draft","template"=>"template-name","thumbnail"=>["id"=>10,"size"=>"thumbnail","link"=>null,"title"=>null,"caption"=>null,"description"=>null,"type"=>null,"mimeType"=>null,"meta"=>null,"width"=>null,"height"=>null],"title"=>"Post Name","type"=>"post"], $post->toArray());
     }
 
     public function getModel()

@@ -58,14 +58,16 @@ class TermTest extends TestCase
     /**
      * @test
      */
-    public function test_converting_term_adapter_instance_to_json()
+    public function test_converting_term_adapter_instance_to_json_and_array()
     {
         $model = $this->getModel();
         $term = $this->getTerm($model);
 
-        $model->shouldReceive('getMeta')->once()->with(2)->andReturn(new Collection(['meta' => 'data']));
+        $model->shouldReceive('getMeta')->with(2)->andReturn(new Collection(['meta' => 'data']));
 
         $this->assertEquals('{"count":15,"description":"Term description","group":"group","id":2,"meta":{"meta":"data"},"parent_id":1,"slug":"term","taxonomy_id":10,"taxonomy_slug":"taxonomy","title":"Term"}', $term->toJson());
+
+        $this->assertEquals(["count"=>15,"description"=>"Term description","group"=>"group","id"=>2,"meta"=>["meta"=>"data"],"parent_id"=>1,"slug"=>"term","taxonomy_id"=>10,"taxonomy_slug"=>"taxonomy","title"=>"Term"], $term->toArray());
     }
 
     public function getModel()

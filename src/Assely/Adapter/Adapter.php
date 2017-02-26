@@ -114,7 +114,7 @@ abstract class Adapter implements JsonSerializable
      */
     public function toArray()
     {
-        return $this->JsonSerialize();
+        return json_decode(json_encode($this->JsonSerialize()), true);
     }
 
     /**
