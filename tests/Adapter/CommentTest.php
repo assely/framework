@@ -1,9 +1,8 @@
 <?php
 
 use Assely\Adapter\Comment;
-use Assely\Config\ApplicationConfig;
 use Brain\Monkey\Functions;
-use Illuminate\Support\Collection;
+use Assely\Config\ApplicationConfig;
 
 class CommentTest extends TestCase
 {
@@ -67,7 +66,7 @@ class CommentTest extends TestCase
 
         $this->assertEquals('{"agent":"Agent","approved":"1","author":"Author","author_email":"example@email.com","author_ip":"127.0.0.1","author_url":"website.com","content":"Content","created_at":"16.07.1997","id":1,"karma":3,"parent_id":4,"post_id":2,"replies":["comment"],"type":"Type","user_id":5}', $comment->toJson());
 
-        $this->assertEquals(["agent"=>"Agent","approved"=>"1","author"=>"Author","author_email"=>"example@email.com","author_ip"=>"127.0.0.1","author_url"=>"website.com","content"=>"Content","created_at"=>"16.07.1997","id"=>1,"karma"=>3,"parent_id"=>4,"post_id"=>2,"replies"=>['comment'],"type"=>"Type","user_id"=>5], $comment->toArray());
+        $this->assertEquals(['agent'=>'Agent', 'approved'=>'1', 'author'=>'Author', 'author_email'=>'example@email.com', 'author_ip'=>'127.0.0.1', 'author_url'=>'website.com', 'content'=>'Content', 'created_at'=>'16.07.1997', 'id'=>1, 'karma'=>3, 'parent_id'=>4, 'post_id'=>2, 'replies'=>['comment'], 'type'=>'Type', 'user_id'=>5], $comment->toArray());
     }
 
     public function getModel()
