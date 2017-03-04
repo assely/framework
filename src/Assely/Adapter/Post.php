@@ -131,7 +131,7 @@ class Post extends Adapter
     /**
      * Get post thumbnail.
      *
-     * @return
+     * @return \Assely\Thumbails\Image|null
      */
     public function thumbnail($size = null)
     {

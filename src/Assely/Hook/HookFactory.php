@@ -21,7 +21,7 @@ class HookFactory
     /**
      * Make filter hook.
      *
-     * @param string$slug
+     * @param string $slug
      * @param mixed $callback
      * @param array $arguments
      *
