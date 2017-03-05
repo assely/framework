@@ -21,7 +21,6 @@ class Menu extends Adapter
      * @var array
      */
     protected $touches = [
-        'active' => 'active',
         'attr' => 'attr_title',
         'classes' => 'classes',
         'description' => 'description',
@@ -35,16 +34,6 @@ class Menu extends Adapter
         'target' => 'target',
         'title' => 'title',
     ];
-
-    /**
-     * Connect post adapter.
-     *
-     * @return void
-     */
-    public function connect()
-    {
-        //
-    }
 
     /**
      * Is current menu item active?
@@ -72,16 +61,6 @@ class Menu extends Adapter
     public function classes()
     {
         return $this->getAdaptee()->classes;
-    }
-
-    /**
-     * Get menu item children.
-     *
-     * @return \Assely\Adapter\Menu[]
-     */
-    public function children()
-    {
-        return $this->children;
     }
 
     /**
