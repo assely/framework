@@ -1,9 +1,9 @@
 <?php
 
-use Assely\Adapter\AdapterPlugger;
 use Assely\Adapter\Post;
-use Assely\Config\ApplicationConfig;
+use Assely\Adapter\AdapterPlugger;
 use Illuminate\Support\Collection;
+use Assely\Config\ApplicationConfig;
 
 class AdapterPluggerTest extends TestCase
 {
