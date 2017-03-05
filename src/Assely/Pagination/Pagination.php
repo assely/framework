@@ -60,7 +60,7 @@ class Pagination
      *
      * @return self
      */
-    public function make($currentPage, array $arguments = [])
+    public function make($currentPage = 0, array $arguments = [])
     {
         $this->currentPage = $currentPage ?: get_query_var('paged');
 
