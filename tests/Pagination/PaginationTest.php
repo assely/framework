@@ -1,8 +1,8 @@
 <?php
 
+use Brain\Monkey\Functions;
 use Assely\Pagination\Pagination;
 use Assely\Pagination\PaginationItem;
-use Brain\Monkey\Functions;
 
 class PaginationTest extends TestCase
 {
