@@ -3,11 +3,10 @@
 namespace Assely\Adapter;
 
 use Assely\Adapter\Traits\PerpetuatesModel;
-use Assely\Adapter\Traits\FormatsCreationDate;
 
 class User extends Adapter
 {
-    use PerpetuatesModel, FormatsCreationDate;
+    use PerpetuatesModel;
 
     /**
      * List of adaptee fields this adapter touches.
@@ -32,25 +31,13 @@ class User extends Adapter
     ];
 
     /**
-     * Connect user adapter.
+     * Gets adaptee create date.
      *
-     * @return void
+     * @return string
      */
-    public function connect()
+    public function created_at()
     {
-        //
-    }
-
-    /**
-     * User capability check.
-     *
-     * @param  string $capability
-     *
-     * @return bool
-     */
-    public function can($capability)
-    {
-        return $this->adaptee->has_cap($capability);
+        return $this->formatDate($this->adaptee->user_registered);
     }
 
     /**
@@ -67,6 +54,18 @@ class User extends Adapter
         }
 
         return $this->model->getMeta($this->id);
+    }
+
+    /**
+     * User capability check.
+     *
+     * @param  string $capability
+     *
+     * @return bool
+     */
+    public function can($capability)
+    {
+        return $this->adaptee->has_cap($capability);
     }
 
     /**

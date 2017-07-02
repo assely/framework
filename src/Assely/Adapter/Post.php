@@ -40,23 +40,13 @@ class Post extends Adapter
     ];
 
     /**
-     * Connect post adapter.
-     *
-     * @return void
-     */
-    public function connect()
-    {
-        //
-    }
-
-    /**
      * Destroy post.
      *
      * @return void
      */
     public function destroy()
     {
-        $this->model->delete($this->id);
+        return $this->model->delete($this->id);
     }
 
     /**
@@ -141,12 +131,14 @@ class Post extends Adapter
     /**
      * Get post thumbnail.
      *
-     * @return
+     * @return \Assely\Thumbails\Image|null
      */
     public function thumbnail($size = null)
     {
-        if ($id = $this->thumbnailId()) {
-            return new Image($id, $size ?: Config::get('images.size'));
+        $size = ($size) ? $size : $this->config->get('images.size');
+
+        if ($id = $this->thumbnailId) {
+            return new Image($id, $size);
         }
     }
 
@@ -157,7 +149,7 @@ class Post extends Adapter
      */
     public function hasThumbnail()
     {
-        return  ! empty($this->thumbnail);
+        return ! is_null($this->thumbnail);
     }
 
     /**
@@ -197,7 +189,7 @@ class Post extends Adapter
      */
     public function setFormat($type)
     {
-        return set_post_format($this, $type);
+        return set_post_format($this->id, $type);
     }
 
     /**
