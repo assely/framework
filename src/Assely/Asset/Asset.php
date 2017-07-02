@@ -4,7 +4,6 @@ namespace Assely\Asset;
 
 use Assely\Hook\HookFactory;
 use Assely\Config\FrameworkConfig;
-use Assely\Support\Facades\Config;
 use Assely\Config\ApplicationConfig;
 use Assely\Support\Accessors\HasSlug;
 use Illuminate\Filesystem\Filesystem;
