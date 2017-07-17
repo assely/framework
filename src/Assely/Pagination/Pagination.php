@@ -32,7 +32,7 @@ class Pagination
     /**
      * Collection of pagination items.
      *
-     * @var @var \Assely\Pagination\PaginationItem[]
+     * @var \Assely\Pagination\PaginationItem[]
      */
     public $items = [];
 

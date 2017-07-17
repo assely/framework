@@ -26,16 +26,6 @@ class Term extends Adapter
     ];
 
     /**
-     * Connect term adapter.
-     *
-     * @return void
-     */
-    public function connect()
-    {
-        //
-    }
-
-    /**
      * Term meta data.
      *
      * @param string $key

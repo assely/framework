@@ -47,7 +47,7 @@ trait MayHaveChildren
     /**
      * Sets the value of children.
      *
-     * @param @return \Assely\Field\FieldsCollection $children
+     * @param \Assely\Field\FieldsCollection $children
      *
      * @return self
      */

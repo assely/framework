@@ -3,11 +3,10 @@
 namespace Assely\Adapter;
 
 use Assely\Adapter\Traits\PerpetuatesModel;
-use Assely\Adapter\Traits\FormatsCreationDate;
 
 class Comment extends Adapter
 {
-    use PerpetuatesModel, FormatsCreationDate;
+    use PerpetuatesModel;
 
     /**
      * List of adaptee fields this adapter touches.
@@ -32,13 +31,13 @@ class Comment extends Adapter
     ];
 
     /**
-     * Connect post adapter.
+     * Gets adaptee create date.
      *
-     * @return void
+     * @return string
      */
-    public function connect()
+    public function created_at()
     {
-        //
+        return $this->formatDate($this->adaptee->comment_date);
     }
 
     /**

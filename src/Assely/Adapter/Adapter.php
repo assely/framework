@@ -2,12 +2,20 @@
 
 namespace Assely\Adapter;
 
+use Exception;
 use JsonSerializable;
-use Assely\Contracts\Adapter\AdapterInterface;
+use Assely\Config\ApplicationConfig;
 use Assely\Contracts\Singularity\Model\ModelInterface;
 
-abstract class Adapter implements AdapterInterface, JsonSerializable
+abstract class Adapter implements JsonSerializable
 {
+    /**
+     * Application config instance.
+     *
+     * @var Assely\Config\ApplicationConfig
+     */
+    protected $config;
+
     /**
      * Adapter adaptee.
      *
@@ -18,7 +26,7 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     /**
      * Adapter model.
      *
-     * @var mixed
+     * @var \Assely\Contracts\Singularity\Model\ModelInterface
      */
     protected $model;
 
@@ -30,9 +38,14 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     protected $touches = [];
 
     /**
-     * Connecting adapter to the adaptee.
+     * Construct adapter.
+     *
+     * @param \Assely\Config\ApplicationConfig $config
      */
-    abstract public function connect();
+    public function __construct(ApplicationConfig $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Dynamically get adaptee properties.
@@ -43,6 +56,10 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
      */
     public function __get($name)
     {
+        if (property_exists($this, $name)) {
+            return $this->{$name};
+        }
+
         if (! property_exists($this, $name) && method_exists($this, $name)) {
             return $this->{$name}();
         }
@@ -50,6 +67,8 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
         if (array_key_exists($name, $this->touches)) {
             return $this->adaptee->{$this->touches[$name]};
         }
+
+        throw new Exception("Property [{$name}] does not exist on this instance.");
     }
 
     /**
@@ -79,6 +98,26 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     }
 
     /**
+     * Encode adapter to json.
+     *
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this);
+    }
+
+    /**
+     * Encode adapter to array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return json_decode(json_encode($this->JsonSerialize()), true);
+    }
+
+    /**
      * Format date.
      *
      * @param string $date
@@ -100,7 +139,6 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
     public function rejectHiddenMeta($meta)
     {
         return $meta->filter(function ($value, $key) {
-
             // Hidden meta starts with "_". Get value
             // if key do not start with underscore.
             if (substr($key, 0, 1) !== '_') {
@@ -155,25 +193,5 @@ abstract class Adapter implements AdapterInterface, JsonSerializable
         $this->model = $model;
 
         return $this;
-    }
-
-    /**
-     * Encode adapter to json.
-     *
-     * @return string
-     */
-    public function toJson()
-    {
-        return json_encode($this);
-    }
-
-    /**
-     * Encode adapter to array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->JsonSerialize();
     }
 }

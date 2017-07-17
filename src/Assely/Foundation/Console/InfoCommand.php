@@ -3,7 +3,6 @@
 namespace Assely\Foundation\Console;
 
 use Assely\Console\Command;
-use Assely\Support\Facades\App;
 
 class InfoCommand extends Command
 {
