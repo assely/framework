@@ -109,8 +109,8 @@ class RouteTest extends TestCase
             'path' => ['path_value'],
             'deep' => [
                 'value' => [
-                    'deep_path' => 'deep_value'
-                ]
+                    'deep_path' => 'deep_value',
+                ],
             ],
             'query' => 'query_value',
         ]);

@@ -161,7 +161,9 @@ class Route extends ActionResolver implements RouteInterface
 
     public function flattenQueries($queries)
     {
-        return is_array($queries) ? array_reduce($queries, function ($c, $a) { return array_merge($c, $this->flattenQueries($a)); },[]) : [$queries];
+        return is_array($queries) ? array_reduce($queries, function ($c, $a) {
+            return array_merge($c, $this->flattenQueries($a));
+        }, []) : [$queries];
     }
 
     /**
