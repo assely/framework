@@ -103,14 +103,19 @@ class RouteTest extends TestCase
         $conditions = $this->getConditions();
         $route = $this->getRoute($conditions);
 
-        $route->setPath('route/{path}/with/{query}');
+        $route->setPath('route/{path}/{deep}/with/{query}');
 
         $mock = $route->getPathMock([
             'path' => ['path_value'],
+            'deep' => [
+                'value' => [
+                    'deep_path' => 'deep_value'
+                ]
+            ],
             'query' => 'query_value',
         ]);
 
-        $this->assertEquals('route/path_value/with/query_value', $mock);
+        $this->assertEquals('route/path_value/deep_value/with/query_value', $mock);
     }
 
     /**

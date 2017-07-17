@@ -101,7 +101,9 @@ class Route extends ActionResolver implements RouteInterface
 
         foreach ($queries as $query => $value) {
             if (is_array($value)) {
-                $value = reset($value);
+                $flatten = $this->flattenQueries($value);
+
+                $value = reset($flatten);
             }
 
             $path = preg_replace("/\\{({$query})\\}/", $value, $path);
@@ -155,6 +157,11 @@ class Route extends ActionResolver implements RouteInterface
     public function rulesNotPassed()
     {
         return in_array(false, $this->evaluateRules(), true);
+    }
+
+    public function flattenQueries($queries)
+    {
+        return is_array($queries) ? array_reduce($queries, function ($c, $a) { return array_merge($c, $this->flattenQueries($a)); },[]) : [$queries];
     }
 
     /**
